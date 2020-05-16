@@ -1,0 +1,7 @@
+{
+  "name": "BlaBlaTec",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
