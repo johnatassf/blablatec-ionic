@@ -11,6 +11,14 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'cadastrar',
+    loadChildren: () => import('./cadastrar/cadastrar.module').then( m => m.CadastrarPageModule)
+  },
+  {
+    path: 'mapas',
+    loadChildren: () => import('./mapas/mapas.module').then( m => m.MapasPageModule)
+  },
 ];
 
 @NgModule({

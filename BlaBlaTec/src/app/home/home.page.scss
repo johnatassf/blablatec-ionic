@@ -1,6 +1,5 @@
 #container {
   text-align: center;
-
   position: absolute;
   left: 0;
   right: 0;
@@ -26,5 +25,19 @@
   text-decoration: none;
 }
 ion-item {
-  color: green;
+  color: #4682b4;
+}
+
+ion-icon {
+  color: #3cb371;
+}
+
+ion-content {
+  #carrinho {
+    width: 100%;
+    display: float;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
 }
