@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cadastrar',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cadastrar.page.scss'],
 })
 export class CadastrarPage implements OnInit {
+  ngOnInit() {}
 
-  constructor() { }
+  constructor(public navCtrl: NavController) {}
 
-  ngOnInit() {
+  //necessários os parametros para o FireBase
+  finalizarCadastro(): void {
+    this.navCtrl.navigateRoot('home');
   }
-
 }
