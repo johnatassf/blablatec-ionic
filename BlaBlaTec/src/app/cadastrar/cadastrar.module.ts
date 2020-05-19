@@ -8,6 +8,8 @@ import { CadastrarPageRoutingModule } from './cadastrar-routing.module';
 
 import { CadastrarPage } from './cadastrar.page';
 
+import { UserService } from '../services/user/user.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -17,4 +19,11 @@ import { CadastrarPage } from './cadastrar.page';
   ],
   declarations: [CadastrarPage]
 })
-export class CadastrarPageModule {}
+export class CadastrarPageModule { 
+  constructor (private userService: UserService){  }
+
+  cadastrarUsuario(){
+    alert("chegou aqui");
+    this.userService.cadastrarUsuario();
+  }
+}
