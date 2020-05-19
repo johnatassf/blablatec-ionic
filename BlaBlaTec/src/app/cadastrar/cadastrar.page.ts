@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
-import { CadastrarPageModule } from '../cadastrar/cadastrar.module';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-cadastrar',
@@ -9,12 +9,14 @@ import { CadastrarPageModule } from '../cadastrar/cadastrar.module';
   styleUrls: ['./cadastrar.page.scss'],
 })
 export class CadastrarPage implements OnInit {
-  ngOnInit() {}
 
-  constructor(public navCtrl: NavController, private cadastrarModule: CadastrarPageModule) {}
+  constructor(private userService: UserService) {}
+  ngOnInit() { }
 
-  //necessários os parametros para o FireBase
-  finalizarCadastro(): void {
-    this.cadastrarModule.cadastrarUsuario();
+  finalizarCadastro(){
+    console.log("Chegou no page");
+    this.userService.cadastrarUsuario().subscribe(data =>{
+      console.log(data);
+    });
   }
 }
