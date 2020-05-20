@@ -1,22 +1,22 @@
 <ion-content padding>
   <ion-item>
     <ion-icon name="person" slot="start"></ion-icon>
-    <ion-input type="name" placeholder="Nome" autofocus="true"></ion-input>
+    <ion-input type="name" [(ngModel)]="usuario.Nome" placeholder="Nome" autofocus="true"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-icon name="lock-closed" slot="start"></ion-icon>
-    <ion-input type="password" placeholder="Senha"></ion-input>
+    <ion-input type="password" [(ngModel)]="usuario.Senha" placeholder="Senha"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-icon name="lock-closed" slot="start"></ion-icon>
-    <ion-input type="password" placeholder="Confirme a Senha"></ion-input>
+    <ion-input type="password" [(ngModel)]="usuario.ConfirmacaoSenha" placeholder="Confirme a Senha"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-icon name="mail" slot="start"></ion-icon>
-    <ion-input type="email" placeholder="Email" inputmode="email"></ion-input>
+    <ion-input type="email" [(ngModel)]="usuario.Email" placeholder="Email" inputmode="email"></ion-input>
   </ion-item>
 
   <ion-item>

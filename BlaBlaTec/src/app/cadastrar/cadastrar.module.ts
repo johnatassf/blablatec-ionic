@@ -21,9 +21,4 @@ import { UserService } from '../services/user/user.service';
 })
 export class CadastrarPageModule { 
   constructor (private userService: UserService){  }
-
-  cadastrarUsuario(){
-    alert("chegou aqui");
-    this.userService.cadastrarUsuario();
-  }
 }

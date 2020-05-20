@@ -9,13 +9,20 @@ import { UserService } from '../services/user/user.service';
   styleUrls: ['./cadastrar.page.scss'],
 })
 export class CadastrarPage implements OnInit {
+  usuario = {
+    Nome: '',
+    Email:  '',
+    Senha: '',
+    ConfirmacaoSenha: ''
+  };
 
   constructor(private userService: UserService) {}
-  ngOnInit() { }
+  ngOnInit() { 
+
+   }
 
   finalizarCadastro(){
-    console.log("Chegou no page");
-    this.userService.cadastrarUsuario().subscribe(data =>{
+    this.userService.cadastrarUsuario(this.usuario).subscribe(data =>{
       console.log(data);
     });
   }
