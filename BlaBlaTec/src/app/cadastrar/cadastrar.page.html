@@ -2,6 +2,7 @@
   <ion-item>
     <ion-icon name="person" slot="start"></ion-icon>
     <ion-input type="name" [(ngModel)]="usuario.Nome" placeholder="Nome" autofocus="true"></ion-input>
+    <ion-input type="sobrenome" [(ngModel)]="usuario.Sobrenome" placeholder="Sobrenome"></ion-input>
   </ion-item>
 
   <ion-item>
@@ -20,7 +21,12 @@
   </ion-item>
 
   <ion-item>
-    <ion-checkbox color="terciary" slot="start"></ion-checkbox>
+    <ion-icon name="mail" slot="start"></ion-icon>
+    <ion-input type="text" [(ngModel)]="usuario.Ra" placeholder="RA" inputmode="ra"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-checkbox color="terciary" slot="start" [(ngModel)]="usuario.ConcordaComTermos"></ion-checkbox>
     <ion-label>Concordo com os <a>termos de uso</a></ion-label>
   </ion-item>
 
