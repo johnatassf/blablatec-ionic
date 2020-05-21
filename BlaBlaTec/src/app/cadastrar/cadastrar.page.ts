@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
+
 
 import { UserService } from '../services/user/user.service';
 
@@ -97,4 +97,14 @@ export class CadastrarPage implements OnInit {
       return true;
     }
   }
+
+  async exibirMensagemErroLogin() {
+    const alert = await this.alertController.create({
+      header: 'Aviso',
+      message: 'Usuario ou senha incorreto.',
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
 }

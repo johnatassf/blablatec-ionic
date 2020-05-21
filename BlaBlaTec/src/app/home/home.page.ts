@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
+
 
 import { UserService } from '../services/user/user.service';
+
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,7 @@ export class HomePage {
     Ra:  '',
     Password: ''
   };
-  constructor(public navCtrl: NavController, private userService: UserService) {}
+  constructor(public navCtrl: NavController, private userService: UserService, private alertController: AlertController) {}
 
   acessarCadastrar(): void {
     this.navCtrl.navigateRoot('cadastrar');
@@ -24,7 +26,16 @@ export class HomePage {
       this.navCtrl.navigateRoot('mapas');
   },
   (error: any) => {
-      console.log(error);
+    console.log(error);
+    this.exibirMensagemErroLogin();
   });
+  }
+  async exibirMensagemErroLogin() {
+    const alert = await this.alertController.create({
+      header: 'Aviso',
+      message: 'Usuario ou senha incorreto.',
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 }
