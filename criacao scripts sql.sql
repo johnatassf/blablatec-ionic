@@ -1,13 +1,9 @@
+
 create table veiculo(
-id_placa_veiculo char  (8) primary key not null,
+id_placa_veiculo char  (8) primary key not null auto_increment,
 nm_modelo_veiculo varchar (20) not null,
 nm_cor_veiculo varchar (10) not null,
 qt_lugar_veiculo varchar (10) not null);
-
-create table viagem(
-id_viagem integer primary key not null,
-nm_origem_viagem varchar (100) not null,
-nm_destino_viagem varchar (100) not null);
 
 create table usuario(
 id_usuario integer primary key not null auto_increment,
@@ -18,8 +14,15 @@ nm_senha_usuario char (8) not null,
 cd_telefone_usuario char (11) not null,
 im_usuario blob ,
 cd_ra_usuario integer not null);
- 
- create table avaliacao(
+CONSTRAINT fk_id_placa_veiculo FOREIGN KEY (id_placa_veiculo) references veiculo(id_placa_veiculo)
+
+
+create table viagem(
+id_viagem integer primary key not null auto_increment,
+nm_origem_viagem varchar (100) not null,
+nm_destino_viagem varchar (100) not null);
+
+  create table avaliacao(
  id_avaliacao integer primary key not null auto_increment,
  vl_avaliacao char (5) );
  
@@ -54,8 +57,6 @@ cd_ra_usuario integer not null);
       
       ALTER TABLE itemViagem add fk_usuario_motorista integer;
       ALTER TABLE itemViagem add constraint fk_motorista foreign key(fk_usuario_motorista) references usuario(id_usuario);
-
-
       
 
 
