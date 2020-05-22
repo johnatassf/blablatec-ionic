@@ -20,6 +20,12 @@
     <ion-input type="email" [(ngModel)]="usuario.Email" placeholder="Email" inputmode="email"></ion-input>
   </ion-item>
 
+  <!--Necessário ligar com o banco!-->
+  <ion-item>
+    <ion-icon name="phone-portrait" slot="start"></ion-icon>
+    <ion-input type="number" placeholder="Numero de Telefone:" inputmode="numero"></ion-input>
+  </ion-item>
+
   <ion-item>
     <ion-icon name="mail" slot="start"></ion-icon>
     <ion-input type="text" [(ngModel)]="usuario.Ra" placeholder="RA" inputmode="ra"></ion-input>
@@ -30,5 +36,5 @@
     <ion-label>Concordo com os <a>termos de uso</a></ion-label>
   </ion-item>
 
-  <ion-button expand="block" (click) = "finalizarCadastro()">Cadastrar</ion-button>
+  <ion-button expand="block" (click)="finalizarCadastro()">Cadastrar</ion-button>
 </ion-content>

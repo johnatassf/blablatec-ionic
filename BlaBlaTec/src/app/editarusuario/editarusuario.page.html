@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <div id="avatar">
+      <img
+        src="https://cdn.pixabay.com/photo/2016/04/01/10/11/avatar-1299805_960_720.png"
+        alt="Avatar"
+        class="avatar"
+      />
+    </div>
+
+    <div>
+      <ion-button id="btnfoto" expand="block" fill="clear">Alterar Foto</ion-button>
+    </div>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="person" slot="start"></ion-icon>
+    <ion-input type="text" placeholder="nome" inputmode="nome" autofocus="true"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="person" slot="start"></ion-icon>
+    <ion-input type="text" placeholder="sobrenome" inputmode="sobrenome" autofocus="true"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="mail" slot="start"></ion-icon>
+    <ion-input type="text" placeholder="email" inputmode="email" autofocus="true"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="phone-portrait" slot="start"></ion-icon>
+    <ion-input type="number" placeholder="Numero de Telefone:" inputmode="numero"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block">Atualizar</ion-button>
+
+  <ion-button expand="block">Encerrar a conta</ion-button>
+</ion-content>

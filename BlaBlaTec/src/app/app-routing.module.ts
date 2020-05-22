@@ -25,6 +25,10 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then((m) => m.TabsPageModule),
   },
+  {
+    path: 'editarusuario',
+    loadChildren: () => import('./editarusuario/editarusuario.module').then( m => m.EditarusuarioPageModule)
+  },
 ];
 
 @NgModule({
