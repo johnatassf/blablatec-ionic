@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 
 
@@ -6,39 +6,39 @@ import { UserService } from '../services/user/user.service';
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-alterar-senha',
+  templateUrl: './alterar-senha.page.html',
+  styleUrls: ['./alterar-senha.page.scss'],
 })
-export class HomePage {
+export class AlterarSenhaPage implements OnInit {
   usuario = {
     Ra:  '',
-    Password: ''
+    email: ''
   };
+
   constructor(public navCtrl: NavController, private userService: UserService, private alertController: AlertController) {}
 
-  acessarCadastrar(): void {
-    this.navCtrl.navigateRoot('cadastrar');
+  ngOnInit() {
   }
-
-  realizarLogin(): void {
+  enviarSenha(): void {
     this.userService.autenticarUsuario(this.usuario).subscribe((data: Response) => {
       this.navCtrl.navigateRoot('mapas');
-  },
-  (error: any) => {
-    console.log(error);
-    this.exibirMensagemErroLogin();
-  });
-  }
-  async exibirMensagemErroLogin() {
+    },
+    (error: any) => {
+      console.log(error);
+      this.exibirMensagemEnvioSenha();
+    });
+}
+  home(): void {
+      this.navCtrl.navigateRoot('home');
+  };
+  async exibirMensagemEnvioSenha() {
     const alert = await this.alertController.create({
       header: 'Aviso',
-      message: 'Usuario ou senha incorreto.',
+      message: 'Sua senha será encaminhada no e-mail cadastrado.',
       buttons: ['OK']
     });
     await alert.present();
   }
-  alterarSenha(): void {
-    this.navCtrl.navigateRoot('alterar-senha');
-  }
+
 }
