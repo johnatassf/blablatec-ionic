@@ -26,7 +26,7 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then((m) => m.TabsPageModule),
   },
   {
-    path: 'editarusuario',
+    path: 'perfil',
     loadChildren: () => import('./editarusuario/editarusuario.module').then( m => m.EditarusuarioPageModule)
   },
 ];
