@@ -25,11 +25,11 @@ export class EditarusuarioPage implements OnInit {
   ngOnInit() {
     this.userService.buscarInformacoesUsuario().subscribe((data: any) => {
       console.log(data);
-      this.usuario.Id = data.id;
-      this.usuario.Email = data.email;
-      this.usuario.Ra = data.ra;
-      this.usuario.Nome = data.nome;
-      this.usuario.Sobrenome = data.sobrenome;
+      this.usuario.Id = data[0].id;
+      this.usuario.Email = data[0].email;
+      this.usuario.Ra = data[0].ra;
+      this.usuario.Nome = data[0].nome;
+      this.usuario.Sobrenome = data[0].sobrenome;
   });
   }
 
