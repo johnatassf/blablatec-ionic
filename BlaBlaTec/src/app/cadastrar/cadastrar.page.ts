@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SystemJsNgModuleLoaderConfig } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 
-
 import { UserService } from '../services/user/user.service';
+import { cordovaPropertySet } from '@ionic-native/core';
 
 @Component({
   selector: 'app-cadastrar',
@@ -12,33 +12,36 @@ import { UserService } from '../services/user/user.service';
 export class CadastrarPage implements OnInit {
   usuario = {
     Nome: '',
-    Email:  '',
+    Email: '',
     Senha: '',
     ConfirmacaoSenha: '',
     Ra: '',
     Sobrenome: '',
-    ConcordaComTermos: false
+    ConcordaComTermos: false,
   };
 
-  constructor(private userService: UserService,
-              private alertController: AlertController,
-              private navCtrl: NavController) {}
-  ngOnInit() { 
+  constructor(
+    private userService: UserService,
+    private alertController: AlertController,
+    private navCtrl: NavController
+  ) {}
+  ngOnInit() {}
 
-   }
-
-  finalizarCadastro(){
-    if(!this.verificarSenha()){
+  finalizarCadastro() {
+    if (!this.verificarSenha()) {
       this.exibirMensagemConformacaoSenha();
       return;
-    }else{
-      if(this.usuario.ConcordaComTermos){
+    } else {
+      if (this.usuario.ConcordaComTermos) {
         this.userService.cadastrarUsuario(this.usuario).subscribe(
-          data =>{ this.exibirMensagemCadastroRealizado(); },
-          error => {this.exibirMensagemCadastroComErro()}
-          );
-      }
-      else{
+          (data) => {
+            this.exibirMensagemCadastroRealizado();
+          },
+          (error) => {
+            this.exibirMensagemCadastroComErro();
+          }
+        );
+      } else {
         this.exibirMensagemConcordaComTermos();
         return;
       }
@@ -49,12 +52,14 @@ export class CadastrarPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Aviso',
       message: 'Cadastro realizado com sucesso',
-      buttons: [{
-        text: 'OK',
-        handler: () => {
-          this.navCtrl.navigateRoot('home');
-        }
-      }]
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.navCtrl.navigateRoot('home');
+          },
+        },
+      ],
     });
 
     await alert.present();
@@ -64,7 +69,7 @@ export class CadastrarPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Aviso',
       message: 'Houve um problema ao realizar o cadastro. Tente novamente mais tarde.',
-      buttons: ['OK']
+      buttons: ['OK'],
     });
 
     await alert.present();
@@ -74,7 +79,7 @@ export class CadastrarPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Aviso',
       message: 'A confirmação de senha está diferente da senha digitada.',
-      buttons: ['OK']
+      buttons: ['OK'],
     });
 
     await alert.present();
@@ -84,27 +89,30 @@ export class CadastrarPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Aviso',
       message: 'Para realizar o cadastro, você deve concordar com nossos termos de uso.',
-      buttons: ['OK']
+      buttons: ['OK'],
     });
 
     await alert.present();
   }
 
-  verificarSenha(){
-    if(this.usuario.Senha != this.usuario.ConfirmacaoSenha){
+  verificarSenha() {
+    if (this.usuario.Senha != this.usuario.ConfirmacaoSenha) {
       return false;
-    }else{
+    } else {
       return true;
     }
+  }
+
+  home(): void {
+    this.navCtrl.navigateRoot('home');
   }
 
   async exibirMensagemErroLogin() {
     const alert = await this.alertController.create({
       header: 'Aviso',
       message: 'Usuario ou senha incorreto.',
-      buttons: ['OK']
+      buttons: ['OK'],
     });
     await alert.present();
   }
-
 }

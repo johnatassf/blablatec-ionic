@@ -25,12 +25,24 @@
 
   <ion-item>
     <ion-icon name="person" slot="start"></ion-icon>
-    <ion-input type="text" placeholder="sobrenome" inputmode="sobrenome" autofocus="true" [(ngModel)]="usuario.Sobrenome"></ion-input>
+    <ion-input
+      type="text"
+      placeholder="sobrenome"
+      inputmode="sobrenome"
+      autofocus="true"
+      [(ngModel)]="usuario.Sobrenome"
+    ></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-icon name="mail" slot="start"></ion-icon>
-    <ion-input type="text" placeholder="email" inputmode="email" autofocus="true" [(ngModel)]="usuario.Email"></ion-input>
+    <ion-input
+      type="text"
+      placeholder="email"
+      inputmode="email"
+      autofocus="true"
+      [(ngModel)]="usuario.Email"
+    ></ion-input>
   </ion-item>
 
   <ion-item>
@@ -38,7 +50,9 @@
     <ion-input type="number" placeholder="Numero de Telefone:" inputmode="numero"></ion-input>
   </ion-item>
 
-  <ion-button expand="block" (click)= "atualizarInformacoes()">Atualizar</ion-button>
+  <ion-button expand="block" (click)="atualizarInformacoes()">Atualizar</ion-button>
 
   <ion-button expand="block">Encerrar a conta</ion-button>
+
+  <ion-button expand="block" (click)="mapas()">Retornar</ion-button>
 </ion-content>

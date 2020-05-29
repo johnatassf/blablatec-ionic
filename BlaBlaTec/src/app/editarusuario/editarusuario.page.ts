@@ -53,6 +53,10 @@ export class EditarusuarioPage implements OnInit {
   });
   }
 
+  mapas(): void {
+    this.navCtrl.navigateRoot('mapas');
+  }
+
   async exibirMensagemAtualziacaoRealizada() {
     const alert = await this.alertController.create({
       header: 'Aviso',
