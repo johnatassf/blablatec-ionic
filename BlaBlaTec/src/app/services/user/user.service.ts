@@ -5,8 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-  apiUrl = 'https://api-blablatec.azurewebsites.net';
-  //apiUrl = 'https://localhost:44334';
+  //apiUrl = 'https://api-blablatec.azurewebsites.net';
+  apiUrl = 'https://localhost:44334';
   constructor(public http: HttpClient) { }
 
   cadastrarUsuario(usuario) {
@@ -24,10 +24,15 @@ export class UserService {
       })
     };
     console.log(httpOptions);
-    return this.http.get(this.apiUrl + '/user/1', httpOptions);
+    return this.http.get(this.apiUrl + '/user/getByRa', httpOptions);
   }
 
   AtualizarUsuario(usuario){
-    return this.http.put(this.apiUrl + '/user/' + usuario.Id, usuario);
+    const httpOptions = {
+      headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + localStorage["ContentLocaly"]
+      })
+    };
+    return this.http.put(this.apiUrl + '/user/' + usuario.Id + '/profile', usuario, httpOptions);
   }
 }

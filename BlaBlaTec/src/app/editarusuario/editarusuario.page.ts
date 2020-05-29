@@ -22,6 +22,14 @@ export class EditarusuarioPage implements OnInit {
       Ra: ''
     }
 
+    usuarioAtualizado = {
+      Id: '',
+      Email: '',
+      Name: '',
+      LastName: '',
+      Ra: ''
+    }
+
   ngOnInit() {
     this.userService.buscarInformacoesUsuario().subscribe((data: any) => {
       console.log(data);
@@ -34,7 +42,13 @@ export class EditarusuarioPage implements OnInit {
   }
 
   atualizarInformacoes(){
-    this.userService.AtualizarUsuario(this.usuario).subscribe((data: any) => {
+    this.usuarioAtualizado.Id = this.usuario.Id;
+    this.usuarioAtualizado.Email = this.usuario.Email;
+    this.usuarioAtualizado.Ra = this.usuario.Ra;
+    this.usuarioAtualizado.Name = this.usuario.Nome;
+    this.usuarioAtualizado.LastName = this.usuario.Sobrenome;
+
+    this.userService.AtualizarUsuario(this.usuarioAtualizado).subscribe((data: any) => {
       this.exibirMensagemAtualziacaoRealizada();
   });
   }
