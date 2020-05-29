@@ -29,7 +29,7 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () => import('./editarusuario/editarusuario.module').then( m => m.EditarusuarioPageModule)
   },
-  {
+  {   
     path: 'alterar-senha',
     loadChildren: () => import('./alterar-senha/alterar-senha.module').then( m => m.AlterarSenhaPageModule)
   },
