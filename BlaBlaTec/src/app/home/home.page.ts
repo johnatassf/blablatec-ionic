@@ -22,7 +22,8 @@ export class HomePage {
   }
 
   realizarLogin(): void {
-    this.userService.autenticarUsuario(this.usuario).subscribe((data: Response) => {
+    this.userService.autenticarUsuario(this.usuario).subscribe((data: any) => {
+      window.localStorage.setItem("ContentLocaly", data.accessToken);
       this.navCtrl.navigateRoot('mapas');
   },
   (error: any) => {

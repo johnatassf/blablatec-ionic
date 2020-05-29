@@ -11,13 +11,16 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule,
            IonicModule.forRoot(), 
            AppRoutingModule,
-           HttpClientModule],
+           HttpClientModule
+           ],
   providers: [
     StatusBar,
     SplashScreen,

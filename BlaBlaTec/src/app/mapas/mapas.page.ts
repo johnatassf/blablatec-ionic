@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-mapas',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MapasPage implements OnInit {
 
-  constructor() { }
+  constructor(public navCtrl: NavController) { }
 
   ngOnInit() {
   }
 
+  irParaMeuPerfil(){
+    this.navCtrl.navigateRoot('perfil');
+  }
 }

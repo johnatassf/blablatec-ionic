@@ -26,14 +26,15 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then((m) => m.TabsPageModule),
   },
   {
-    path: 'editarusuario',
+    path: 'perfil',
     loadChildren: () => import('./editarusuario/editarusuario.module').then( m => m.EditarusuarioPageModule)
-  },  {
+  },
+  {
     path: 'alterar-senha',
     loadChildren: () => import('./alterar-senha/alterar-senha.module').then( m => m.AlterarSenhaPageModule)
   },
-
-];
+ 
+];  
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
