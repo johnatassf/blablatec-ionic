@@ -5,8 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-  //apiUrl = 'https://api-blablatec.azurewebsites.net';
-  apiUrl = 'https://localhost:44334';
+  apiUrl = 'https://blablatec.azurewebsites.net';
+  //apiUrl = 'https://localhost:44334';
   constructor(public http: HttpClient) { }
 
   cadastrarUsuario(usuario) {
