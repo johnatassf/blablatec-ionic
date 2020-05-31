@@ -16,4 +16,7 @@ export class MapasPage implements OnInit {
   irParaMeuPerfil(){
     this.navCtrl.navigateRoot('perfil');
   }
+  procurarCaronas(){
+    this.navCtrl.navigateRoot('listarCaronas');
+  }
 }

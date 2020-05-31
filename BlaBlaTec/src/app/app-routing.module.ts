@@ -33,6 +33,10 @@ const routes: Routes = [
     path: 'alterar-senha',
     loadChildren: () => import('./alterar-senha/alterar-senha.module').then( m => m.AlterarSenhaPageModule)
   },
+  {
+    path: 'listarcaronas',
+    loadChildren: () => import('./caronas/listarcaronas/listarcaronas.module').then( m => m.ListarcaronasPageModule)
+  },
  
 ];  
 
