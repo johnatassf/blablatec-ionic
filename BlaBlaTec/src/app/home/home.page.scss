@@ -33,7 +33,37 @@ ion-icon {
 }
 
 ion-content {
-  #carrinho {
+  #logo {
+    width: 100%;
+    display: float;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+ion-content {
+  #login {
+    width: 100%;
+    display: float;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+ion-content {
+  #criarConta {
+    width: 100%;
+    display: float;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+ion-content {
+  #esqueceuSenha {
     width: 100%;
     display: float;
     flex-direction: column;

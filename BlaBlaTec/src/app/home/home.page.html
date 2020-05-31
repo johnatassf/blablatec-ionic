@@ -1,7 +1,7 @@
 <ion-content padding>
-  <div id="carrinho">
+  <div id="logo">
     <h1 text-align>
-      <ion-icon name="car" class="icon-7em"> </ion-icon>
+      <img src="https://uploaddeimagens.com.br/images/002/681/801/full/logo_blabla.png?1590890763" class="icon-7em" />
     </h1>
   </div>
 
@@ -15,9 +15,14 @@
     <ion-input type="password" placeholder="Senha" [(ngModel)]="usuario.Password"></ion-input>
   </ion-item>
 
-  <ion-button expand="block" (click)="realizarLogin()">Acessar</ion-button>
-  <ion-button expand="block" fill="clear" (click)="acessarCadastrar()">Criar uma conta</ion-button>
-  <ion-button expand="block" fill="clear" (click)="alterarSenha()" color="success">Esqueceu sua senha</ion-button>
-</ion-content>
+  <div id="login">
+    <ion-button fill="clear" (click)="realizarLogin()">Acessar </ion-button>
+  </div>
 
- 
+  <div id="criarConta">
+    <ion-button fill="clear" (click)="acessarCadastrar()">Criar uma conta</ion-button>
+  </div>
+  <div id="esqueceuSenha">
+    <ion-button fill="clear" (click)="alterarSenha()" color="success">Esqueceu sua senha</ion-button>
+  </div>
+</ion-content>

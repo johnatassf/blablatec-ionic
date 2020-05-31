@@ -5,17 +5,11 @@
   width: 100%;
 }
 
-#atual {
-  flex-grow: 1;
-  width: 50%;
-}
-
-#antigo {
-  flex-grow: 1;
-  width: 50%;
-}
-
 #mapa {
   width: 100%;
   height: 55%;
+}
+
+.my-custom-class {
+  --background: #e5e5e5;
 }
