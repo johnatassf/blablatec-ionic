@@ -20,6 +20,8 @@ export class CadastrarPage implements OnInit {
     ConcordaComTermos: false,
   };
 
+  grupo;
+
   constructor(
     private userService: UserService,
     private alertController: AlertController,
@@ -46,6 +48,10 @@ export class CadastrarPage implements OnInit {
         return;
       }
     }
+  }
+
+  teste(evento: any) {
+    console.log(evento);
   }
 
   async exibirMensagemCadastroRealizado() {
@@ -115,4 +121,6 @@ export class CadastrarPage implements OnInit {
     });
     await alert.present();
   }
+
+  public escolha: string;
 }
