@@ -1,5 +1,6 @@
 import { Component, OnInit, SystemJsNgModuleLoaderConfig } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { UserService } from '../services/user/user.service';
 import { cordovaPropertySet } from '@ionic-native/core';
@@ -20,10 +21,13 @@ export class CadastrarPage implements OnInit {
     ConcordaComTermos: false,
   };
 
+  private form: FormGroup;
+
   constructor(
     private userService: UserService,
     private alertController: AlertController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private formBuilder: FormBuilder
   ) {}
   ngOnInit() {}
 
