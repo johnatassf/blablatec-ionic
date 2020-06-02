@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarcaronasPage implements OnInit {
 
+  public show_agendadas: boolean = false;
+  public show_oferecidas: boolean = false;
+  
   constructor() { }
 
   ngOnInit() {

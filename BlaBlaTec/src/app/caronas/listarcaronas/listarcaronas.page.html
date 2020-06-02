@@ -1,10 +1,40 @@
 <ion-header>
   <ion-toolbar>
+    
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="home"></ion-back-button>
+      </ion-buttons>
+    
     <ion-title>Caronas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
   
-  
+
+  <ion-item (click)="this.show_agendadas= true; this.show_oferecidas= false">
+      <ion-label><b>Caronas Agendadas</b></ion-label>  
+    </ion-item>     
+
+<ion-list *ngIf="show_agendadas">
+    
+        <ion-item>
+            <ion-label>Praia Grande</ion-label>  
+        </ion-item>
+        <ion-item>
+            <ion-label>São Vicente</ion-label>  
+        </ion-item>
+</ion-list> 
+         
+  <ion-item (click)="this.show_oferecidas= true; this.show_agendadas= false">
+      <ion-label><b>Caronas Oferecidas</b></ion-label>
+        </ion-item>
+      <ion-list *ngIf="show_oferecidas">
+          <ion-item>
+            <ion-label>Cubatão</ion-label>  
+          </ion-item>
+        <ion-item>
+            <ion-label>Santos</ion-label>  
+        </ion-item>
+</ion-list>
 </ion-content>
