@@ -21,7 +21,11 @@ export class CadastrarPage implements OnInit {
     ConcordaComTermos: false,
   };
 
+<<<<<<< HEAD
   private form: FormGroup;
+=======
+  grupo;
+>>>>>>> d75e66d20e5fe8187a09d50d482d1b17527fddc6
 
   constructor(
     private userService: UserService,
@@ -50,6 +54,10 @@ export class CadastrarPage implements OnInit {
         return;
       }
     }
+  }
+
+  teste(evento: any) {
+    console.log(evento);
   }
 
   async exibirMensagemCadastroRealizado() {
@@ -119,4 +127,6 @@ export class CadastrarPage implements OnInit {
     });
     await alert.present();
   }
+
+  public escolha: string;
 }
