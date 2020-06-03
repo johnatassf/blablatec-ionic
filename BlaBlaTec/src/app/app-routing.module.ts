@@ -32,10 +32,17 @@ const routes: Routes = [
   {   
     path: 'alterar-senha',
     loadChildren: () => import('./alterar-senha/alterar-senha.module').then( m => m.AlterarSenhaPageModule)
-  },  {
+  },
+  {
     path: 'historico',
     loadChildren: () => import('./historico/historico.module').then( m => m.HistoricoPageModule)
   },
+  {
+    path: 'oferecer-carona',
+    loadChildren: () => import('./oferecer-carona/oferecer-carona.module').then( m => m.OferecerCaronaPageModule)
+  },
+ 
+];  
 
  
 ];  

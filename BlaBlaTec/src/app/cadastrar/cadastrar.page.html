@@ -1,12 +1,12 @@
 <ion-content padding>
   <ion-list>
-    <ion-radio-group value="escolhaPerfil">
+    <ion-radio-group [(ngModel)]="grupo">
       <ion-row>
         <ion-list-header>
           <ion-label>Escolha seu perfil:</ion-label>
         </ion-list-header>
         <ion-item>
-          <ion-radio mode="md" color="success" value="perfilCarona"></ion-radio>
+          <ion-radio color="success" value="perfilCarona" checked></ion-radio>
           <ion-label>Somente carona</ion-label>
         </ion-item>
 
@@ -40,9 +40,10 @@
   </ion-item>
 
   <!--Necessário ligar com o banco!-->
+
   <ion-item>
     <ion-icon name="phone-portrait" slot="start"></ion-icon>
-    <ion-input type="number" placeholder="Numero de Telefone:" inputmode="numero"></ion-input>
+    <ion-input type="tel" pattern="[0-9]" placeholder="Numero de Telefone:" inputmode="numero"></ion-input>
   </ion-item>
 
   <ion-item>
@@ -50,40 +51,46 @@
     <ion-input type="text" [(ngModel)]="usuario.Ra" placeholder="RA" inputmode="ra"></ion-input>
   </ion-item>
 
-  <div id="modeloC">
-    <ion-item disabled>
-      <ion-icon name="car" slot="start"></ion-icon>
-      <ion-input type="text" placeholder="Modelo do carro" inputmode="modelocar"></ion-input>
-    </ion-item>
-  </div>
-  <div id="placaV">
-    <ion-item disabled>
-      <ion-icon name="square" slot="start"></ion-icon>
-      <ion-input type="text" placeholder="Placa do veíclulo:" inputmode="placa"></ion-input>
-    </ion-item>
-  </div>
+  <div *ngIf="grupo=='perfilMotorista'">
+    <div id="modeloC">
+      <ion-item>
+        <ion-icon name="car" slot="start"></ion-icon>
+        <ion-input type="text" placeholder="Modelo do carro" inputmode="modelocar"></ion-input>
+      </ion-item>
+    </div>
 
-  <div id="cores">
-    <ion-item disabled>
-      <ion-label>Cor do veículo</ion-label>
-      <ion-select value="Azul" okText="Confirmar" cancelText="Cancelar">
-        <ion-select-option value="azul">Azul</ion-select-option>
-        <ion-select-option value="amarelo">Amarelo</ion-select-option>
-        <ion-select-option value="branco">Branco</ion-select-option>
-        <ion-select-option value="cinza">Cinza</ion-select-option>
-        <ion-select-option value="preto">Preto</ion-select-option>
-        <ion-select-option value="prata">Prata</ion-select-option>
-        <ion-select-option value="cinza">Verde</ion-select-option>
-        <ion-select-option value="vermelho">Vermelho</ion-select-option>
-      </ion-select>
-    </ion-item>
+    <div id="placaV">
+      <ion-item>
+        <ion-icon name="square" slot="start"></ion-icon>
+        <ion-input type="text" placeholder="Placa do veíclulo:" inputmode="placa"></ion-input>
+      </ion-item>
+    </div>
+
+    <div id="cores">
+      <ion-item>
+        <ion-label>Cor do veículo</ion-label>
+        <ion-select value="Azul" okText="Confirmar" cancelText="Cancelar">
+          <ion-select-option value="azul">Azul</ion-select-option>
+          <ion-select-option value="amarelo">Amarelo</ion-select-option>
+          <ion-select-option value="branco">Branco</ion-select-option>
+          <ion-select-option value="cinza">Cinza</ion-select-option>
+          <ion-select-option value="preto">Preto</ion-select-option>
+          <ion-select-option value="prata">Prata</ion-select-option>
+          <ion-select-option value="cinza">Verde</ion-select-option>
+          <ion-select-option value="vermelho">Vermelho</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
   </div>
 
   <ion-item>
     <input type="checkbox" color="terciary" slot="start" [(ngModel)]="usuario.ConcordaComTermos" />
     <ion-label>Concordo com os <a>termos de uso</a></ion-label>
   </ion-item>
-
-  <ion-button expand="block" (click)="finalizarCadastro()">Cadastrar</ion-button>
-  <ion-button expand="block" (click)="home()">Retornar</ion-button>
+  <div id="btnFinalizar">
+    <ion-button fill="clear" (click)="finalizarCadastro()">Cadastrar</ion-button>
+  </div>
+  <div id="btnVoltar">
+    <ion-button fill="clear" (click)="home()">Retornar</ion-button>
+  </div>
 </ion-content>

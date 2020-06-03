@@ -1,5 +1,6 @@
 import { Component, OnInit, SystemJsNgModuleLoaderConfig } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { UserService } from '../services/user/user.service';
 import { cordovaPropertySet } from '@ionic-native/core';
@@ -20,10 +21,17 @@ export class CadastrarPage implements OnInit {
     ConcordaComTermos: false,
   };
 
+<<<<<<< HEAD
+  private form: FormGroup;
+=======
+  grupo;
+>>>>>>> d75e66d20e5fe8187a09d50d482d1b17527fddc6
+
   constructor(
     private userService: UserService,
     private alertController: AlertController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private formBuilder: FormBuilder
   ) {}
   ngOnInit() {}
 
@@ -46,6 +54,10 @@ export class CadastrarPage implements OnInit {
         return;
       }
     }
+  }
+
+  teste(evento: any) {
+    console.log(evento);
   }
 
   async exibirMensagemCadastroRealizado() {
@@ -115,4 +127,6 @@ export class CadastrarPage implements OnInit {
     });
     await alert.present();
   }
+
+  public escolha: string;
 }
