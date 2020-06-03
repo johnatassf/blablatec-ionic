@@ -11,9 +11,6 @@ export class MapasPage implements OnInit {
 
   ngOnInit() {}
 
-  irParaMeuPerfil() {
-    this.navCtrl.navigateRoot('perfil');
-  }
 
   async openActionSheet() {
     const actionSheet = await this.actionSheetController.create({
@@ -25,6 +22,13 @@ export class MapasPage implements OnInit {
           icon: 'thumbs-up',
           handler: () => {
             console.log('Delete clicked');
+          },
+        },
+        {
+          text: 'Oferecer',
+          icon: 'thumbs-up',
+          handler: () => {
+            this.navCtrl.navigateRoot('oferecer-carona');
           },
         },
         {
@@ -45,7 +49,7 @@ export class MapasPage implements OnInit {
           text: 'Meu Perfil',
           icon: 'happy-outline',
           handler: () => {
-            console.log('Favorite clicked');
+            this.navCtrl.navigateRoot('perfil');
           },
         },
         {

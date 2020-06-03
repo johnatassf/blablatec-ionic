@@ -59,8 +59,12 @@ export class MapaMotoristaPage implements OnInit {
         this.longitudeAtual = result.coords.toString();
 
         const mapOptions = {
-          zoom: 18,
-          center: position
+          zoom: 13,
+          center: position,
+          mapTypeControl: false,
+          mapTypeIs: google.maps.MapTypeId.ROADMAP,
+          streetViewControl: false,
+          fullscreenControl: false,
         };
 
         this.map = new google.maps.Map(document.getElementById('map'), mapOptions);

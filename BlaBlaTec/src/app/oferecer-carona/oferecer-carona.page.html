@@ -8,35 +8,39 @@
   <form [formGroup]="form">
     <ion-item>
       <ion-icon name="locate-outline" slot="start"></ion-icon>
-      <ion-input type="origem" placeholder="Origem da Corrida" autofocus="true" formControlName="origem"></ion-input>
+      <ion-searchbar class="autocompleteperson" formControlName="origem" placeholder="Origem da Corrida"
+        style="box-shadow:nome!important"></ion-searchbar>
+      <ion-list [hidden]="origem.lenght" style="position: absolute;" *ngFor="let resultado of origens">
+        <ion-item>{{resultado.description}}</ion-item>
+      </ion-list>
       <div *ngIf="form.controls.origem.errors">
-        <p *ngIf="form.controls.origem.errors.required"></p>        
+        <p *ngIf="form.controls.origem.errors.required"></p>
       </div>
     </ion-item>
-
-    <ion-item>
+    <ion-item style="display: block;">
       <ion-icon name="map-outline" slot="start"></ion-icon>
-      <ion-input type="destino" placeholder="Destino da Corrida" autofocus="true" formControlName="destino"></ion-input>
+      <ion-searchbar class="autocompleteperson" placeholder="Destino da Corrida" formControlName="destino"
+        style="box-shadow:nome!important"></ion-searchbar>
     </ion-item>
     <div *ngIf="form.controls.destino.errors">
-      <p *ngIf="form.controls.destino.errors.required"></p>        
+      <p *ngIf="form.controls.destino.errors.required"></p>
     </div>
     <ion-item>
 
       <ion-label>Data/Hora da Corrida</ion-label>
       <ion-datetime value="1995-04-15" min="1990-02" max="2050" formControlName="data" mask="00/00/0000"
-        [dayShortNames]="customDayShortNames"
-        displayFormat="MMM DD, YYYY HH:mm"
-        monthShortNames="jan, feb, mar, apr, mai, jun, jul, aug, sep, okt, nov, des"></ion-datetime>      
+        [dayShortNames]="customDayShortNames" displayFormat="MMM DD, YYYY HH:mm"
+        monthShortNames="jan, feb, mar, apr, mai, jun, jul, aug, sep, okt, nov, des"></ion-datetime>
     </ion-item>
 
     <ion-item>
       <ion-icon name="walk-outline" slot="start"></ion-icon>
-      <ion-input type="qtdLugares" placeholder="Qtd disponíveis de vagas no veículo" autofocus="true" formControlName="qtdLugares" numeric-only></ion-input>
+      <ion-input type="number" placeholder="Qtd disponíveis de vagas no veículo" formControlName="qtdLugares"
+        numeric-only></ion-input>
     </ion-item>
     <div *ngIf="form.controls.qtdLugares.errors">
-      <p *ngIf="form.controls.qtdLugares.errors.required"></p>       
-      <p *ngIf="form.controls.qtdLugares.errors.pattern"></p>  
+      <p *ngIf="form.controls.qtdLugares.errors.required"></p>
+      <p *ngIf="form.controls.qtdLugares.errors.pattern"></p>
     </div>
   </form>
   <ion-button expand="block" (click)="oferecerCarona()">Oferecer Carona</ion-button>
