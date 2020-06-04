@@ -22,14 +22,15 @@ export class HomePage {
   }
 
   realizarLogin(): void {
-    this.userService.autenticarUsuario(this.usuario).subscribe((data: any) => {
-      window.localStorage.setItem("ContentLocaly", data.accessToken);
-      this.navCtrl.navigateRoot('mapas');
-  },
-  (error: any) => {
-    console.log(error);
-    this.exibirMensagemErroLogin();
-  });
+    this.navCtrl.navigateRoot('mapas');
+  //   this.userService.autenticarUsuario(this.usuario).subscribe((data: any) => {
+  //     window.localStorage.setItem("ContentLocaly", data.accessToken);
+  //     this.navCtrl.navigateRoot('mapas');
+  // },
+  // (error: any) => {
+  //   console.log(error);
+  //   this.exibirMensagemErroLogin();
+  // });
   }
   async exibirMensagemErroLogin() {
     const alert = await this.alertController.create({

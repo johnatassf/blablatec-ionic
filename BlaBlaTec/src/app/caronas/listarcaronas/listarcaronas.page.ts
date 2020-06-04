@@ -6,9 +6,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listarcaronas.page.scss'],
 })
 export class ListarcaronasPage implements OnInit {
-
-  public show_agendadas: boolean = false;
-  public show_oferecidas: boolean = false;
+  
+  public lista: {endereco: string, nome: string, horario: string}[] = [
+    {
+      endereco: 'Rua',
+      nome: 'eu',
+      horario: '19:00'
+    },
+    {
+      endereco: 'Rua',
+      nome: 'eu',
+      horario: '19:00'
+    }, 
+    {
+      endereco: 'Rua',
+      nome: 'eu',
+      horario: '19:00'
+    }
+  ];
   
   constructor() { }
 

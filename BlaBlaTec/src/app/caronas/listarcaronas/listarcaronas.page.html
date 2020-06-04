@@ -10,31 +10,14 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
-
-  <ion-item (click)="this.show_agendadas= true; this.show_oferecidas= false">
-      <ion-label><b>Caronas Agendadas</b></ion-label>  
-    </ion-item>     
-
-<ion-list *ngIf="show_agendadas">
+  <ion-list>
+    <ion-item *ngFor="let valorEndereco of lista">
+          <ion-label>{{valorEndereco.endereco}}</ion-label>
+          <ion-label>{{valorEndereco.nome}}</ion-label>
+          <ion-label>{{valorEndereco.horario}}</ion-label>
+      <ion-button size="small" color="success">Acept</ion-button>
+      <ion-button size="small" color="danger">Decline</ion-button>
+    </ion-item>
     
-        <ion-item>
-            <ion-label>Praia Grande</ion-label>  
-        </ion-item>
-        <ion-item>
-            <ion-label>São Vicente</ion-label>  
-        </ion-item>
-</ion-list> 
-         
-  <ion-item (click)="this.show_oferecidas= true; this.show_agendadas= false">
-      <ion-label><b>Caronas Oferecidas</b></ion-label>
-        </ion-item>
-      <ion-list *ngIf="show_oferecidas">
-          <ion-item>
-            <ion-label>Cubatão</ion-label>  
-          </ion-item>
-        <ion-item>
-            <ion-label>Santos</ion-label>  
-        </ion-item>
-</ion-list>
+  </ion-list>
 </ion-content>

@@ -34,9 +34,20 @@ const routes: Routes = [
     loadChildren: () => import('./alterar-senha/alterar-senha.module').then( m => m.AlterarSenhaPageModule)
   },
   {
+    path: 'oferecer-carona',
+    loadChildren: () => import('./oferecer-carona/oferecer-carona.module').then( m => m.OferecerCaronaPageModule)
+  },
+  {
+    path: 'mapa-motorista',
+    loadChildren: () => import('./mapa-motorista/mapa-motorista.module').then( m => m.MapaMotoristaPageModule)
+  },
+  {
     path: 'listarcaronas',
     loadChildren: () => import('./caronas/listarcaronas/listarcaronas.module').then( m => m.ListarcaronasPageModule)
   },
+ 
+];  
+
  
 ];  
 

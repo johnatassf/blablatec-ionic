@@ -39,4 +39,22 @@ ion-button {
   --color: #ffffff;
 }
 
+ion-searchbar.autocompleteperson{
+  padding: 0;
+  box-shadow: none !important;
+  .searchbar-search-icon.sc-ion-searchbar-md {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .searchbar-input {
+    padding-left: 9px !important;
+    box-shadow: none !important;
+  }
+  .sc-ion-searchbar-md-h{
+    padding: 0;
+  }
+  
 
+  
+}
