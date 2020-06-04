@@ -53,6 +53,13 @@ export class MapasPage implements OnInit {
           },
         },
         {
+          text: 'Listar',
+          icon: 'list-outline',
+          handler: () => {
+            this.navCtrl.navigateRoot('listarcaronas');
+          },
+        },
+        {
           text: 'Voltar',
           icon: 'arrow-back-circle',
           role: 'cancel',
