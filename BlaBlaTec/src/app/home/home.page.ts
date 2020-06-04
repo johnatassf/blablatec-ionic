@@ -22,6 +22,7 @@ export class HomePage {
   }
 
   realizarLogin(): void {
+    // this.navCtrl.navigateRoot('mapas');
     this.userService.autenticarUsuario(this.usuario).subscribe((data: any) => {
       window.localStorage.setItem("ContentLocaly", data.accessToken);
       this.navCtrl.navigateRoot('mapas');
