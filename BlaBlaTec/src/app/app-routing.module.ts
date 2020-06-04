@@ -44,9 +44,10 @@ const routes: Routes = [
   {
     path: 'listarcaronas',
     loadChildren: () => import('./caronas/listarcaronas/listarcaronas.module').then( m => m.ListarcaronasPageModule)
+  },  {
+    path: 'avaliacao-caronas',
+    loadChildren: () => import('./caronas/avaliacao-caronas/avaliacao-caronas.module').then( m => m.AvaliacaoCaronasPageModule)
   },
- 
-];  
 
  
 ];  
