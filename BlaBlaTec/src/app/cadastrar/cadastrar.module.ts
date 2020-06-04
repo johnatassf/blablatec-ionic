@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -17,7 +17,8 @@ import { UserService } from '../services/user/user.service';
     IonicModule,
     CadastrarPageRoutingModule
   ],
-  declarations: [CadastrarPage]
+  declarations: [CadastrarPage], 
+  providers: [FormBuilder]
 })
 export class CadastrarPageModule { 
   constructor (private userService: UserService){  }
