@@ -17,7 +17,12 @@ export class CadastrarPage implements OnInit {
     Senha: '',
     ConfirmacaoSenha: '',
     Ra: '',
+    Celular: '',
+    Modelo: '',
+    Placa: '',
+    Corcarro: '',
     Sobrenome: '',
+
     ConcordaComTermos: false,
   };
 
@@ -51,10 +56,6 @@ export class CadastrarPage implements OnInit {
         return;
       }
     }
-  }
-
-  teste(evento: any) {
-    console.log(evento);
   }
 
   async exibirMensagemCadastroRealizado() {
