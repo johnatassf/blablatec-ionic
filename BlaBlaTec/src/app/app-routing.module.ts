@@ -40,9 +40,17 @@ const routes: Routes = [
   {
     path: 'oferecer-carona',
     loadChildren: () => import('./oferecer-carona/oferecer-carona.module').then( m => m.OferecerCaronaPageModule)
-  },  {
+  },
+  {
     path: 'mapa-motorista',
     loadChildren: () => import('./mapa-motorista/mapa-motorista.module').then( m => m.MapaMotoristaPageModule)
+  },
+  {
+    path: 'procurar-carona',
+    loadChildren: () => import('./procurar-carona/procurar-carona-routing.module').then( m => m.ProcurarCaronaPageRoutingModule)
+  },  {
+    path: 'procurar-carona',
+    loadChildren: () => import('./procurar-carona/procurar-carona.module').then( m => m.ProcurarCaronaPageModule)
   },
 
  
