@@ -22,6 +22,21 @@ export class OferecerCaronaPage implements OnInit {
   showLisDesti = false;
   clickList: boolean;
 
+  directionsService = new google.maps.DirectionsService();
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  map: any;
+  posicaoAtual: any;
+  originPosition: string;
+  destinationPosition: string;
+  rotasCadastradas;
+  obterRotas: { latitude: string, longitude: string }[] = [];
+  marcador: any;
+  startPosition: any;
+  latitudeAtual: string;
+  longitudeAtual: string;
+  idViagem: any;
+  RotaAtiva: any;
+
   constructor(
     private navCtrl: NavController,
     private formBuilder: FormBuilder,
@@ -47,6 +62,8 @@ export class OferecerCaronaPage implements OnInit {
       qtdLugares: this.qtdLugares
     });
 
+    this.initializeMap();
+
   }
   mapas(): void {
     this.navCtrl.navigateRoot('mapas');
@@ -66,6 +83,8 @@ export class OferecerCaronaPage implements OnInit {
     this.showListOrigin = false;
     this.clickList = true;
     this.form.controls.origem.patchValue(event.description);
+    this.destinationPosition = event.description;
+    this.calculateRoute();
   }
   setDestino(event: any) {
     this.origens = [];
@@ -73,6 +92,8 @@ export class OferecerCaronaPage implements OnInit {
     this.showLisDesti = false;
     this.clickList = true;
     this.form.controls.destino.patchValue(event.description);
+    this.originPosition = event.description;
+    this.calculateRoute();
   }
 
   searchOrigem(input: any, tela: boolean) {
@@ -129,9 +150,10 @@ export class OferecerCaronaPage implements OnInit {
   criarRota() {
     const oferecerCarona = new OferecerCaronaModel();
     oferecerCarona.valor = 0,
-      oferecerCarona.viagem = this.form.controls.data.value,
+      oferecerCarona.dataViagem = this.form.controls.data.value,
       oferecerCarona.pontoInicial = this.form.controls.origem.value,
       oferecerCarona.pontoFinal = this.form.controls.destino.value,
+      oferecerCarona.qtdLugares = this.form.controls.qtdLugares.value,
 
       this.service.criarViagem(oferecerCarona).subscribe(() => {
         //carrega loading
@@ -141,7 +163,44 @@ export class OferecerCaronaPage implements OnInit {
       })
   }
 
+  initializeMap() {
+    this.startPosition = new google.maps.LatLng(-21.763409, -43.349034);
 
+    const mapOptions = {
+      zoom: 18,
+      center: this.startPosition,
+      disableDefaultUI: true
+    };
+
+    this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    this.directionsDisplay.setMap(this.map);
+
+    const marker = new google.maps.Marker({
+      position: this.startPosition,
+      map: this.map,
+    });
+  }
+
+  calculateRoute() {
+    if (this.destinationPosition && this.originPosition) {
+      const request = {
+        // Pode ser uma coordenada (LatLng), uma string ou um lugar
+        origin: this.originPosition,
+        destination: this.destinationPosition,
+        travelMode: 'DRIVING'
+      };
+
+      this.traceRoute(this.directionsService, this.directionsDisplay, request);
+    }
+  }
+
+  traceRoute(service: any, display: any, request: any) {
+    service.route(request, function (result, status) {
+      if (status === 'OK') {
+        display.setDirections(result);
+      }
+    });
+  }
 
 
 

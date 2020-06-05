@@ -1,9 +1,10 @@
 export class OferecerCaronaModel {
+    qtdLugares: any;
 
     constructor(){}
 
     valor: number;
-    viagem: string;
+    dataViagem: string;
     pontoInicial: string;
     pontoFinal: string;
 

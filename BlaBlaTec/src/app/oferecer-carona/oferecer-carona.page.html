@@ -4,56 +4,65 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="container">
-  <form [formGroup]="form">
-    <ion-item>
-      <ion-icon name="locate-outline" slot="start"></ion-icon>
-      <ion-searchbar debounce="500" class="autocompleteperson" (ionClear)="ionClear()" (ionChange)="searchOrigem($event, true)" formControlName="origem"
-        placeholder="Origem da Corrida" style="box-shadow:nome!important"></ion-searchbar>
+<form [formGroup]="form">
+  <ion-item>
+    <ion-icon name="locate-outline" slot="start"></ion-icon>
+    <ion-searchbar debounce="500" class="autocompleteperson" (ionClear)="ionClear()"
+      (ionChange)="searchOrigem($event, true)" formControlName="origem" placeholder="Origem da Corrida"
+      style="box-shadow:nome!important"></ion-searchbar>
 
-      <div *ngIf="form.controls.origem.errors">
-        <p *ngIf="form.controls.origem.errors.required"></p>
-      </div>
-    </ion-item>
-
-
-    <ion-list [hidden]="!showListOrigin" (click) = "setOrigem(resultado)"*ngFor="let resultado of origens">
-      <ion-item>{{resultado.description}}</ion-item>
-    </ion-list>
-
-    <ion-item *ngIf="!showListOrigin">
-      <ion-icon name="map-outline" slot="start"></ion-icon>
-      <ion-searchbar debounce="500" class="autocompleteperson" (ionClear)="ionClear()" (ionChange)="searchDestino($event)" formControlName="destino"
-        placeholder="Origem da Corrida" style="box-shadow:nome!important"></ion-searchbar>
-      <div *ngIf="form.controls.destino.errors">
-        <p *ngIf="form.controls.destino.errors.required"></p>
-      </div>
-    </ion-item>
-    <ion-list [hidden]="!showLisDesti" (click) = "setDestino(resultado)" *ngFor="let resultado of destinos">
-      <ion-item>{{resultado.description}}</ion-item>
-    </ion-list>
-
-
-    <ion-item *ngIf="!showListOrigin || !showLisDesti">
-
-      <ion-label>Data/Hora da Corrida</ion-label>
-      <ion-datetime value="1995-04-15" min="1990-02" max="2050" formControlName="data" mask="00/00/0000"
-        [dayShortNames]="customDayShortNames" displayFormat="MMM DD, YYYY HH:mm"
-        monthShortNames="jan, feb, mar, apr, mai, jun, jul, aug, sep, okt, nov, des"></ion-datetime>
-    </ion-item>
-
-    <ion-item *ngIf="!showListOrigin || !showLisDesti">
-      <ion-icon name="walk-outline" slot="start"></ion-icon>
-      <ion-input type="number" placeholder="Qtd disponíveis de vagas no veículo" formControlName="qtdLugares"
-        numeric-only></ion-input>
-    </ion-item>
-    <div *ngIf="form.controls.qtdLugares.errors">
-      <p *ngIf="form.controls.qtdLugares.errors.required"></p>
-      <p *ngIf="form.controls.qtdLugares.errors.pattern"></p>
+    <div *ngIf="form.controls.origem.errors">
+      <p *ngIf="form.controls.origem.errors.required"></p>
     </div>
-  </form>
+  </ion-item>
 
-  <ion-button *ngIf="!showListOrigin || !showLisDesti" expand="block" (click)="oferecerCarona()">Oferecer Carona</ion-button>
-  <ion-button *ngIf="!showListOrigin || !showLisDesti" expand="block" (click)="mapas()">Retornar</ion-button>
 
+  <ion-list [hidden]="!showListOrigin" (click)="setOrigem(resultado)" *ngFor="let resultado of origens">
+    <ion-item>{{resultado.description}}</ion-item>
+  </ion-list>
+
+  <ion-item *ngIf="!showListOrigin">
+    <ion-icon name="map-outline" slot="start"></ion-icon>
+    <ion-searchbar debounce="500" class="autocompleteperson" (ionClear)="ionClear()" (ionChange)="searchDestino($event)"
+      formControlName="destino" placeholder="Origem da Corrida" style="box-shadow:nome!important"></ion-searchbar>
+    <div *ngIf="form.controls.destino.errors">
+      <p *ngIf="form.controls.destino.errors.required"></p>
+    </div>
+  </ion-item>
+  <ion-list [hidden]="!showLisDesti" (click)="setDestino(resultado)" *ngFor="let resultado of destinos">
+    <ion-item>{{resultado.description}}</ion-item>
+  </ion-list>
+
+
+  <ion-item *ngIf="!showListOrigin || !showLisDesti">
+
+    <ion-label>Data/Hora da Corrida</ion-label>
+    <ion-datetime value="1995-04-15" min="1990-02" max="2050" formControlName="data" mask="00/00/0000"
+      [dayShortNames]="customDayShortNames" displayFormat="MMM DD, YYYY HH:mm"
+      monthShortNames="jan, feb, mar, apr, mai, jun, jul, aug, sep, okt, nov, des"></ion-datetime>
+  </ion-item>
+
+  <ion-item *ngIf="!showListOrigin || !showLisDesti">
+    <ion-icon name="walk-outline" slot="start"></ion-icon>
+    <ion-input type="number" placeholder="Qtd disponíveis de vagas no veículo" formControlName="qtdLugares"
+      numeric-only></ion-input>
+  </ion-item>
+  <div *ngIf="form.controls.qtdLugares.errors">
+    <p *ngIf="form.controls.qtdLugares.errors.required"></p>
+    <p *ngIf="form.controls.qtdLugares.errors.pattern"></p>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!showListOrigin || !showLisDesti">
+    <ion-fab-button [disabled]="!form.valid" (click)="oferecerCarona()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="!showListOrigin || !showLisDesti">
+    <ion-fab-button (click)="mapas()">
+      <ion-icon name="arrow-back-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</form>
+<ion-content>
+  <div #map id="map"></div>
 </ion-content>
