@@ -43,7 +43,7 @@
 
   <ion-item>
     <ion-icon name="phone-portrait" slot="start"></ion-icon>
-    <ion-input type="tel" pattern="[0-9]" placeholder="Numero de Telefone:" inputmode="numero"></ion-input>
+    <ion-input type="text" maxlength="11" [(ngModel)]="usuario.Celular" placeholder="Numero de Telefone:"></ion-input>
   </ion-item>
 
   <ion-item>
@@ -55,21 +55,31 @@
     <div id="modeloC">
       <ion-item>
         <ion-icon name="car" slot="start"></ion-icon>
-        <ion-input type="text" placeholder="Modelo do carro" inputmode="modelocar"></ion-input>
+        <ion-input
+          type="text"
+          [(ngModel)]="usuario.Modelo"
+          placeholder="Modelo do carro"
+          inputmode="modelocar"
+        ></ion-input>
       </ion-item>
     </div>
 
     <div id="placaV">
       <ion-item>
         <ion-icon name="square" slot="start"></ion-icon>
-        <ion-input type="text" placeholder="Placa do veíclulo:" inputmode="placa"></ion-input>
+        <ion-input
+          type="text"
+          [(ngModel)]="usuario.Placa"
+          placeholder="Placa do veíclulo:"
+          inputmode="placa"
+        ></ion-input>
       </ion-item>
     </div>
 
     <div id="cores">
       <ion-item>
         <ion-label>Cor do veículo</ion-label>
-        <ion-select value="Azul" okText="Confirmar" cancelText="Cancelar">
+        <ion-select value="Azul" [(ngModel)]="usuario.Corcarro" okText="Confirmar" cancelText="Cancelar">
           <ion-select-option value="azul">Azul</ion-select-option>
           <ion-select-option value="amarelo">Amarelo</ion-select-option>
           <ion-select-option value="branco">Branco</ion-select-option>

@@ -17,39 +17,33 @@ export class MapasPage implements OnInit {
       header: 'Menu',
       cssClass: 'my-custom-class',
       buttons: [
+        
         {
-          text: 'Minhas Caronas',
-          icon: 'thumbs-up',
-          handler: () => {
-            console.log('Delete clicked');
-          },
-        },
-        {
-          text: 'Oferecer',
+          text: 'Oferecer Carona',
           icon: 'thumbs-up',
           handler: () => {
             this.navCtrl.navigateRoot('oferecer-carona');
           },
         },
         {
-          text: 'Meu Histórico',
-          icon: 'reader',
-          handler: () => {
-            console.log('Share clicked');
-          },
-        },
-        {
           text: 'Procurar',
           icon: 'search',
           handler: () => {
-            console.log('Play clicked');
+            this.navCtrl.navigateRoot('procurar-carona');
           },
         },
         {
           text: 'Meu Perfil',
           icon: 'happy-outline',
           handler: () => {
-            this.navCtrl.navigateRoot('perfil');
+            
+          },
+        },
+        {
+          text: 'Corridas',
+          icon: 'list-outline',
+          handler: () => {
+            this.navCtrl.navigateRoot('listarcaronas');
           },
         },
         {

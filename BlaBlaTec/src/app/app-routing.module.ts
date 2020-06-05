@@ -40,13 +40,12 @@ const routes: Routes = [
   {
     path: 'oferecer-carona',
     loadChildren: () => import('./oferecer-carona/oferecer-carona.module').then( m => m.OferecerCaronaPageModule)
-  },  {
+  },
+  {
     path: 'mapa-motorista',
     loadChildren: () => import('./mapa-motorista/mapa-motorista.module').then( m => m.MapaMotoristaPageModule)
   },
-
- 
-];  
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],

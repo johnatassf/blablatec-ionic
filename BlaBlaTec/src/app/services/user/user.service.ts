@@ -6,8 +6,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserService {
- 
-  //apiUrl = 'https://localhost:44334';
+
+  // apiUrl = 'https://blablatec.azurewebsites.net';
+
+  apiUrl = 'https://localhost:44334';
   constructor(public http: HttpClient) { }
 
   cadastrarUsuario(usuario) {
