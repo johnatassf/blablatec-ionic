@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Procurar carona</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list *ngFor="let viagem of viagens">
+    <ion-item>
+      <ion-label>Motorista: {{ viagem.motorista.nome }} {{ viagem.motorista.sobrenome }}</ion-label> <ion-button (click)="participarDaViagem(viagem)">Participar da viagem</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label>Viagem: {{viagem.origem}} - {{viagem.destino}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Data/hora da viagem: {{viagem.inicio}}</ion-label>
+    </ion-item>
+    <ion-item-divider color="light"></ion-item-divider>
+  </ion-list>
+</ion-content>
+
