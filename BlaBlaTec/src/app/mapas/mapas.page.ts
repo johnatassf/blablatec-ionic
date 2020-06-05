@@ -17,25 +17,12 @@ export class MapasPage implements OnInit {
       header: 'Menu',
       cssClass: 'my-custom-class',
       buttons: [
+        
         {
-          text: 'Minhas Caronas',
-          icon: 'thumbs-up',
-          handler: () => {
-            console.log('Delete clicked');
-          },
-        },
-        {
-          text: 'Oferecer',
+          text: 'Oferecer Carona',
           icon: 'thumbs-up',
           handler: () => {
             this.navCtrl.navigateRoot('oferecer-carona');
-          },
-        },
-        {
-          text: 'Meu Histórico',
-          icon: 'reader',
-          handler: () => {
-            console.log('Share clicked');
           },
         },
         {
@@ -53,7 +40,7 @@ export class MapasPage implements OnInit {
           },
         },
         {
-          text: 'Listar',
+          text: 'Corridas',
           icon: 'list-outline',
           handler: () => {
             this.navCtrl.navigateRoot('listarcaronas');

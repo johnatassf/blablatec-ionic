@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone, ɵConsole, ChangeDetectorRef, OnChanges } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { OferecerCaronaService } from 'src/app/oferecer-carona/oferecer-carona.service';
@@ -22,12 +22,14 @@ export class OferecerCaronaPage implements OnInit {
   showLisDesti = false;
   clickList: boolean;
 
+
   constructor(
     private navCtrl: NavController,
     private formBuilder: FormBuilder,
     private ngZone: NgZone,
     private cd: ChangeDetectorRef,
-    private service: OferecerCaronaService
+    private service: OferecerCaronaService,
+    private alertController: AlertController
 
   ) { }
 
@@ -140,7 +142,7 @@ export class OferecerCaronaPage implements OnInit {
         console.log('Erro');
       })
   }
-
+  
 
 
 
