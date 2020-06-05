@@ -29,14 +29,14 @@ export class MapasPage implements OnInit {
           text: 'Procurar',
           icon: 'search',
           handler: () => {
-            console.log('Play clicked');
+            this.navCtrl.navigateRoot('procurar-carona');
           },
         },
         {
           text: 'Meu Perfil',
           icon: 'happy-outline',
           handler: () => {
-            this.navCtrl.navigateRoot('perfil');
+            
           },
         },
         {
