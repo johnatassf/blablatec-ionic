@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -12,21 +12,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
+
   imports: [BrowserModule,
-           IonicModule.forRoot(), 
+           IonicModule.forRoot(),
            AppRoutingModule,
            HttpClientModule,
-           
+
            ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Geolocation
-  
+    Geolocation,
   ],
   bootstrap: [AppComponent]
 })
