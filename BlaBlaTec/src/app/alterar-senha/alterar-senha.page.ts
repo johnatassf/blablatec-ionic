@@ -3,6 +3,7 @@ import { NavController, AlertController } from '@ionic/angular';
 
 
 import { UserService } from '../services/user/user.service';
+import { AlterarSenhaService } from './alterar-senha.service';
 
 
 @Component({
@@ -12,31 +13,41 @@ import { UserService } from '../services/user/user.service';
 })
 export class AlterarSenhaPage implements OnInit {
   usuario = {
-    Ra:  '',
+    Ra: '',
     email: ''
   };
 
-  constructor(public navCtrl: NavController, private userService: UserService, private alertController: AlertController) {}
+  constructor(public navCtrl: NavController, private userService: AlterarSenhaService, private alertController: AlertController) { }
 
   ngOnInit() {
   }
   enviarSenha(): void {
-    this.userService.autenticarUsuario(this.usuario).subscribe((data: Response) => {
-      this.navCtrl.navigateRoot('mapas');
-    },
-    (error: any) => {
-      console.log(error);
-      this.exibirMensagemEnvioSenha();
-    });
-}
+    this.userService.resetarSenha(this.usuario.Ra, this.usuario.email)
+      .subscribe((data: Response) => {
+        const mensagem = 'Encaminhamos um e-mail para você, por favor verifique a caiza de span e lixeira';
+        this.exibirMensagemEnvioSenha(mensagem);
+      },
+        (error: any) => {
+          console.log(error);
+          const mensagem = 'Erro ao atualizar senha, por favor tente novamente mais tarde';
+          this.exibirMensagemEnvioSenha(mensagem);
+        });
+  }
   home(): void {
-      this.navCtrl.navigateRoot('home');
+    this.navCtrl.navigateRoot('home');
   };
-  async exibirMensagemEnvioSenha() {
+  async exibirMensagemEnvioSenha(mensagem: string) {
     const alert = await this.alertController.create({
       header: 'Aviso',
-      message: 'Sua senha será encaminhada no e-mail cadastrado.',
-      buttons: ['OK']
+      message: mensagem,
+      buttons: [{
+
+        text: 'Ok',
+        role: 'ok',
+        handler: () => {
+          this.navCtrl.navigateRoot('home');
+        }
+      }]
     });
     await alert.present();
   }

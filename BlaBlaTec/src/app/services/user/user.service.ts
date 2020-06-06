@@ -7,13 +7,10 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
-  // apiUrl = 'https://blablatec.azurewebsites.net';
-
-  apiUrl = 'https://localhost:44334';
   constructor(public http: HttpClient) { }
 
   cadastrarUsuario(usuario) {
-    return this.http.post(environment.apiUrl + '/user/signup', usuario);
+    return this.http.post(environment.apiUrl + 'user/signup', usuario);
   }
 
   autenticarUsuario(usuario) {

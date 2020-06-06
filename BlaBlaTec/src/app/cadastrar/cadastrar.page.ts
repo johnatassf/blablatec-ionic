@@ -22,12 +22,15 @@ export class CadastrarPage implements OnInit {
     Placa: '',
     Corcarro: '',
     Sobrenome: '',
+    motorista: false,
 
     ConcordaComTermos: false,
   };
 
   private form: FormGroup;
   grupo;
+
+  
 
   constructor(
     private userService: UserService,
@@ -43,6 +46,7 @@ export class CadastrarPage implements OnInit {
       return;
     } else {
       if (this.usuario.ConcordaComTermos) {
+        this.usuario.motorista = this.grupo === 'perfilMotorista' ? true : false;
         this.userService.cadastrarUsuario(this.usuario).subscribe(
           (data) => {
             this.exibirMensagemCadastroRealizado();

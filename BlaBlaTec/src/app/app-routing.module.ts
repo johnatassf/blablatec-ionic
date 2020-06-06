@@ -45,6 +45,10 @@ const routes: Routes = [
     path: 'mapa-motorista',
     loadChildren: () => import('./mapa-motorista/mapa-motorista.module').then( m => m.MapaMotoristaPageModule)
   },
+  {
+    path: 'procurar-carona',
+    loadChildren: () => import('./procurar-carona/procurar-carona.module').then( m => m.ProcurarCaronaPageModule)
+  },
 ];
 
 @NgModule({
