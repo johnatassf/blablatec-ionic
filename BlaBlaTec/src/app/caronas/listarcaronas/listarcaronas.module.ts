@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ListarcaronasPageRoutingModule } from './listarcaronas-routing.module';
 
 import { ListarcaronasPage } from './listarcaronas.page';
+import { ModalComponent } from 'src/app/modal/modal.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ListarcaronasPage } from './listarcaronas.page';
     IonicModule,
     ListarcaronasPageRoutingModule
   ],
-  declarations: [ListarcaronasPage]
+  declarations: [ListarcaronasPage, ModalComponent],
+  entryComponents:[ModalComponent]
 })
 export class ListarcaronasPageModule {}

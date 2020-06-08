@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ModalComponent } from 'src/app/modal/modal.component';
 
 @Component({
   selector: 'app-listarcaronas',
@@ -7,12 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarcaronasPage implements OnInit {
 
-  public show_agendadas: boolean = false;
-  public show_oferecidas: boolean = false;
-  
-  constructor() { }
+ lista =[
+   {
+     name: 'Oferecidas'
+   },
+   {
+     name: 'Agendadas'
+   }
+ ];
 
-  ngOnInit() {
+  constructor(private modalController: ModalController) { }
+  async openModal(){
+    const modal = await this.modalController.create({
+      component: ModalComponent
+    }); 
+    await modal.present();
+  }
+
+  ngOnInit(){
   }
 // criar lista de caronas
 
