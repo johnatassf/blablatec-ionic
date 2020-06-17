@@ -27,27 +27,27 @@ const routes: Routes = [
   },
   {
     path: 'perfil',
-    loadChildren: () => import('./editarusuario/editarusuario.module').then( m => m.EditarusuarioPageModule)
-  },
-  {   
-    path: 'alterar-senha',
-    loadChildren: () => import('./alterar-senha/alterar-senha.module').then( m => m.AlterarSenhaPageModule)
+    loadChildren: () => import('./editarusuario/editarusuario.module').then(m => m.EditarusuarioPageModule)
   },
   {
-    path: 'listarcaronas',
-    loadChildren: () => import('./caronas/listarcaronas/listarcaronas.module').then( m => m.ListarcaronasPageModule)
+    path: 'alterar-senha',
+    loadChildren: () => import('./alterar-senha/alterar-senha.module').then(m => m.AlterarSenhaPageModule)
+  },
+  {
+    path: 'listar-caronas',
+    loadChildren: () => import('./caronas/listarcaronas/listarcaronas.module').then(m => m.ListarcaronasPageModule)
   },
   {
     path: 'oferecer-carona',
-    loadChildren: () => import('./oferecer-carona/oferecer-carona.module').then( m => m.OferecerCaronaPageModule)
+    loadChildren: () => import('./oferecer-carona/oferecer-carona.module').then(m => m.OferecerCaronaPageModule)
   },
   {
     path: 'mapa-motorista',
-    loadChildren: () => import('./mapa-motorista/mapa-motorista.module').then( m => m.MapaMotoristaPageModule)
+    loadChildren: () => import('./mapa-motorista/mapa-motorista.module').then(m => m.MapaMotoristaPageModule)
   },
   {
     path: 'procurar-carona',
-    loadChildren: () => import('./procurar-carona/procurar-carona.module').then( m => m.ProcurarCaronaPageModule)
+    loadChildren: () => import('./procurar-carona/procurar-carona.module').then(m => m.ProcurarCaronaPageModule)
   },
 ];
 
@@ -55,4 +55,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
