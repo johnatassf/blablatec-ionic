@@ -1,3 +1,19 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="first" contentId="principal">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item><ion-icon name="thumbs-up" slot="start"></ion-icon>Minhas caronas</ion-item>
+        <ion-item><ion-icon name="chatbubble" slot="start"></ion-icon>Oferecer carona</ion-item>
+        <ion-item><ion-icon name="search" slot="start"></ion-icon>Procurar</ion-item>
+        <ion-item><ion-icon name="person" slot="start"></ion-icon>Meu Perfil</ion-item>
+        <ion-item><ion-icon name="list" slot="start"></ion-icon>Listar</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="principal"></ion-router-outlet>
 </ion-app>
