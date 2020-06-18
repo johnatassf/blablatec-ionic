@@ -4,7 +4,7 @@ export class OferecerCaronaModel {
     constructor(){}
 
     valor: number;
-    dataViagem: string;
+    viagem: string;
     pontoInicial: string;
     pontoFinal: string;
 

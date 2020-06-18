@@ -151,7 +151,7 @@ export class OferecerCaronaPage implements OnInit {
   criarRota() {
     const oferecerCarona = new OferecerCaronaModel();
     oferecerCarona.valor = 0,
-      oferecerCarona.dataViagem = this.form.controls.data.value,
+      oferecerCarona.viagem = this.form.controls.data.value,
       oferecerCarona.pontoInicial = this.form.controls.origem.value,
       oferecerCarona.pontoFinal = this.form.controls.destino.value,
       oferecerCarona.qtdLugares = this.form.controls.qtdLugares.value,
