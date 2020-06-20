@@ -23,6 +23,6 @@ export class ViagemService {
   }
 
   solicitarCarona(idViagem: number){
-    return this.http.post(environment.apiUrl + 'solicitacao-viagem/viagem/' + idViagem, this.httpOptions);
+    return this.http.post(environment.apiUrl + 'solicitacao-viagem/viagem/' + idViagem, {});
   }
 }

@@ -3,6 +3,8 @@ import { NavController, AlertController, LoadingController } from '@ionic/angula
 
 import { UserService } from '../services/user/user.service';
 import { finalize } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
+import { TokenAutentication } from '../model/TokenAutentication';
 
 @Component({
   selector: 'app-home',
@@ -18,9 +20,10 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     private userService: UserService,
+    private authService: AuthService,
     private alertController: AlertController,
     private loadingCtrl: LoadingController
-  ) {}
+  ) { }
 
   acessarCadastrar(): void {
     this.navCtrl.navigateRoot('cadastrar');
@@ -44,7 +47,14 @@ export class HomePage {
       )
       .subscribe(
         (data: any) => {
-          window.localStorage.setItem('ContentLocaly', data.accessToken);
+
+          const token = new TokenAutentication();
+          token.accessToken = data?.accessToken;
+          token.authenticated = data?.authenticated;
+          token.created = data?.created;
+          token.expiration = data?.expiration;
+
+          window.localStorage.setItem('ContentLocaly', JSON.stringify(token));
           this.navCtrl.navigateRoot('mapas');
         },
         (error: any) => {
