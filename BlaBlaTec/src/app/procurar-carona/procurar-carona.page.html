@@ -8,7 +8,7 @@
 
 
   <ion-card class="card-viagem" *ngFor="let viagem of viagens">
-    <ion-card-header>
+    <ion-card-header style="padding: 3px 0 5px 5px">
       <ion-row>
         <ion-col size="10">
           <ion-card-subtitle><b>Motoristas: </b>{{ viagem.motorista.nome }} {{ viagem.motorista.sobrenome }}</ion-card-subtitle>
@@ -38,7 +38,8 @@
                     <ion-row *ngIf="viagem.jaSolicitado == false && viagem.motoristaDaCorrida== false"  class="solicitar-carona-mensagem ion-justify-content-start">
                       <span (click)="solicitarCarona(viagem)">Solicitar carona   <ion-icon class="icon-car" name="thumbs-up-outline"></ion-icon></span>
                     </ion-row>
-                    <ion-row *ngIf="viagem.jaSolicitado == true && viagem.motoristaDaCorrida== false && viagem.recusado == false cem" class="solicitar-carona-mensagem ion-justify-content-start">
+                     <!-- adiocionar prorpiedade de recusado  && viagem.recusado == false -->
+                    <ion-row *ngIf="viagem.jaSolicitado == true && viagem.motoristaDaCorrida== false " class="solicitar-carona-mensagem ion-justify-content-start">
                       <span>Aguardando reposta de solicitação...  <ion-icon class="icon-car" name="chatbubble-ellipses-outline"></ion-icon></span>
                     </ion-row>
                     <!-- Adionar no modal carona aceita viagens.caronaAceita -->
