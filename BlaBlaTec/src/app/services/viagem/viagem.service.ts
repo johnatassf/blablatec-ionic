@@ -15,10 +15,14 @@ export class ViagemService {
   constructor(public http: HttpClient) { }
 
   buscarViagens(){
-    return this.http.get(environment.apiUrl + 'viagens/', this.httpOptions);
+    return this.http.get(environment.apiUrl + 'viagens/viagens-abertas', this.httpOptions);
   }
 
-  AtualizarUsuario(usuario){
+  atualizarUsuario(usuario){
     return this.http.put(environment.apiUrl + 'viagens/' + usuario.Id + '/profile', usuario, this.httpOptions);
+  }
+
+  solicitarCarona(idViagem: number){
+    return this.http.post(environment.apiUrl + 'solicitacao-viagem/viagem/' + idViagem, this.httpOptions);
   }
 }

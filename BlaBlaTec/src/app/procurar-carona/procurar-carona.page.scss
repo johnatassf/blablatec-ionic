@@ -1,3 +1,40 @@
-.lista{
-    color:white;
+.lista {
+    color: white;
+}
+
+.card-viagem {
+    border-radius: 20px;
+
+    .img-motorista {
+        width: 100%;
+    }
+    img {
+        max-height: 78px;
+    }
+
+    .notificacao-carona {
+        width: 90%;
+    }
+    .solicitar-carona-mensagem {
+        font-family: cursive;
+        font-style: oblique;
+        color: darkslategrey;
+        text-decoration: underline;
+    }
+
+    .destino-origem {
+        font-family: cursive;
+        font-style: oblique;
+        font-size: 16px;
+    }
+
+    .icon-car {
+        position: relative;
+        left: 10px;
+        top: 3px;
+    }
+}
+
+.cem {
+    width: 100%;
 }

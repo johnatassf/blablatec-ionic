@@ -12,27 +12,14 @@ export class ProcurarCaronaPage implements OnInit {
   viagens;
 
   constructor(private viagemService: ViagemService,
-              private alertController: AlertController,
-              private navCtrl:NavController) { 
+    private alertController: AlertController,
+    private navCtrl: NavController) {
     this.viagens = [];
   }
 
   ngOnInit() {
-    console.log(['a', 'b']);
-    this.viagemService.buscarViagens().subscribe(
-      data => {
-        console.log(data);
-        this.viagens = data;
-        console.log(this.viagens);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
+    this.buscarViagens();
 
-  participarDaViagem(viagem){
-    console.log(viagem);
   }
 
   async exibirMensagemCadastroRealizado() {
@@ -50,5 +37,30 @@ export class ProcurarCaronaPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+
+  solicitarCarona(viagem: any) {
+    console.log(viagem)
+    this.viagemService.solicitarCarona(viagem.id).subscribe(() => {
+      //sucesso
+      // this.buscarViagens();
+    }, (error: Error) => {
+
+    });
+  }
+
+
+  buscarViagens() {
+    this.viagemService.buscarViagens().subscribe(
+      data => {
+        console.log(data);
+        this.viagens = data;
+        console.log(this.viagens);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
