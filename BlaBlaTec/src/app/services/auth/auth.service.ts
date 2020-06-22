@@ -11,6 +11,7 @@ import { TokenAutentication } from '../../model/TokenAutentication';
 export class AuthService {
 
     isAdm = false;
+    public usuarioLogado = new EventEmitter<boolean>(true);
     public credenciaisInvalidasEvent = new EventEmitter<boolean>(false);
 
     constructor(private http: HttpClient, private router: Router) { }
@@ -28,6 +29,7 @@ export class AuthService {
 
     logOut() {
         localStorage.removeItem('ContentLocaly');
+        this.usuarioLogado.next(false);
         this.router.navigate(['']);
     }
 
@@ -55,7 +57,7 @@ export class AuthService {
         } else if (tokenIsExp) {
             return false;
         }
-
+        this.usuarioLogado.next(true);
         return true;
     }
 
