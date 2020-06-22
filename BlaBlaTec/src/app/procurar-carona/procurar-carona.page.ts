@@ -41,12 +41,18 @@ export class ProcurarCaronaPage implements OnInit {
 
 
   solicitarCarona(viagem: any) {
-    console.log(viagem)
     this.viagemService.solicitarCarona(viagem.id).subscribe(() => {
-      //sucesso
-      // this.buscarViagens();
-    }, (error: Error) => {
-
+      this.buscarViagens();
+    }, async (error: Error) => {
+      const alert = await this.alertController.create({
+        header: 'Aviso',
+        message: 'Um erro ocorreu ao efetuar a ação, tente novamente mais tarde',
+        buttons: [
+          {
+            text: 'OK'
+          },
+        ],
+      });
     });
   }
 
