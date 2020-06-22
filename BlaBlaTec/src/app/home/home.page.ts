@@ -3,7 +3,7 @@ import { NavController, AlertController, LoadingController } from '@ionic/angula
 
 import { UserService } from '../services/user/user.service';
 import { finalize } from 'rxjs/operators';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../services/auth/auth.service';
 import { TokenAutentication } from '../model/TokenAutentication';
 
 @Component({

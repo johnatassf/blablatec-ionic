@@ -7,24 +7,45 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item [routerLink]="['/oferecer-carona']" routerLinkActive="router-link-active">
-          <ion-icon name="thumbs-up" slot="start"></ion-icon>Minhas caronas
-        </ion-item>
-        <ion-item [routerLink]="['/oferecer-carona']" routerLinkActive="router-link-active">
-          <ion-icon name="chatbubble" slot="start"></ion-icon>Oferecer carona
-        </ion-item>
-        <ion-item [routerLink]="['/procurar-carona']" routerLinkActive="router-link-active">
-          <ion-icon name="search" slot="start"></ion-icon>Procurar
-        </ion-item>
-        <ion-item [routerLink]="['/perfil']" routerLinkActive="router-link-active">
-          <ion-icon name="person" slot="start"></ion-icon>Meu Perfil
-        </ion-item>
-        <ion-item [routerLink]="['/listar-caronas']" routerLinkActive="router-link-active">
-          <ion-icon name="list" slot="start"></ion-icon>Listar
-        </ion-item>
-        <ion-item [routerLink]="['/home']" routerLinkActive="router-link-active">
-          <ion-icon name="list" slot="start"></ion-icon>Sair 
-        </ion-item>
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['/oferecer-carona']" routerLinkActive="router-link-active">
+            <ion-icon name="thumbs-up" slot="start"></ion-icon>Minhas caronas
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['/oferecer-carona']" routerLinkActive="router-link-active">
+            <ion-icon name="chatbubble" slot="start"></ion-icon>Oferecer carona
+          </ion-item>
+        </ion-menu-toggle>
+        
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['/procurar-carona']" routerLinkActive="router-link-active">
+            <ion-icon name="search" slot="start"></ion-icon>Procurar
+          </ion-item>
+        </ion-menu-toggle>
+        
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['/perfil']" routerLinkActive="router-link-active">
+            <ion-icon name="person" slot="start"></ion-icon>Meu Perfil
+          </ion-item>
+        </ion-menu-toggle>
+        
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['/listar-caronas']" routerLinkActive="router-link-active">
+            <ion-icon name="list" slot="start"></ion-icon>Listar
+          </ion-item>
+        </ion-menu-toggle>
+        
+        <ion-menu-toggle>
+          <ion-item (click)="logOut()" routerLinkActive="router-link-active">
+            <ion-icon name="exit-outline" slot="start"></ion-icon>Sair
+          </ion-item>
+        </ion-menu-toggle>
+        
+        
+       
+       
       </ion-list>
     </ion-content>
   </ion-menu>

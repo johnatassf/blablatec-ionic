@@ -12,7 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AuthInterceptor } from './http-intercetor/http-intercetor';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './services/auth/auth.service';
 
 
 @NgModule({

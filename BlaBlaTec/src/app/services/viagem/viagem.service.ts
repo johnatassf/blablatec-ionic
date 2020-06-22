@@ -6,23 +6,23 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ViagemService {
-  httpOptions = {
-
-    headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + localStorage["ContentLocaly"]
-    })};
+ 
 
   constructor(public http: HttpClient) { }
 
   buscarViagens(){
-    return this.http.get(environment.apiUrl + 'viagens/viagens-abertas', this.httpOptions);
+    return this.http.get(environment.apiUrl + 'viagens/viagens-abertas');
   }
 
   atualizarUsuario(usuario){
-    return this.http.put(environment.apiUrl + 'viagens/' + usuario.Id + '/profile', usuario, this.httpOptions);
+    return this.http.put(environment.apiUrl + 'viagens/' + usuario.Id + '/profile', usuario);
   }
 
   solicitarCarona(idViagem: number){
     return this.http.post(environment.apiUrl + 'solicitacao-viagem/viagem/' + idViagem, {});
+  }
+
+  removerSolicitacaoCarona(idViagem: number){
+    return this.http.delete(environment.apiUrl + 'solicitacao-viagem/viagem/' + idViagem, {});
   }
 }

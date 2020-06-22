@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
-import { TokenAutentication } from '../model/TokenAutentication';
+import { TokenAutentication } from '../../model/TokenAutentication';
 
 @Injectable({
     providedIn: 'root'

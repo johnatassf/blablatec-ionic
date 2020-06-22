@@ -1,72 +1,113 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Procurar carona</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="circles" refreshingText="Atualizando caronas...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-content>
+    <ion-card class="card-viagem" *ngFor="let viagem of viagens">
+      <ion-card-header style="padding: 3px 0 5px 5px">
+        <ion-row>
+          <ion-col size="10">
+            <ion-card-subtitle><b>Motoristas: </b>{{ viagem.motorista.nome }} {{ viagem.motorista.sobrenome }}
+            </ion-card-subtitle>
+          </ion-col>
+          <ion-col size="2">
+            <ion-row class=" ion-align-items-end ion-justify-content-end cem">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+      <ion-card-content>
+        <div>
+          <ion-item>
+            <ion-row class=" ion-align-items-end ion-justify-content-start cem">
+              <ion-col style="padding-bottom:0px; max-width: 70px!important">
+                <div class="img-motorista fixed" id="avatar">
+                  <img src="https://cdn.pixabay.com/photo/2016/04/01/10/11/avatar-1299805_960_720.png" alt="Avatar"
+                    class="avatar" />
+                </div>
+              </ion-col>
+              <ion-col size="10" style="padding-bottom:0px;">
+                <div class="notificacao-carona">
+                  <ion-row>
+                    <ion-col>
+                      <!-- Adicionar propriedade de recusado && viagem.recusado == false" -->
+                      <ion-row *ngIf="viagem.jaSolicitado == false && viagem.motoristaDaCorrida== false"
+                        class="solicitar-carona-mensagem ion-justify-content-start">
+                        <span (click)="solicitarCarona(viagem)">Solicitar carona <ion-icon class="icon-car"
+                            name="thumbs-up-outline"></ion-icon></span>
+                      </ion-row>
+                      <!-- adiocionar prorpiedade de recusado  && viagem.recusado == false -->
+                      <ion-row *ngIf="viagem.jaSolicitado == true && viagem.motoristaDaCorrida== false "
+                        class="solicitar-carona-mensagem ion-justify-content-start">
+                        <span>Aguardando reposta de solicitação... <ion-icon class="icon-car"
+                            name="chatbubble-ellipses-outline"></ion-icon></span>
+                      </ion-row>
+                      <!-- Adionar no modal carona aceita viagens.caronaAceita -->
+                      <ion-row *ngIf="viagem?.caronaAceita == true && viagem?.motoristaDaCorrida == false"
+                        class="solicitar-carona-mensagem ion-justify-content-start">
+                        <span> Carona aceita... <ion-icon class="icon-car" name="checkmark-done-outline"></ion-icon>
+                        </span>
+                      </ion-row>
+                      <ion-row *ngIf="viagem?.recusada == true && viagem?.motoristaDaCorrida == false"
+                        class="solicitar-carona-mensagem ion-justify-content-start"
+                        style="color:#cc2c2c!important; font-size: 15px;">
+                        <span>Solicitação de carona recusada <ion-icon class="icon-car" name="sad-outline"></ion-icon>
+                        </span>
+
+                      </ion-row>
+                      <ion-row *ngIf="viagem.motoristaDaCorrida == true"
+                        class="solicitar-carona-mensagem ion-justify-content-start ">
+                        <span>Você é o motorista desta corrida <ion-icon class="icon-car" name="car-sport"></ion-icon>
+                        </span>
+
+                      </ion-row>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </div>
+        <ion-row style="margin-top: 5px; margin-left: -2px;" class="destino-origem">
+          <ion-label style="margin-right: 5px;">De: {{viagem.pontoInicial}} </ion-label>
+          <ion-label>Para: {{viagem.pontoFinal}} </ion-label>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
 
 
+  <!-- Custom Refresher Properties -->
+  <!-- <ion-content>
+    <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  </ion-content>
+  
+  <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="chevron-down-circle-outline"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+  </ion-content> -->
 
-  <ion-card class="card-viagem" *ngFor="let viagem of viagens">
-    <ion-card-header style="padding: 3px 0 5px 5px">
-      <ion-row>
-        <ion-col size="10">
-          <ion-card-subtitle><b>Motoristas: </b>{{ viagem.motorista.nome }} {{ viagem.motorista.sobrenome }}</ion-card-subtitle>
-        </ion-col>
-        <ion-col size="2">
-          <ion-row class=" ion-align-items-end ion-justify-content-end cem">
-            <ion-icon name="alert-circle-outline"></ion-icon>
-          </ion-row>
-        </ion-col>
-      </ion-row>
-    </ion-card-header>
-    <ion-card-content>
-      <div>
-        <ion-item>
-          <ion-row class=" ion-align-items-end ion-justify-content-start cem">
-            <ion-col style="padding-bottom:0px; max-width: 70px!important">
-              <div class="img-motorista fixed" id="avatar">
-                <img src="https://cdn.pixabay.com/photo/2016/04/01/10/11/avatar-1299805_960_720.png" alt="Avatar"
-                  class="avatar" />
-              </div>
-            </ion-col>
-            <ion-col size="10" style="padding-bottom:0px;">
-              <div class="notificacao-carona">
-                <ion-row>
-                  <ion-col>
-                    <!-- Adicionar propriedade de recusado && viagem.recusado == false" -->
-                    <ion-row *ngIf="viagem.jaSolicitado == false && viagem.motoristaDaCorrida== false"  class="solicitar-carona-mensagem ion-justify-content-start">
-                      <span (click)="solicitarCarona(viagem)">Solicitar carona   <ion-icon class="icon-car" name="thumbs-up-outline"></ion-icon></span>
-                    </ion-row>
-                     <!-- adiocionar prorpiedade de recusado  && viagem.recusado == false -->
-                    <ion-row *ngIf="viagem.jaSolicitado == true && viagem.motoristaDaCorrida== false " class="solicitar-carona-mensagem ion-justify-content-start">
-                      <span>Aguardando reposta de solicitação...  <ion-icon class="icon-car" name="chatbubble-ellipses-outline"></ion-icon></span>
-                    </ion-row>
-                    <!-- Adionar no modal carona aceita viagens.caronaAceita -->
-                    <ion-row *ngIf="viagem?.caronaAceita == true && viagem?.motoristaDaCorrida == false" class="solicitar-carona-mensagem ion-justify-content-start">
-                      <span> Carona aceita... <ion-icon  class="icon-car" name="checkmark-done-outline"></ion-icon></span>
-                    </ion-row>
-                    <ion-row *ngIf="viagem?.recusada == true && viagem?.motoristaDaCorrida == false" class="solicitar-carona-mensagem ion-justify-content-start" style="color:#cc2c2c!important; font-size: 15px;">
-                    <span>Solicitação de carona recusada <ion-icon  class="icon-car" name="sad-outline"></ion-icon> </span>
-                     
-                    </ion-row>
-                    <ion-row *ngIf="viagem.motoristaDaCorrida == true" class="solicitar-carona-mensagem ion-justify-content-start ">
-                      <span>Você é o motorista desta corrida  <ion-icon  class="icon-car" name="car-sport"></ion-icon></span>
-                       
-                    </ion-row>
-                  </ion-col>
-                </ion-row>
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-      </div>
-      <ion-row style="margin-top: 5px; margin-left: -2px;" class="destino-origem">
-        <ion-label style="margin-right: 5px;">De: {{viagem.pontoInicial}} </ion-label>
-        <ion-label>Para: {{viagem.pontoFinal}} </ion-label>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
 
 
 
