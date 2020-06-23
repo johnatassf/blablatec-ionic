@@ -8,7 +8,7 @@
     <ion-content>
       <ion-list>
         <ion-menu-toggle *ngFor="let item of listaMenu">
-          <ion-item  *ngIf="item.mostrarMenu" [routerLink]="['/item.rota']" routerLinkActive="router-link-active">
+          <ion-item  *ngIf="item.mostrarMenu" [routerLink]="[item.rota]" routerLinkActive="router-link-active">
             <ion-icon name="{{item.nomeIcon}}" slot="start"></ion-icon>{{item.titulo}}
           </ion-item>
         </ion-menu-toggle>
