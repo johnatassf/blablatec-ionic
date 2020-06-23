@@ -11,9 +11,15 @@ import { ModalController } from '@ionic/angular';
 export class ModalComponent implements OnInit {
   public listaEndereco: {endereco: string, nome: string, horario: string} [] = [
     {
-        endereco: 'Rua',
-        nome: 'BlaBlaTec',
-        horario: '18:30 hs'
+        endereco: 'Endereço: Praça 21 de Janeiro',
+        nome: 'Passageiro: Joaquim Aroldo',
+        horario: 'Horário: 18:30 hs'
+    }
+  ]
+  public items: {texto: string, status: string} [] = [
+    {
+      texto: 'Destino: Fatec Praia Grande ',
+      status: 'Status: Pendente'
     }
   ]
 

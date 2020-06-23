@@ -9,15 +9,34 @@
 
 
 <ion-content>
+  <div>
   <ion-list>
-    <ion-item *ngFor="let valorEndereco of listaEndereco">
-          <ion-label>{{valorEndereco.endereco}}</ion-label>
-          <ion-label>{{valorEndereco.nome}}</ion-label>
-          <ion-label>{{valorEndereco.horario}}</ion-label>
-      <ion-button size="small" color="success">Aceitar</ion-button>
-      <ion-button size="small" color="danger">Recusar</ion-button>
-    </ion-item>
-    
-  </ion-list>
+   
+    <ion-card *ngFor="let valorEndereco of listaEndereco">
 
+        <ion-list>
+          <ion-item class="img" *ngFor="let item of items">
+            <ion-thumbnail slot="start">
+              <ion-img [src]="item.src"></ion-img>
+            </ion-thumbnail>
+            <ion-label>
+              <h2>{{item.texto}}</h2>
+              <h2>{{item.status}}</h2>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        
+          <ion-card class="info-carona">
+            <h4><ion-icon name="location-outline"></ion-icon> {{valorEndereco.endereco}}</h4>
+            <h4><ion-icon name="person-circle-outline"></ion-icon> {{valorEndereco.nome}}</h4>
+            <h4><ion-icon name="alarm-outline"></ion-icon> {{valorEndereco.horario}}</h4>
+          </ion-card>
+        
+      <ion-button class="btn1" size="small" color="success"><ion-icon name="thumbs-up-sharp"></ion-icon></ion-button>
+      <ion-button size="small" color="danger"><ion-icon name="thumbs-down-sharp"></ion-icon></ion-button>
+
+    </ion-card>
+  
+  </ion-list>
+</div>
 </ion-content>
