@@ -19,7 +19,7 @@ export class AppComponent {
   isMotorista = true;
 
   listaMenu: { rota: string, varificarMotorista: boolean, mostrarMenu: boolean, nomeIcon: string, slot: string, titulo: string }[] = [
-    { rota: 'oferecer-carona', varificarMotorista: true, mostrarMenu: true, nomeIcon: 'thumbs-up', slot: 'start', titulo: 'Minhas Caronas', },
+    { rota: 'caronas', varificarMotorista: true, mostrarMenu: true, nomeIcon: 'thumbs-up', slot: 'start', titulo: 'Minhas Caronas', },
     { rota: 'oferecer-carona', varificarMotorista: true, mostrarMenu: true, nomeIcon: 'chatbubble', slot: 'start', titulo: 'Oferecer carona' },
     { rota: 'procurar-carona', varificarMotorista: false, mostrarMenu: true, nomeIcon: 'search', slot: 'start', titulo: 'Procurar Carona' },
     { rota: 'perfil', varificarMotorista: false, mostrarMenu: true, nomeIcon: 'person', slot: 'start', titulo: 'Meu Perfil' },

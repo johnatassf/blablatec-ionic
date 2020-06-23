@@ -58,6 +58,10 @@ const routes: Routes = [
     loadChildren: () => import('./procurar-carona/procurar-carona.module').then(m => m.ProcurarCaronaPageModule),
     canActivate: [HomeGuard]
   },
+  {
+    path: 'caronas',
+    loadChildren: () => import('./caronas/listarcaronas/listarcaronas.module').then(m => m.ListarcaronasPageModule)
+  },
 ];
 
 @NgModule({

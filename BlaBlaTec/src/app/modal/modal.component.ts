@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import {SolicitacoesService} from '../services/solicitacoes/solicitacoes.service'
 
 @Component({
   selector: 'app-modal',
@@ -9,18 +10,18 @@ import { ModalController } from '@ionic/angular';
 
 
 export class ModalComponent implements OnInit {
-  public listaEndereco: {endereco: string, nome: string, horario: string} [] = [
-    {
-        endereco: 'Rua',
-        nome: 'BlaBlaTec',
-        horario: '18:30 hs'
-    }
-  ]
+  public listaEndereco: {};
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController,
+    private solicitacoesService: SolicitacoesService) { }
   dismissModal(){
       this.modalCtrl.dismiss();
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.solicitacoesService.buscarSolicitacaoViagem().subscribe((data: any) => {
+      this.listaEndereco = data;
+      console.log(this.listaEndereco);
+  });
+  }
 
 }
