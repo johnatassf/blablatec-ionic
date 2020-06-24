@@ -6,19 +6,14 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class SolicitacoesService {
-  httpOptions = {
-
-    headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + localStorage["ContentLocaly"]
-    })};
 
   constructor(public http: HttpClient) { }
 
   buscarSolicitacaoViagem(){
-    return this.http.get(environment.apiUrl + 'solicitacaoViagem/', this.httpOptions);
+    return this.http.get(environment.apiUrl + 'solicitacao-viagem/');
   }
 
   AtualizarUsuario(usuario){
-    return this.http.put(environment.apiUrl + 'solicitacaoViagem/' + usuario.Id + '/profile', usuario, this.httpOptions);
+    return this.http.put(environment.apiUrl + 'solicitacao-viagem/' + usuario.Id + '/profile', usuario);
   }
 }

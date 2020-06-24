@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import {SolicitacoesService} from '../services/solicitacoes/solicitacoes.service'
+import { ViagemService } from '../services/viagem/viagem.service';
 
 @Component({
   selector: 'app-modal',
@@ -13,7 +14,8 @@ export class ModalComponent implements OnInit {
   public listaEndereco: {};
 
   constructor(private modalCtrl: ModalController,
-    private solicitacoesService: SolicitacoesService) { }
+    private solicitacoesService: SolicitacoesService,
+    private serviceViagem: ViagemService) { }
   dismissModal(){
       this.modalCtrl.dismiss();
   }
