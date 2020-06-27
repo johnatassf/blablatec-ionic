@@ -15,11 +15,13 @@ import { UserService } from '../services/user/user.service';
     CommonModule,
     FormsModule,
     IonicModule,
-    CadastrarPageRoutingModule
+    CadastrarPageRoutingModule, 
+    ReactiveFormsModule,
+    FormsModule
   ],
-  declarations: [CadastrarPage], 
-  providers: [FormBuilder]
+  declarations: [CadastrarPage],
+  providers: [FormBuilder],
 })
-export class CadastrarPageModule { 
-  constructor (private userService: UserService){  }
+export class CadastrarPageModule {
+  constructor(private userService: UserService) { }
 }

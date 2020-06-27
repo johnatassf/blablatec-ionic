@@ -52,7 +52,7 @@ export class HomePage {
     carregando.present();
 
     this.userService
-      .autenticarUsuario(this.usuario)
+      .autenticarUsuario(this.form.value)
       .pipe(
         finalize(() => {
           carregando.dismiss();

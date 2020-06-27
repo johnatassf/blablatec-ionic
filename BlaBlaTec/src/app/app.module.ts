@@ -36,5 +36,6 @@ import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, FormsModule }
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
+  
 })
 export class AppModule { } 

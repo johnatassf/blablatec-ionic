@@ -10,7 +10,7 @@ export class UserService {
   constructor(public http: HttpClient) { }
 
   cadastrarUsuario(usuario) {
-    return this.http.post(environment.apiUrl + 'user/signup', usuario);
+    return this.http.post<any>(environment.apiUrl + 'user/signup', usuario);
   }
 
   autenticarUsuario(usuario) {

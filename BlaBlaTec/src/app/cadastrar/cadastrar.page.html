@@ -1,106 +1,129 @@
 <ion-content padding>
-  <ion-list>
-    <ion-radio-group [(ngModel)]="grupo">
-      <ion-row>
-        <ion-list-header>
-          <ion-label>Escolha seu perfil:</ion-label>
-        </ion-list-header>
+  <div [formGroup]="form">
+    <ion-list>
+      <ion-radio-group formControlName="grupo">
+        <ion-row>
+          <ion-list-header>
+            <ion-label>Escolha seu perfil:</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-radio color="success" value="perfilCarona" checked></ion-radio>
+            <ion-label>Somente carona</ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-radio mode="md" color="tertiary" value="perfilMotorista"></ion-radio>
+            <ion-label>Motorista e carona</ion-label>
+          </ion-item>
+        </ion-row>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-item>
+      <ion-icon name="person" slot="start"></ion-icon>
+      <ion-input type="name" formControlName="nome" placeholder="Nome" autofocus="true"></ion-input>
+      
+      <ion-input type="sobrenome" formControlName="sobrenome" placeholder="Sobrenome"></ion-input>
+      <div *ngIf="form.controls.sobrenome.errors">
+        <p *ngIf="form.controls.sobrenome.errors.required "></p>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="lock-closed" slot="start"></ion-icon>
+      <ion-input type="password" formControlName="senha" placeholder="Senha"></ion-input>
+      <div *ngIf="form.controls.senha.errors">
+        <p *ngIf="form.controls.senha.errors.required "></p>
+      </div>
+
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="lock-closed" slot="start"></ion-icon>
+      <ion-input type="password" formControlName="confirmacaoSenha" placeholder="Confirme a Senha"></ion-input>
+      <div *ngIf="form.controls.confirmacaoSenha.errors">
+        <p *ngIf="form.controls.confirmacaoSenha.errors.required "></p>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="mail" slot="start"></ion-icon>
+      <ion-input type="email" formControlName="email" placeholder="Email" inputmode="email"></ion-input>
+      <div *ngIf="form.controls.email.errors">
+        <p *ngIf="form.controls.email.errors.required "></p>
+      </div>
+    </ion-item>
+
+    <!--Necessário ligar com o banco!-->
+
+    <ion-item>
+      <ion-icon name="phone-portrait" slot="start"></ion-icon>
+      <ion-input type="text" maxlength="11" formControlName="celular" placeholder="Numero de Telefone:"></ion-input>
+      <div *ngIf="form.controls.celular.errors">
+        <p *ngIf="form.controls.celular.errors.required "></p>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="mail" slot="start"></ion-icon>
+      <ion-input type="text" formControlName="ra" placeholder="RA" inputmode="ra"></ion-input>
+      <div *ngIf="form.controls.ra.errors">
+        <p *ngIf="form.controls.ra.errors.required "></p>
+      </div>
+    </ion-item>
+
+    <div *ngIf="grupo.value=='perfilMotorista'">
+      <div id="modeloC">
         <ion-item>
-          <ion-radio color="success" value="perfilCarona" checked></ion-radio>
-          <ion-label>Somente carona</ion-label>
+          <ion-icon name="car" slot="start"></ion-icon>
+          <ion-input type="text" formControlName="modelo" placeholder="Modelo do carro" inputmode="modelocar" required="grupo.value=='perfilMotorista'">
+          </ion-input>
+          <div *ngIf="form.controls.modelo.errors && grupo.value=='perfilMotorista'">
+            <p *ngIf="form.controls.modelo.errors.required  && grupo.value=='perfilMotorista'"></p>
+          </div>
         </ion-item>
+      </div>
 
+      <div id="placaV">
         <ion-item>
-          <ion-radio mode="md" color="tertiary" value="perfilMotorista"></ion-radio>
-          <ion-label>Motorista e carona</ion-label>
+          <ion-icon name="square" slot="start"></ion-icon>
+          <ion-input type="text" formControlName="placa" placeholder="Placa do veíclulo:" inputmode="placa" required="grupo.value=='perfilMotorista'"></ion-input>
+          <div *ngIf="form.controls.placa.errors && grupo.value=='perfilMotorista'">
+            <p *ngIf="form.controls.placa.errors.required  && grupo.value=='perfilMotorista'"></p>
+          </div>
         </ion-item>
-      </ion-row>
-    </ion-radio-group>
-  </ion-list>
+      </div>
 
-  <ion-item>
-    <ion-icon name="person" slot="start"></ion-icon>
-    <ion-input type="name" [(ngModel)]="usuario.Nome" placeholder="Nome" autofocus="true"></ion-input>
-    <ion-input type="sobrenome" [(ngModel)]="usuario.Sobrenome" placeholder="Sobrenome"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-icon name="lock-closed" slot="start"></ion-icon>
-    <ion-input type="password" [(ngModel)]="usuario.Senha" placeholder="Senha"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-icon name="lock-closed" slot="start"></ion-icon>
-    <ion-input type="password" [(ngModel)]="usuario.ConfirmacaoSenha" placeholder="Confirme a Senha"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-icon name="mail" slot="start"></ion-icon>
-    <ion-input type="email" [(ngModel)]="usuario.Email" placeholder="Email" inputmode="email"></ion-input>
-  </ion-item>
-
-  <!--Necessário ligar com o banco!-->
-
-  <ion-item>
-    <ion-icon name="phone-portrait" slot="start"></ion-icon>
-    <ion-input type="text" maxlength="11" [(ngModel)]="usuario.Celular" placeholder="Numero de Telefone:"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-icon name="mail" slot="start"></ion-icon>
-    <ion-input type="text" [(ngModel)]="usuario.Ra" placeholder="RA" inputmode="ra"></ion-input>
-  </ion-item>
-
-  <div *ngIf="grupo=='perfilMotorista'">
-    <div id="modeloC">
-      <ion-item>
-        <ion-icon name="car" slot="start"></ion-icon>
-        <ion-input
-          type="text"
-          [(ngModel)]="usuario.Modelo"
-          placeholder="Modelo do carro"
-          inputmode="modelocar"
-        ></ion-input>
-      </ion-item>
+      <div id="cores">
+        <ion-item>
+          <ion-label>Cor do veículo</ion-label>
+          <ion-select value="Azul" formControlName="corcarro" okText="Confirmar" cancelText="Cancelar" required="grupo.value=='perfilMotorista'">
+            <ion-select-option value="azul">Azul</ion-select-option>
+            <ion-select-option value="amarelo">Amarelo</ion-select-option>
+            <ion-select-option value="branco">Branco</ion-select-option>
+            <ion-select-option value="cinza">Cinza</ion-select-option>
+            <ion-select-option value="preto">Preto</ion-select-option>
+            <ion-select-option value="prata">Prata</ion-select-option>
+            <ion-select-option value="cinza">Verde</ion-select-option>
+            <ion-select-option value="vermelho">Vermelho</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
     </div>
 
-    <div id="placaV">
-      <ion-item>
-        <ion-icon name="square" slot="start"></ion-icon>
-        <ion-input
-          type="text"
-          [(ngModel)]="usuario.Placa"
-          placeholder="Placa do veíclulo:"
-          inputmode="placa"
-        ></ion-input>
-      </ion-item>
+    <ion-item>
+      <input type="checkbox" color="terciary" slot="start" formControlName="cordaComTermos"  />
+      <ion-label>Concordo com os <a>termos de uso</a></ion-label>
+      <div *ngIf="form.controls.cordaComTermos.errors ">
+        <p *ngIf="form.controls.cordaComTermos.errors.required"></p>
+      </div>
+    </ion-item>
+    <div id="btnFinalizar">
+      <ion-button fill="clear" (click)="finalizarCadastro()" disabled="{{form.invalid}}">Cadastrar </ion-button>
     </div>
-
-    <div id="cores">
-      <ion-item>
-        <ion-label>Cor do veículo</ion-label>
-        <ion-select value="Azul" [(ngModel)]="usuario.Corcarro" okText="Confirmar" cancelText="Cancelar">
-          <ion-select-option value="azul">Azul</ion-select-option>
-          <ion-select-option value="amarelo">Amarelo</ion-select-option>
-          <ion-select-option value="branco">Branco</ion-select-option>
-          <ion-select-option value="cinza">Cinza</ion-select-option>
-          <ion-select-option value="preto">Preto</ion-select-option>
-          <ion-select-option value="prata">Prata</ion-select-option>
-          <ion-select-option value="cinza">Verde</ion-select-option>
-          <ion-select-option value="vermelho">Vermelho</ion-select-option>
-        </ion-select>
-      </ion-item>
+    <div id="btnVoltar">
+      <ion-button fill="clear" (click)="home()">Retornar</ion-button>
     </div>
-  </div>
-
-  <ion-item>
-    <input type="checkbox" color="terciary" slot="start" [(ngModel)]="usuario.ConcordaComTermos" />
-    <ion-label>Concordo com os <a>termos de uso</a></ion-label>
-  </ion-item>
-  <div id="btnFinalizar">
-    <ion-button fill="clear" (click)="finalizarCadastro()">Cadastrar</ion-button>
-  </div>
-  <div id="btnVoltar">
-    <ion-button fill="clear" (click)="home()">Retornar</ion-button>
   </div>
 </ion-content>
+

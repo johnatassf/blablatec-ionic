@@ -17,7 +17,8 @@ import { HomePageRoutingModule } from './home-routing.module';
     ReactiveFormsModule
   ],
   declarations: [HomePage],
-  providers: [FormBuilder]
+  providers: [FormBuilder],
+ 
  
 })
 export class HomePageModule {}

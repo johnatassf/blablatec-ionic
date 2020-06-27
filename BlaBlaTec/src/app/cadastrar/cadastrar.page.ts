@@ -1,9 +1,10 @@
 import { Component, OnInit, SystemJsNgModuleLoaderConfig } from '@angular/core';
-import { NavController, AlertController } from '@ionic/angular';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NavController, AlertController, LoadingController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { UserService } from '../services/user/user.service';
 import { cordovaPropertySet } from '@ionic-native/core';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cadastrar',
@@ -27,34 +28,74 @@ export class CadastrarPage implements OnInit {
     ConcordaComTermos: false,
   };
 
-  private form: FormGroup;
-  grupo;
+  nome = new FormControl('', [Validators.required]);
+  email = new FormControl('', [Validators.email]);
+  senha = new FormControl('', [Validators.required]);
+  confirmacaoSenha = new FormControl('', [Validators.required]);
+  ra = new FormControl('', [Validators.required]);
+  celular = new FormControl('', [Validators.required]);
+  modelo = new FormControl('', []);
+  placa = new FormControl('', []);
+  corcarro = new FormControl('', []);
+  sobrenome = new FormControl('', [Validators.required]);
+  motorista = new FormControl(false, []);
+  cordaComTermos = new FormControl(false, [Validators.required]);
+  grupo = new FormControl('', [Validators.required]);
 
-  
+  form: FormGroup;
+
+
+
 
   constructor(
     private userService: UserService,
     private alertController: AlertController,
     private navCtrl: NavController,
-    private formBuilder: FormBuilder
-  ) {}
-  ngOnInit() {}
+    private formBuilder: FormBuilder,
+    private loadingCtrl: LoadingController,
+  ) { }
+  ngOnInit() {
 
-  finalizarCadastro() {
+    this.form = this.formBuilder.group({
+      nome: this.nome,
+      email: this.email,
+      senha: this.senha,
+      confirmacaoSenha: this.confirmacaoSenha,
+      ra: this.ra,
+      celular: this.celular,
+      modelo: this.modelo,
+      placa: this.placa,
+      corcarro: this.corcarro,
+      sobrenome: this.sobrenome,
+      motorista: this.motorista,
+      cordaComTermos: this.cordaComTermos,
+      grupo: this.grupo,
+    });
+  }
+
+  async finalizarCadastro() {
+    const carregando = await this.loadingCtrl.create({
+      message: 'Carregando...',
+    });
+
+
     if (!this.verificarSenha()) {
       this.exibirMensagemConformacaoSenha();
       return;
     } else {
-      if (this.usuario.ConcordaComTermos) {
-        this.usuario.motorista = this.grupo === 'perfilMotorista' ? true : false;
-        this.userService.cadastrarUsuario(this.usuario).subscribe(
-          (data) => {
-            this.exibirMensagemCadastroRealizado();
-          },
-          (error) => {
-            this.exibirMensagemCadastroComErro();
-          }
-        );
+      carregando.present();
+      if (this.form.controls.cordaComTermos.value) {
+        this.form.controls.motorista.patchValue('perfilMotorista' ? true : false);
+        this.userService.cadastrarUsuario(this.form.value)
+          .pipe(finalize(() => this.loadingCtrl.dismiss()))
+          .subscribe(
+            (data) => {
+              this.exibirMensagem(data.message);
+            },
+            (error) => {
+              this.exibirMensagemCadastroComErro();
+            }
+          );
       } else {
         this.exibirMensagemConcordaComTermos();
         return;
@@ -62,10 +103,10 @@ export class CadastrarPage implements OnInit {
     }
   }
 
-  async exibirMensagemCadastroRealizado() {
+  async exibirMensagem(mensagem: string) {
     const alert = await this.alertController.create({
       header: 'Aviso',
-      message: 'Cadastro realizado com sucesso',
+      message: mensagem,
       buttons: [
         {
           text: 'OK',
