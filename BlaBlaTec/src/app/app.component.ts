@@ -16,7 +16,7 @@ import { EventEmitter } from 'protractor';
 
 export class AppComponent {
 
-  isMotorista = true;
+  isMotorista = false;
 
   listaMenu: { rota: string, varificarMotorista: boolean, mostrarMenu: boolean, nomeIcon: string, slot: string, titulo: string }[] = [
     { rota: 'caronas', varificarMotorista: true, mostrarMenu: true, nomeIcon: 'thumbs-up', slot: 'start', titulo: 'Minhas Caronas', },
@@ -38,8 +38,10 @@ export class AppComponent {
     this.varificarMenu();
     
     this.authService.usuarioLogado.subscribe((result: any) => {
-     console.log(result);
       this.usuarioLogado = result;
+    });
+    this.authService.isMotoristaEvent.subscribe((result: any) => {
+      this.isMotorista = result;
     });
   }
 

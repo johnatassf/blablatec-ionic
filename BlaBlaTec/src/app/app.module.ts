@@ -13,6 +13,7 @@ import { environment } from '../environments/environment';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AuthInterceptor } from './http-intercetor/http-intercetor';
 import { AuthService } from './services/auth/auth.service';
+import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,19 +21,20 @@ import { AuthService } from './services/auth/auth.service';
   entryComponents: [],
 
   imports: [BrowserModule,
-           IonicModule.forRoot(),
-           AppRoutingModule,
-           HttpClientModule,
-
-           ],
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,
     AuthService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Geolocation,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {} 
+export class AppModule { } 

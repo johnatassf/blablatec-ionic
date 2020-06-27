@@ -5,6 +5,7 @@ import { UserService } from '../services/user/user.service';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from '../services/auth/auth.service';
 import { TokenAutentication } from '../model/TokenAutentication';
+import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -17,22 +18,34 @@ export class HomePage {
     Password: '',
   };
 
+  ra = new FormControl('', Validators.compose([Validators.required]));
+  password = new FormControl('', Validators.compose([Validators.required]));
+  form: FormGroup;
+
   constructor(
     public navCtrl: NavController,
     private userService: UserService,
     private authService: AuthService,
     private alertController: AlertController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private formBuilder: FormBuilder
   ) { }
 
+  ngOnInit() {
+    this.form = this.formBuilder.group({
+      ra: this.ra,
+      password: this.password
+    });
+  }
   acessarCadastrar(): void {
     this.navCtrl.navigateRoot('cadastrar');
   }
 
   async realizarLogin() {
-    // this.navCtrl.navigateRoot('mapas');
+    if (this.form.invalid)
+      return;
 
-    let carregando = await this.loadingCtrl.create({
+    const carregando = await this.loadingCtrl.create({
       message: 'Carregando...',
     });
 
@@ -55,6 +68,7 @@ export class HomePage {
           token.expiration = data?.expiration;
 
           window.localStorage.setItem('ContentLocaly', JSON.stringify(token));
+          this.authService.isMotoristaEvent.emit(this.authService.isMotorista());
           this.navCtrl.navigateRoot('mapas');
         },
         (error: any) => {

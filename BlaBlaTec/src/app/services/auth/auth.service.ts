@@ -13,6 +13,7 @@ export class AuthService {
     isAdm = false;
     public usuarioLogado = new EventEmitter<boolean>(true);
     public credenciaisInvalidasEvent = new EventEmitter<boolean>(false);
+    isMotoristaEvent = new EventEmitter<boolean>(false);
 
     constructor(private http: HttpClient, private router: Router) { }
 
@@ -33,6 +34,22 @@ export class AuthService {
         this.router.navigate(['']);
     }
 
+    isMotorista(): boolean {
+        const tokenSession = localStorage.getItem('ContentLocaly');
+
+        if (!tokenSession)
+            return false;
+
+        const token: TokenAutentication = JSON.parse(tokenSession);
+        var codToken = jwt_decode(token.accessToken);
+        console.log(token.accessToken);
+        console.log(codToken);
+        console.log('TOkeeeeeeeeeeeeeen');
+        if (codToken.role === 'Motorista')
+            return true;
+
+        return false;
+    }
     getTokenAutetication(): TokenAutentication {
         const tokenSession = localStorage.getItem('ContentLocaly');
 
