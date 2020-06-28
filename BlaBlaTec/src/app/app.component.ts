@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './services/auth/auth.service';
 import { EventEmitter } from 'protractor';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -18,12 +20,12 @@ export class AppComponent {
 
   isMotorista = false;
 
-  listaMenu: { rota: string, varificarMotorista: boolean, mostrarMenu: boolean, nomeIcon: string, slot: string, titulo: string }[] = [
-    { rota: 'caronas', varificarMotorista: true, mostrarMenu: true, nomeIcon: 'thumbs-up', slot: 'start', titulo: 'Minhas Caronas', },
-    { rota: 'oferecer-carona', varificarMotorista: true, mostrarMenu: true, nomeIcon: 'chatbubble', slot: 'start', titulo: 'Oferecer carona' },
-    { rota: 'procurar-carona', varificarMotorista: false, mostrarMenu: true, nomeIcon: 'search', slot: 'start', titulo: 'Procurar Carona' },
-    { rota: 'perfil', varificarMotorista: false, mostrarMenu: true, nomeIcon: 'person', slot: 'start', titulo: 'Meu Perfil' },
-    { rota: 'listar-caronas', varificarMotorista: false, mostrarMenu: true, nomeIcon: 'list', slot: 'start', titulo: 'Listar' },
+  listaMenu: { rota: string, verificarMotorista: boolean, mostrarMenu: boolean, nomeIcon: string, slot: string, titulo: string }[] = [
+    { rota: 'caronas', verificarMotorista: true, mostrarMenu: true, nomeIcon: 'thumbs-up', slot: 'start', titulo: 'Minhas Caronas', },
+    { rota: 'oferecer-carona', verificarMotorista: true, mostrarMenu: true, nomeIcon: 'chatbubble', slot: 'start', titulo: 'Oferecer carona' },
+    { rota: 'procurar-carona', verificarMotorista: false, mostrarMenu: true, nomeIcon: 'search', slot: 'start', titulo: 'Procurar Carona' },
+    { rota: 'perfil', verificarMotorista: false, mostrarMenu: true, nomeIcon: 'person', slot: 'start', titulo: 'Meu Perfil' },
+    { rota: 'listar-caronas', verificarMotorista: false, mostrarMenu: true, nomeIcon: 'list', slot: 'start', titulo: 'Listar' },
   ];
 
   usuarioLogado: boolean = true;
@@ -32,7 +34,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.initializeApp();
     this.varificarMenu();
@@ -42,6 +45,7 @@ export class AppComponent {
     });
     this.authService.isMotoristaEvent.subscribe((result: any) => {
       this.isMotorista = result;
+      this.varificarMenu();
     });
   }
 
@@ -57,11 +61,12 @@ export class AppComponent {
 
   logOut() {
     this.authService.logOut();
+    this.usuarioLogado = false;
   }
 
   varificarMenu() {
     this.listaMenu.forEach(result => {
-      if (result.varificarMotorista) {
+      if (result.verificarMotorista) {
         result.mostrarMenu = this.isMotorista;
       }
     });

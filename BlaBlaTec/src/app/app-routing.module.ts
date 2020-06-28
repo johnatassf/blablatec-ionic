@@ -14,18 +14,13 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'cadastrar', 
+    path: 'cadastrar',
     loadChildren: () => import('./cadastrar/cadastrar.module').then((m) => m.CadastrarPageModule),
   },
 
   {
     path: 'mapas',
     loadChildren: () => import('./mapas/mapas.module').then((m) => m.MapasPageModule),
-    canActivate: [HomeGuard]
-  },
-  {
-    path: '',
-    loadChildren: () => import('./tabs/tabs.module').then((m) => m.TabsPageModule),
     canActivate: [HomeGuard]
   },
   {

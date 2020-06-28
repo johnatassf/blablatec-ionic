@@ -30,8 +30,7 @@ export class AuthService {
 
     logOut() {
         localStorage.removeItem('ContentLocaly');
-        this.usuarioLogado.next(false);
-        this.router.navigate(['']);
+        this.router.navigate(['/']);
     }
 
     isMotorista(): boolean {

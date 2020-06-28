@@ -83,8 +83,9 @@ export class CadastrarPage implements OnInit {
       this.exibirMensagemConformacaoSenha();
       return;
     } else {
-      carregando.present();
+
       if (this.form.controls.cordaComTermos.value) {
+        carregando.present();
         this.form.controls.motorista.patchValue('perfilMotorista' ? true : false);
         this.userService.cadastrarUsuario(this.form.value)
           .pipe(finalize(() => this.loadingCtrl.dismiss()))
