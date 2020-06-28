@@ -18,7 +18,7 @@ export class CadastrarPage implements OnInit {
     Senha: '',
     ConfirmacaoSenha: '',
     Ra: '',
-    Celular: '',
+    numeroTelefone: '',
     Modelo: '',
     Placa: '',
     Corcarro: '',
@@ -33,7 +33,7 @@ export class CadastrarPage implements OnInit {
   senha = new FormControl('', [Validators.required]);
   confirmacaoSenha = new FormControl('', [Validators.required]);
   ra = new FormControl('', [Validators.required]);
-  celular = new FormControl('', [Validators.required]);
+  numeroTelefone = new FormControl('', [Validators.required]);
   modelo = new FormControl('', []);
   placa = new FormControl('', []);
   corcarro = new FormControl('', []);
@@ -62,7 +62,7 @@ export class CadastrarPage implements OnInit {
       senha: this.senha,
       confirmacaoSenha: this.confirmacaoSenha,
       ra: this.ra,
-      celular: this.celular,
+      numeroTelefone: this.numeroTelefone,
       modelo: this.modelo,
       placa: this.placa,
       corcarro: this.corcarro,

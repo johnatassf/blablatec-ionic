@@ -19,7 +19,8 @@ export class EditarusuarioPage implements OnInit {
       Email: '',
       Nome: '',
       Sobrenome: '',
-      Ra: ''
+      Ra: '',
+      NumeroTelefone: '',
     }
 
     usuarioAtualizado = {
@@ -27,7 +28,9 @@ export class EditarusuarioPage implements OnInit {
       Email: '',
       Name: '',
       LastName: '',
-      Ra: ''
+      Ra: '',
+      NumeroTelefone: '',
+
     }
 
   ngOnInit() {
@@ -38,6 +41,7 @@ export class EditarusuarioPage implements OnInit {
       this.usuario.Ra = data[0].ra;
       this.usuario.Nome = data[0].nome;
       this.usuario.Sobrenome = data[0].sobrenome;
+      this.usuario.NumeroTelefone = data[0].numeroTelefone;
   });
   }
 
@@ -47,6 +51,7 @@ export class EditarusuarioPage implements OnInit {
     this.usuarioAtualizado.Ra = this.usuario.Ra;
     this.usuarioAtualizado.Name = this.usuario.Nome;
     this.usuarioAtualizado.LastName = this.usuario.Sobrenome;
+    this.usuarioAtualizado.NumeroTelefone = this.usuario.NumeroTelefone;
 
     this.userService.AtualizarUsuario(this.usuarioAtualizado).subscribe((data: any) => {
       this.exibirMensagemAtualziacaoRealizada();
