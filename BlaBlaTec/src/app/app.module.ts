@@ -34,6 +34,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, FormsModule }
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Geolocation,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    Storage
   ],
   bootstrap: [AppComponent],
   

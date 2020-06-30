@@ -134,7 +134,7 @@ export class OferecerCaronaPage implements OnInit {
 
 
   oferecerCarona() {
-    console.log(this.form.controls.data.value)
+    console.log(this.form.controls.data.value);
     this.criarRota();
   }
 

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 
-import { Platform, MenuController } from '@ionic/angular';
+import { Platform, MenuController, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './services/auth/auth.service';
 import { EventEmitter } from 'protractor';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
+import { MapaMotoristaPage } from './mapa-motorista/mapa-motorista.page';
 
 @Component({
   selector: 'app-root',
@@ -35,11 +36,12 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    
   ) {
     this.initializeApp();
     this.varificarMenu();
-    
+
     this.authService.usuarioLogado.subscribe((result: any) => {
       this.usuarioLogado = result;
     });

@@ -15,6 +15,6 @@ import { MapaMotoristaPage } from './mapa-motorista.page';
     IonicModule,
     MapaMotoristaPageRoutingModule
   ],
-  declarations: [MapaMotoristaPage]
+  declarations: [MapaMotoristaPage],
 })
-export class MapaMotoristaPageModule {}
+export class MapaMotoristaPageModule { }
