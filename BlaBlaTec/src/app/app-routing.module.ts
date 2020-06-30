@@ -56,7 +56,11 @@ const routes: Routes = [
   {
     path: 'caronas',
     loadChildren: () => import('./caronas/listarcaronas/listarcaronas.module').then(m => m.ListarcaronasPageModule)
+  },  {
+    path: 'alterar-infocar',
+    loadChildren: () => import('./alterar-infocar/alterar-infocar.module').then( m => m.AlterarInfocarPageModule)
   },
+
 ];
 
 @NgModule({
