@@ -37,10 +37,9 @@ ion-toolbar {
 ion-button {
   --background: #1c808b;
   --color: #ffffff;
-  
 }
 
-ion-searchbar.autocompleteperson{
+ion-searchbar.autocompleteperson {
   padding: 0;
   box-shadow: none !important;
   .searchbar-search-icon.sc-ion-searchbar-md {
@@ -52,10 +51,7 @@ ion-searchbar.autocompleteperson{
     padding-left: 9px !important;
     box-shadow: none !important;
   }
-  .sc-ion-searchbar-md-h{
+  .sc-ion-searchbar-md-h {
     padding: 0;
   }
-
-
-
 }
