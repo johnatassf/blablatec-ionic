@@ -13,7 +13,9 @@ export class SolicitacoesService {
     return this.http.get(environment.apiUrl + 'solicitacao-viagem/');
   }
 
-  AtualizarUsuario(usuario){
-    return this.http.put(environment.apiUrl + 'solicitacao-viagem/' + usuario.Id + '/profile', usuario);
+  AtualizarSolicitacaoViagem(solicitacao){
+    return this.http.put(environment.apiUrl + 'solicitacao-viagem/' + solicitacao.Id + '/profile', solicitacao);
   }
+
+  
 }

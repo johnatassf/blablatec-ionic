@@ -26,4 +26,17 @@ export class ModalComponent implements OnInit {
   });
   }
 
+  aceitarSolicitacao(solicitacao){
+    solicitacao.Recusada = false;
+    this.solicitacoesService.AtualizarSolicitacaoViagem(solicitacao).subscribe((data: any) => {
+      console.log("foi");
+  });
+  }
+
+  recusarSolicitacao(solicitacao){
+    this.solicitacoesService.AtualizarSolicitacaoViagem(solicitacao).subscribe((data: any) => {
+      console.log("foi");
+  });
+  }
+
 }
