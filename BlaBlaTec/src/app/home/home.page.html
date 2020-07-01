@@ -7,7 +7,7 @@
   <div [formGroup]="form">
     <ion-item>
       <ion-icon name="person" slot="start"></ion-icon>
-      <ion-input type="text" placeholder="RA" formControlName="ra" focus="true"></ion-input>
+      <ion-input type="text" placeholder="RA" formControlName="ra" focus="true" maxlength="13"></ion-input>
       <div *ngIf="form?.controls.ra.errors">
         <p *ngIf="form?.controls.ra.errors.required"></p>
       </div>

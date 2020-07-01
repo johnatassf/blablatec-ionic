@@ -78,7 +78,6 @@ export class CadastrarPage implements OnInit {
       message: 'Carregando...',
     });
 
-
     if (!this.verificarSenha()) {
       this.exibirMensagemConformacaoSenha();
       return;
@@ -87,6 +86,14 @@ export class CadastrarPage implements OnInit {
       if (this.form.controls.cordaComTermos.value) {
         carregando.present();
         this.form.controls.motorista.patchValue('perfilMotorista' ? true : false);
+        if(this.form.value.grupo = 'perfilCarona'){
+          this.form.value.motorista = false;
+        }
+        else{
+          this.form.value.motorista = true;
+        }
+        
+        console.log(this.form.value);
         this.userService.cadastrarUsuario(this.form.value)
           .pipe(finalize(() => this.loadingCtrl.dismiss()))
           .subscribe(
