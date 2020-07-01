@@ -87,6 +87,7 @@ export class OferecerCaronaPage implements OnInit {
     this.destinationPosition = event.description;
     this.calculateRoute();
   }
+
   setDestino(event: any) {
     this.origens = [];
     this.destinos = [];
@@ -99,14 +100,12 @@ export class OferecerCaronaPage implements OnInit {
 
   searchOrigem(input: any, tela: boolean) {
     this.cd.detectChanges();
-    if ((input.detail.value == null || input.detail.value == undefined) || this.clickList) {
+    if ((input.detail.value == null || input.detail.value === undefined) || this.clickList) {
       this.showListOrigin = false;
       this.clickList = false;
       return;
     }
     this.ngZone.run(() => {
-      console.log('request origem');
-      console.log('request origem');
       new google.maps.places.AutocompleteService().getPlacePredictions({ input: input.detail.value }, prediction => {
         this.origens = prediction;
         this.showListOrigin = true;
@@ -116,7 +115,7 @@ export class OferecerCaronaPage implements OnInit {
   }
 
   searchDestino(input: any, tela: boolean) {
-    if ((input.detail.value == null || input.detail.value == undefined) || this.clickList) {
+    if ((input.detail.value == null || input.detail.value === undefined) || this.clickList) {
       this.showLisDesti = false;
       this.clickList = false;
       return;
@@ -132,20 +131,9 @@ export class OferecerCaronaPage implements OnInit {
 
   }
 
-
   oferecerCarona() {
     console.log(this.form.controls.data.value);
     this.criarRota();
-  }
-
-
-  renderDate(value: any, depoisDaFormatacao = 'DD/MM/YYYY', antesDaFormatacao = 'YYYY-MM-DD') {
-    if (value) { return; }
-    const date = moment(value, antesDaFormatacao);
-
-    if (moment('0001-01-01').format(depoisDaFormatacao) != moment.utc(date).format(depoisDaFormatacao)) {
-      return date.isValid() ? date.format(depoisDaFormatacao) : ' - ';
-    }
   }
 
   criarRota() {

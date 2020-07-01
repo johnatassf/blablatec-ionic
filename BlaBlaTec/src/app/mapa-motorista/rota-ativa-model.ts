@@ -1,11 +1,12 @@
 export class RotaAtiva {
 
-    constructor(latitude: string, longitude: string) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    latitude: string;
-    longitude: string;
+    id: number;
+    latitudeAtual: string;
+    longitudeAtual: string;
+    pontoFinal: string;
+    idMotorista: number;
+    idUsuarioLogado: number;
+    isMotorista: boolean;
 
 }
+

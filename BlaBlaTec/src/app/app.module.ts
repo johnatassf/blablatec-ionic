@@ -14,10 +14,14 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AuthInterceptor } from './http-intercetor/http-intercetor';
 import { AuthService } from './services/auth/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, FormsModule } from '@angular/forms';
+import { ModalCorridaService } from './services/modal-corrida/modal-corrida.service';
+import { ModalMapaCorridaComponent } from './mapa-motorista/modal-mapa.component';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    ModalMapaCorridaComponent],
   entryComponents: [],
 
   imports: [BrowserModule,
@@ -31,12 +35,13 @@ import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, FormsModule }
     StatusBar,
     SplashScreen,
     AuthService,
+    ModalCorridaService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Geolocation,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     Storage
   ],
   bootstrap: [AppComponent],
-  
+
 })
 export class AppModule { } 

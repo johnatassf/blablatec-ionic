@@ -6,6 +6,7 @@ import { finalize } from 'rxjs/operators';
 import { AuthService } from '../services/auth/auth.service';
 import { TokenAutentication } from '../model/TokenAutentication';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { ModalCorridaService } from '../services/modal-corrida/modal-corrida.service';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +29,8 @@ export class HomePage {
     private authService: AuthService,
     private alertController: AlertController,
     private loadingCtrl: LoadingController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private modalService: ModalCorridaService
   ) { }
 
   ngOnInit() {
@@ -69,6 +71,7 @@ export class HomePage {
 
           window.localStorage.setItem('ContentLocaly', JSON.stringify(token));
           this.authService.isMotoristaEvent.emit(this.authService.isMotorista());
+          this.modalService.mostrarCorridaAtiva.emit(true);
           this.navCtrl.navigateRoot('mapas');
         },
         (error: any) => {

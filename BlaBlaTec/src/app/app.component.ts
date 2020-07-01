@@ -8,6 +8,7 @@ import { EventEmitter } from 'protractor';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { MapaMotoristaPage } from './mapa-motorista/mapa-motorista.page';
+import { ModalCorridaService } from './services/modal-corrida/modal-corrida.service';
 
 @Component({
   selector: 'app-root',
@@ -37,7 +38,10 @@ export class AppComponent {
     private statusBar: StatusBar,
     private authService: AuthService,
     private router: Router,
+    private modalService: ModalCorridaService,
+    private modalController: ModalController
     
+
   ) {
     this.initializeApp();
     this.varificarMenu();
@@ -56,8 +60,6 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-
-
   }
 
 
@@ -73,4 +75,17 @@ export class AppComponent {
       }
     });
   }
+
+  
+
+
+  
+  dismiss() {
+    // using the injected ModalController this page
+    // can "dismiss" itself and optionally pass back data
+    this.modalController.dismiss({
+      'dismissed': true
+    });
+  }
+
 }
