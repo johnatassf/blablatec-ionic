@@ -30,7 +30,7 @@ export class EditarusuarioPage implements OnInit {
       LastName: '',
       Ra: '',
       NumeroTelefone: '',
-
+      Encerrado: false,
     }
 
   ngOnInit() {
@@ -58,6 +58,20 @@ export class EditarusuarioPage implements OnInit {
   });
   }
 
+  encerrarConta(){
+    this.usuarioAtualizado.Id = this.usuario.Id;
+    this.usuarioAtualizado.Email = this.usuario.Email;
+    this.usuarioAtualizado.Ra = this.usuario.Ra;
+    this.usuarioAtualizado.Name = this.usuario.Nome;
+    this.usuarioAtualizado.LastName = this.usuario.Sobrenome;
+    this.usuarioAtualizado.NumeroTelefone = this.usuario.NumeroTelefone;
+    this.usuarioAtualizado.Encerrado = true;
+
+    this.userService.AtualizarUsuario(this.usuarioAtualizado).subscribe((data: any) => {
+      this.exibirMensagemContaEncerrada();
+  });
+  }
+
   mapas(): void {
     this.navCtrl.navigateRoot('mapas');
   }
@@ -70,6 +84,21 @@ export class EditarusuarioPage implements OnInit {
         text: 'OK',
         handler: () => {
           this.navCtrl.navigateRoot('perfil');
+        }
+      }]
+    });
+
+    await alert.present();
+  }
+
+  async exibirMensagemContaEncerrada() {
+    const alert = await this.alertController.create({
+      header: 'Aviso',
+      message: 'Conta encerrada',
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.navCtrl.navigateRoot('home');
         }
       }]
     });
