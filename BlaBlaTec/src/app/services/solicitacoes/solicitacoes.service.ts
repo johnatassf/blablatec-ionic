@@ -9,11 +9,13 @@ export class SolicitacoesService {
 
   constructor(public http: HttpClient) { }
 
-  buscarSolicitacaoViagem(){
-    return this.http.get(environment.apiUrl + 'solicitacao-viagem/');
+  buscarSolicitacaoViagem(idViagem){
+    return this.http.get(environment.apiUrl + 'solicitacao-viagem/getAll/' + idViagem);
   }
 
-  AtualizarUsuario(usuario){
-    return this.http.put(environment.apiUrl + 'solicitacao-viagem/' + usuario.Id + '/profile', usuario);
+  AtualizarSolicitacaoViagem(solicitacao){
+    return this.http.put(environment.apiUrl + 'solicitacao-viagem/' + solicitacao.id + '/profile', solicitacao);
   }
+
+  
 }

@@ -26,7 +26,7 @@ export class AppComponent {
     { rota: 'caronas', verificarMotorista: true, mostrarMenu: true, nomeIcon: 'thumbs-up', slot: 'start', titulo: 'Minhas Caronas', },
     { rota: 'oferecer-carona', verificarMotorista: true, mostrarMenu: true, nomeIcon: 'chatbubble', slot: 'start', titulo: 'Oferecer carona' },
     { rota: 'procurar-carona', verificarMotorista: false, mostrarMenu: true, nomeIcon: 'search', slot: 'start', titulo: 'Procurar Carona' },
-    { rota: 'perfil', verificarMotorista: false, mostrarMenu: true, nomeIcon: 'person', slot: 'start', titulo: 'Meu Perfil' },
+    { rota: 'perfil', verificarMotorista: false, mostrarMenu: false, nomeIcon: 'person', slot: 'start', titulo: 'Meu Perfil' },
     { rota: 'listar-caronas', verificarMotorista: false, mostrarMenu: true, nomeIcon: 'list', slot: 'start', titulo: 'Listar' },
   ];
 

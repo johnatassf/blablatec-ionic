@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Alterar senha</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [formGroup]="form">
+    <ion-item>
+      <ion-icon name="lock-closed" slot="start"></ion-icon>
+      <ion-input type="password" formControlName="senha" placeholder="Senha"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="lock-closed" slot="start"></ion-icon>
+      <ion-input type="password" formControlName="confirmacaoSenha" placeholder="Confirme a Senha"></ion-input>
+    </ion-item>
+  </div>
+
+  <div id="btnAtualizar">
+    <ion-button fill="clear" (click)="atualizarSenha()">Confirmar </ion-button>
+  </div>
+  <div id="btnVoltar">
+    <ion-button fill="clear" (click)="home()">Retornar</ion-button>
+  </div>
+</ion-content>

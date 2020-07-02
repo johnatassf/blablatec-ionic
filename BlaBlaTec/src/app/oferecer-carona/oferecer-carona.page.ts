@@ -138,11 +138,16 @@ export class OferecerCaronaPage implements OnInit {
 
   criarRota() {
     const oferecerCarona = new OferecerCaronaModel();
-    oferecerCarona.valor = 0,
-      oferecerCarona.viagem = this.form.controls.data.value,
-      oferecerCarona.pontoInicial = this.form.controls.origem.value,
-      oferecerCarona.pontoFinal = this.form.controls.destino.value,
-      oferecerCarona.qtdLugares = this.form.controls.qtdLugares.value,
+    oferecerCarona.valor = 0;
+      oferecerCarona.viagem = this.form.controls.data.value;
+      oferecerCarona.pontoInicial = this.form.controls.origem.value;
+      oferecerCarona.pontoFinal = this.form.controls.destino.value;
+      oferecerCarona.qtdLugares = this.form.controls.qtdLugares.value;
+
+      if(oferecerCarona.qtdLugares > 30){
+        this.exibirMensagemQtdLugaresInvalido();
+        return;
+      }
 
       this.service.criarViagem(oferecerCarona).subscribe(() => {
         //carrega loading
@@ -191,6 +196,15 @@ export class OferecerCaronaPage implements OnInit {
     });
   }
 
+  async exibirMensagemQtdLugaresInvalido() {
+    const alert = await this.alertController.create({
+      header: 'Aviso',
+      message: 'O número de lugares disponíveis não pode ser maior que 30',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
 
 
 }

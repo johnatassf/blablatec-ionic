@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModalComponent } from 'src/app/modal/modal.component';
+import { ViagemService } from '../../services/viagem/viagem.service';
 
 @Component({
   selector: 'app-listarcaronas',
@@ -9,26 +10,27 @@ import { ModalComponent } from 'src/app/modal/modal.component';
 })
 export class ListarcaronasPage implements OnInit {
 
- lista =[
-   {
-     name: 'Oferecidas'
-   },
-   {
-     name: 'Agendadas'
-   }
- ];
+ lista =[];
 
-  constructor(private modalController: ModalController) { }
-  async openModal(){
+  constructor(private modalController: ModalController,
+    private serviceViagem: ViagemService) { }
+  async openModal(idViagem){
+    console.log("listarcaronas " + idViagem);
     const modal = await this.modalController.create({
-      component: ModalComponent
+      component: ModalComponent,
+      componentProps: {
+        idViagem: idViagem,
+      }
     }); 
     await modal.present();
   }
 
   ngOnInit(){
+    this.serviceViagem.buscarMinhasViagens().subscribe((data: any) => {
+      console.log(data);
+      this.lista = data;
+  });
   }
-// criar lista de caronas
 
 
 }
