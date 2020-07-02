@@ -7,6 +7,7 @@ import { AuthService } from '../services/auth/auth.service';
 import { TokenAutentication } from '../model/TokenAutentication';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ModalCorridaService } from '../services/modal-corrida/modal-corrida.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -74,16 +75,19 @@ export class HomePage {
           this.modalService.mostrarCorridaAtiva.emit(true);
           this.navCtrl.navigateRoot('mapas');
         },
-        (error: any) => {
-          console.log(error);
-          this.exibirMensagemErroLogin();
+        (error: HttpErrorResponse) => {
+          if (error.status === 400) {
+            this.exibirMensagemErroLogin('ERRO: ' + error.error.message);
+          } else {
+            this.exibirMensagemErroLogin('Um erro ocorreu tente novamente mais tarde');
+          }
         }
       );
   }
-  async exibirMensagemErroLogin() {
+  async exibirMensagemErroLogin(msg: string) {
     const alert = await this.alertController.create({
       header: 'Aviso',
-      message: 'Usuario ou senha incorreto.',
+      message: msg,
       buttons: ['OK'],
     });
     await alert.present();
