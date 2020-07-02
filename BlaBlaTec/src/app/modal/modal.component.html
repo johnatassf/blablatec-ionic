@@ -11,9 +11,7 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let valorEndereco of listaEndereco">
-          <ion-label>{{valorEndereco.viagem.pontoFinal}}</ion-label>
-          <ion-label>{{valorEndereco.carona.nome}}</ion-label>
-          <ion-label>{{valorEndereco.viagem.dataViagem}}</ion-label>
+          <ion-label>{{valorEndereco.carona.nome}} {{ valorEndereco.carona.sobrenome }}</ion-label>
       <ion-button size="small" color="success" (click)="aceitarSolicitacao(valorEndereco)">Aceitar</ion-button>
       <ion-button size="small" color="danger" (click)="recusarSolicitacao(valorEndereco)">Recusar</ion-button>
     </ion-item>

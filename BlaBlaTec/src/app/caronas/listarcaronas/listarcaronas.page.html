@@ -10,9 +10,9 @@
 
 <ion-content class="ion-padding">
   <ion-list>
-    <ion-item button *ngFor="let valorCaronas of lista" (click)="openModal()">
+    <ion-item button *ngFor="let valorCaronas of lista" (click)="openModal(valorCaronas.id)">
       <ion-label>
-        <h2>{{ valorCaronas.name }}</h2>
+        <h2>{{ valorCaronas.pontoInicial }} - {{ valorCaronas.pontoFinal }}</h2>
       </ion-label>
     </ion-item>
 
