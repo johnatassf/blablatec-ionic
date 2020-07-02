@@ -7,12 +7,25 @@
   </ion-toolbar>
 </ion-header>
 
-  <div id="notificações">
-    <h1 text-align>
-      <img src="https://uploaddeimagens.com.br/images/002/694/079/full/blablatransparente.png?1591468772" class="icon-7em" />
-    </h1>
-  </div>
 
-<div id="mapa"></div>
+<ion-content class="backgroud">
+  <ion-item *ngIf="showCorridaEmAndamento">
+    <ion-row > 
+      <ion-col size="6"  >
+        <ion-button (click)="showModal()"expand="block" fill="clear" shape="round">
+          <ion-icon name="car-sport-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        Corrida em andamento
+      </ion-col>
+    </ion-row>
+  </ion-item>
+</ion-content>
 
-<ion-content> </ion-content>
+
+
+
+
+
+<!-- <ion-icon name="caret-forward-circle-outline"></ion-icon> -->
