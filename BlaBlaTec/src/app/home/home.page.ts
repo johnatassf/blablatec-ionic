@@ -72,7 +72,7 @@ export class HomePage {
 
           window.localStorage.setItem('ContentLocaly', JSON.stringify(token));
           this.authService.isMotoristaEvent.emit(this.authService.isMotorista());
-          this.modalService.mostrarCorridaAtiva.emit(true);
+          this.modalService.mostrarCorridaAtivaMotorista.emit(true);
           this.navCtrl.navigateRoot('mapas');
         },
         (error: HttpErrorResponse) => {

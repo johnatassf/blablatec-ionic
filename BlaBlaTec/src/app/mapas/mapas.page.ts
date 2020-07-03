@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController, AlertController, ActionSheetController } from '@ionic/angular';
 import { ModalCorridaService } from '../services/modal-corrida/modal-corrida.service';
 import { RotaAtiva } from '../mapa-motorista/rota-ativa-model';
@@ -8,15 +8,15 @@ import { RotaAtiva } from '../mapa-motorista/rota-ativa-model';
   templateUrl: './mapas.page.html',
   styleUrls: ['./mapas.page.scss'],
 })
-export class MapasPage implements OnInit {
-  showCorridaEmAndamento: boolean;
+export class MapasPage implements OnDestroy {
+  showCorridaEmAndamento = false;
   constructor(
     public navCtrl: NavController,
     public actionSheetController: ActionSheetController,
     private modalCorridaService: ModalCorridaService
   ) { }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.verificarCorridaAndamento();
   }
 
@@ -33,7 +33,11 @@ export class MapasPage implements OnInit {
     });
   }
 
-  showModal(){
-    this.modalCorridaService.mostrarCorridaAtiva.emit(true);
+  showModal() {
+    this.modalCorridaService.mostrarCorridaAtivaMenu.emit(true);
+  }
+
+  ngOnDestroy(): void {
+    this.showCorridaEmAndamento = false;
   }
 }

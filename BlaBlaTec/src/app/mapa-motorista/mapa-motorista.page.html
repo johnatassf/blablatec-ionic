@@ -12,11 +12,6 @@
     </ion-toolbar>
   </ion-header>
   
-  <button ion-button full color="danger" icon-left (click)="stopTracking()" *ngIf="isTracking">
-    <ion-icon name="hand"></ion-icon>
-    Stop Tracking
-  </button>
-
   <div #map id="map"></div>
   <ion-button (click)="stopTracking()" color="danger" expand="block" fill="clear" shape="round" *ngIf="!isTracking">
     Finalizar Corrida

@@ -32,6 +32,7 @@ export class ModalComponent implements OnInit {
     });
   }
 
+
   aceitarSolicitacao(solicitacao) {
     solicitacao.Recusada = false;
     console.log(solicitacao);

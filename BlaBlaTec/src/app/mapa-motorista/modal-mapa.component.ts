@@ -15,6 +15,8 @@ declare var google;
 })
 export class ModalMapaCorridaComponent {
     rotaAtiva: RotaAtiva;
+    mostrarCorridaMotoristaObservable: Subscription;
+    mostrarCorridaMenuObservable: Subscription;
 
     constructor(
         public modalController: ModalController,
@@ -25,21 +27,21 @@ export class ModalMapaCorridaComponent {
 
     ngOnInit(): void {
 
-        this.modalCorridaService.mostrarCorridaAtiva.subscribe(async result => {
-            console.log('Ativou modal')
-            if (result) {
-                this.buscarRotaAtivaUsuario();
-            } else {
-                this.dismiss();
-            }
-        });
+        this.mostrarCorridaMotoristaObservable = this.modalCorridaService.mostrarCorridaAtivaMotorista
+            .subscribe(async result => {
+                result ? this.buscarRotaAtivaUsuario(false) : this.dismiss();
+            });
+        this.mostrarCorridaMenuObservable = this.modalCorridaService.mostrarCorridaAtivaMenu
+            .subscribe(async result => {
+                result ? this.buscarRotaAtivaUsuario(true) : this.dismiss();
+            });
     }
 
-    // Verificar se existe rota ativa para este usuario
-    buscarRotaAtivaUsuario() {
+    // Verificar se existe rota atmiva para este usuario
+    buscarRotaAtivaUsuario(mostrarCorridaClickMeu: boolean) {
         this.modalCorridaService.buscarRotasEmAdamentoUsuario().subscribe(async (result: RotaAtiva) => {
             this.rotaAtiva = result;
-            if (this.rotaAtiva.isMotorista) {
+            if (this.rotaAtiva.isMotorista || mostrarCorridaClickMeu) {
                 await this.presentModal();
             }
         }, error => {
@@ -66,6 +68,12 @@ export class ModalMapaCorridaComponent {
         this.modalController.dismiss({
             'dismissed': true
         });
+    }
+
+    ngOnDestroy(): void {
+        this.mostrarCorridaMotoristaObservable.unsubscribe();
+        this.mostrarCorridaMenuObservable.unsubscribe();
+
     }
 
 

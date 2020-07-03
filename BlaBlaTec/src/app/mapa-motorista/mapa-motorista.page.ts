@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { interval, timer, Subscription, Observable, Subject } from 'rxjs';
-import { map, tap, retryWhen, delayWhen, filter } from 'rxjs/operators';
+import { map, tap, retryWhen, delayWhen, filter, finalize } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NavController, Platform, ModalController } from '@ionic/angular';
 import { ModalCorridaService } from '../services/modal-corrida/modal-corrida.service';
 import { RotaAtiva, RotaAtivaUpdate } from './rota-ativa-model';
+import { IfStmt } from '@angular/compiler';
 declare var google;
 
 @Component({
@@ -17,9 +18,9 @@ export class MapaMotoristaPage {
   public timer: Subscription = new Subscription();
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
-  currentPosition: any;
+  currentPositionDriver: any;
   originPosition: string;
-  destinationPosition = 'FATEC - Praça 19 de Janeiro - Boqueirão, Praia Grande - SP, Brasil';
+  destinationPositionDriver = 'FATEC - Praça 19 de Janeiro - Boqueirão, Praia Grande - SP, Brasil';
 
   @Input() rotaAtiva: RotaAtiva;
 
@@ -29,10 +30,10 @@ export class MapaMotoristaPage {
   positionSubscription: Subscription;
   motoristaMarcador: any;
 
-
   showModalObservable: Observable<boolean>;
   tracking: boolean;
   atualizarPosicaoObservable: Subscription;
+  marcadorCarona: any;
 
   constructor(
     private geolocation: Geolocation,
@@ -49,6 +50,14 @@ export class MapaMotoristaPage {
     this.setMap();
     this.atualizarPosicaoAtual();
   }
+
+  // Iniciei acompanhamento de rota atual por usuario
+  // Pegar a rota do motorista no banco
+  // Traca a rota até o ponto final
+  // Fazer requests no banco para verificação
+
+
+
 
   setMap() {
     const mapOptions = {
@@ -67,16 +76,18 @@ export class MapaMotoristaPage {
       this.map.setCenter(latLng);
       this.map.setZoom(16);
 
-      // Toda vez q a posição atual atualizar setar no banco: metodo Set Map
-      this.modalCorridaService.atualizarRotaEmAndamento(
-        this.rotaAtiva.id,
-        new RotaAtivaUpdate(this.rotaAtiva.id, latLng));
 
-      this.currentPosition = latLng;
-      this.destinationPosition = this.rotaAtiva.pontoFinal;
+      this.destinationPositionDriver = this.rotaAtiva.pontoFinal;
 
-      this.calculateRoute();
-      this.startTracking();
+      // if motorista current position trackeia a rota
+      if (this.rotaAtiva.isMotorista) {
+        this.setMapDriverView(latLng);
+      } else {
+        this.startTrakingUser(latLng);
+        this.setMapDriverView(this.rotaAtiva.latLng);
+      }
+
+
 
     }).catch((error) => {
       console.log('Error getting location', error);
@@ -85,13 +96,87 @@ export class MapaMotoristaPage {
 
   }
 
+
+  dismiss() {
+    this.modalCorridaService.mostrarCorridaAtivaMotorista.emit(false);
+    this.atualizarPosicaoObservable?.unsubscribe();
+    this.stopTracking();
+  }
+
+  finalizarRotaEmAndamento() {
+    this.modalCorridaService.removerAndamento(this.rotaAtiva.id);
+  }
+
+
+  startTracking() {
+
+    this.tracking = true;
+    this.positionSubscription = this.geolocation.watchPosition()
+      .pipe(
+        filter((p) => p.coords !== undefined)
+      )
+      .subscribe(data => {
+        setTimeout(() => {
+          const latLng = this.currentPositionDriver = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
+
+          this.destinationPositionDriver = this.rotaAtiva.pontoFinal;
+
+          // if motorista current position trackeia a rota
+          if (this.rotaAtiva.isMotorista) {
+            this.setMapDriverView(latLng);
+          } else {
+            this.startTrakingUser(latLng);
+          }
+
+        }, 0);
+      });
+
+  }
+
+
+  setMapDriverView(latLng: string) {
+    this.currentPositionDriver = latLng;
+    this.modalCorridaService.atualizarRotaEmAndamento(
+      this.rotaAtiva.id,
+      new RotaAtivaUpdate(this.rotaAtiva.id, latLng));
+    this.calculateRoute();
+  }
+
+
+  setMapDriverForViewUser() {
+    this.modalCorridaService.buscarRotasEmAdamentoUsuario()
+      .pipe(finalize(() => {
+        this.calculateRoute();
+      }))
+      .subscribe(result => {
+        this.currentPositionDriver = result.latLng;
+
+      });
+
+  }
+
+  startTrakingUser(latLng: string) {
+    if (this.marcadorCarona)
+      this.marcadorCarona.setMap(null);
+
+    this.marcadorCarona = new google.maps.Marker({
+      position: latLng,
+      map: this.map
+    });
+
+    this.marcadorCarona.setMap(this.map);
+    this.currentPositionDriver = this.rotaAtiva.latLng;
+    this.destinationPositionDriver = this.rotaAtiva.pontoFinal;
+
+  }
+
   calculateRoute() {
-    console.log('Calcular rota');
-    if (this.destinationPosition && this.currentPosition) {
+    if (this.destinationPositionDriver && this.currentPositionDriver) {
+
       const request = {
         // Pode ser uma coordenada (LatLng), uma string ou um lugar
-        origin: this.currentPosition,
-        destination: this.destinationPosition,
+        origin: this.currentPositionDriver,
+        destination: this.destinationPositionDriver,
         travelMode: 'DRIVING'
       };
 
@@ -107,38 +192,6 @@ export class MapaMotoristaPage {
     });
   }
 
-  dismiss() {
-    this.modalCorridaService.mostrarCorridaAtiva.emit(false);
-    this.atualizarPosicaoObservable?.unsubscribe();
-    this.stopTracking();
-  }
-
-  finalizarRotaEmAndamento() {
-    this.modalCorridaService.removerAndamento(this.rotaAtiva.id);
-  }
-
-
-
-  startTracking() {
-
-    this.tracking = true;
-    this.positionSubscription = this.geolocation.watchPosition()
-      .pipe(
-        filter((p) => p.coords !== undefined) //Filter Out Errors
-      )
-      .subscribe(data => {
-        setTimeout(() => {
-          const latLng = this.currentPosition = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
-
-          this.destinationPosition = this.rotaAtiva.pontoFinal;
-
-          this.calculateRoute();
-
-
-        }, 0);
-      });
-
-  }
 
   stopTracking() {
     if (this.tracking)
@@ -153,13 +206,13 @@ export class MapaMotoristaPage {
         console.log('Atualizara posicao')
         const storagePosition = localStorage.getItem('previousRota');
 
-        if (JSON.stringify(this.currentPosition) !== storagePosition) {
+        if (String(this.currentPositionDriver) !== storagePosition) {
           this.modalCorridaService.atualizarRotaEmAndamento(
             this.rotaAtiva.idViagem,
-            new RotaAtivaUpdate(this.rotaAtiva.id, JSON.stringify(this.currentPosition)))
+            new RotaAtivaUpdate(this.rotaAtiva.id, JSON.stringify(this.currentPositionDriver)))
             .subscribe();
 
-          localStorage.setItem('previousRota', this.currentPosition);
+          localStorage.setItem('previousRota', this.currentPositionDriver);
         }
       }, 30000);
     }).subscribe();

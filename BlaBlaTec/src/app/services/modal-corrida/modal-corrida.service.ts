@@ -8,17 +8,18 @@ import { RotaAtiva, RotaAtivaUpdate } from 'src/app/mapa-motorista/rota-ativa-mo
 })
 export class ModalCorridaService {
 
-  public mostrarCorridaAtiva = new EventEmitter<boolean>(false);
+  public mostrarCorridaAtivaMotorista = new EventEmitter<boolean>(false);
+  public mostrarCorridaAtivaMenu = new EventEmitter<boolean>(false);
 
   constructor(
     private http: HttpClient
   ) {
-    this.mostrarCorridaAtiva.emit(true);
+    this.mostrarCorridaAtivaMotorista.emit(true);
   }
 
 
   buscarRotasEmAdamentoUsuario() {
-    return this.http.get(environment.apiUrl + 'rotas/ativa');
+    return this.http.get<RotaAtiva>(environment.apiUrl + 'rotas/ativa');
   }
 
   criarRotaEmAndamento(id: number) {
