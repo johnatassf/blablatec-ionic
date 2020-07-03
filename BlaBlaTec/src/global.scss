@@ -30,12 +30,67 @@
 }
 
 ion-toolbar {
-  --background: #31c29f;
+  --background: rgba(76, 185, 196, 1);
+  --background: -moz-linear-gradient(45deg, rgba(76, 185, 196, 1) 0%, rgba(61, 211, 174, 1) 100%);
+  --background: -webkit-gradient(
+    left bottom,
+    right top,
+    color-stop(0%, rgba(76, 185, 196, 1)),
+    color-stop(100%, rgba(61, 211, 174, 1))
+  );
+  --background: -webkit-linear-gradient(45deg, rgba(76, 185, 196, 1) 0%, rgba(61, 211, 174, 1) 100%);
+  --background: -o-linear-gradient(45deg, rgba(76, 185, 196, 1) 0%, rgba(61, 211, 174, 1) 100%);
+  --background: -ms-linear-gradient(45deg, rgba(76, 185, 196, 1) 0%, rgba(61, 211, 174, 1) 100%);
+  --background: linear-gradient(45deg, rgba(76, 185, 196, 1) 0%, rgba(61, 211, 174, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4cb9c4', endColorstr='#3dd3ae', GradientType=1 );
+
   --color: #ffffff;
 }
 
+ion-label {
+  margin: 10px;
+}
+
 ion-button {
-  --background: #1c808b;
+  /*  --background: #1c808b;
+  --color: #ffffff;*/
+  
+
+  --background: rgba(65, 105, 225, 1);
+  --background: -moz-linear-gradient(
+    left,
+    rgba(65, 105, 225, 1) 0%,
+    rgba(30, 144, 255, 1) 44%,
+    rgba(0, 191, 255, 1) 100%
+  );
+  --background: -webkit-gradient(
+    left top,
+    right top,
+    color-stop(0%, rgba(65, 105, 225, 1)),
+    color-stop(44%, rgba(30, 144, 255, 1)),
+    color-stop(100%, rgba(0, 191, 255, 1))
+  );
+  --background: -webkit-linear-gradient(
+    left,
+    rgba(65, 105, 225, 1) 0%,
+    rgba(30, 144, 255, 1) 44%,
+    rgba(0, 191, 255, 1) 100%
+  );
+  --background: -o-linear-gradient(left, rgba(65, 105, 225, 1) 0%, rgba(25, 25, 112, 1) 44%, rgba(72, 61, 139, 1) 100%);
+  --background: -ms-linear-gradient(
+    left,
+    rgba(65, 105, 225, 1) 0%,
+    rgba(30, 144, 255, 1) 44%,
+    rgba(0, 191, 255, 1) 100%
+  );
+  --background: linear-gradient(
+    to right,
+    rgba(65, 105, 225, 1) 0%,
+    rgba(30, 144, 255, 1) 44%,
+    rgba(0, 191, 255, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019', GradientType=1 );
+
   --color: #ffffff;
 }
 

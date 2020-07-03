@@ -1,4 +1,7 @@
 <ion-content padding>
+  <ion-toolbar>
+    <ion-title>Cadastrar</ion-title>
+  </ion-toolbar>
   <div [formGroup]="form">
     <ion-list>
       <ion-radio-group formControlName="grupo">
@@ -22,7 +25,7 @@
     <ion-item>
       <ion-icon name="person" slot="start"></ion-icon>
       <ion-input type="name" formControlName="nome" placeholder="Nome" autofocus="true"></ion-input>
-      
+
       <ion-input type="sobrenome" formControlName="sobrenome" placeholder="Sobrenome"></ion-input>
       <div *ngIf="form.controls.sobrenome.errors">
         <p *ngIf="form.controls.sobrenome.errors.required "></p>
@@ -35,7 +38,6 @@
       <div *ngIf="form.controls.senha.errors">
         <p *ngIf="form.controls.senha.errors.required "></p>
       </div>
-
     </ion-item>
 
     <ion-item>
@@ -58,7 +60,12 @@
 
     <ion-item>
       <ion-icon name="phone-portrait" slot="start"></ion-icon>
-      <ion-input type="text" maxlength="11" formControlName="numeroTelefone" placeholder="Numero de Telefone:"></ion-input>
+      <ion-input
+        type="text"
+        maxlength="11"
+        formControlName="numeroTelefone"
+        placeholder="Numero de Telefone:"
+      ></ion-input>
       <div *ngIf="form.controls.numeroTelefone.errors">
         <p *ngIf="form.controls.numeroTelefone.errors.required "></p>
       </div>
@@ -76,7 +83,13 @@
       <div id="modeloC">
         <ion-item>
           <ion-icon name="car" slot="start"></ion-icon>
-          <ion-input type="text" formControlName="modelo" placeholder="Modelo do carro" inputmode="modelocar" required="grupo.value=='perfilMotorista'">
+          <ion-input
+            type="text"
+            formControlName="modelo"
+            placeholder="Modelo do carro"
+            inputmode="modelocar"
+            required="grupo.value=='perfilMotorista'"
+          >
           </ion-input>
           <div *ngIf="form.controls.modelo.errors && grupo.value=='perfilMotorista'">
             <p *ngIf="form.controls.modelo.errors.required  && grupo.value=='perfilMotorista'"></p>
@@ -87,7 +100,13 @@
       <div id="placaV">
         <ion-item>
           <ion-icon name="square" slot="start"></ion-icon>
-          <ion-input type="text" formControlName="placa" placeholder="Placa do veíclulo:" inputmode="placa" required="grupo.value=='perfilMotorista'"></ion-input>
+          <ion-input
+            type="text"
+            formControlName="placa"
+            placeholder="Placa do veíclulo:"
+            inputmode="placa"
+            required="grupo.value=='perfilMotorista'"
+          ></ion-input>
           <div *ngIf="form.controls.placa.errors && grupo.value=='perfilMotorista'">
             <p *ngIf="form.controls.placa.errors.required  && grupo.value=='perfilMotorista'"></p>
           </div>
@@ -97,7 +116,13 @@
       <div id="cores">
         <ion-item>
           <ion-label>Cor do veículo</ion-label>
-          <ion-select value="Azul" formControlName="corcarro" okText="Confirmar" cancelText="Cancelar" required="grupo.value=='perfilMotorista'">
+          <ion-select
+            value="Azul"
+            formControlName="corcarro"
+            okText="Confirmar"
+            cancelText="Cancelar"
+            required="grupo.value=='perfilMotorista'"
+          >
             <ion-select-option value="azul">Azul</ion-select-option>
             <ion-select-option value="amarelo">Amarelo</ion-select-option>
             <ion-select-option value="branco">Branco</ion-select-option>
@@ -112,7 +137,7 @@
     </div>
 
     <ion-item>
-      <input type="checkbox" color="terciary" slot="start" formControlName="cordaComTermos"  />
+      <input type="checkbox" color="terciary" slot="start" formControlName="cordaComTermos" />
       <ion-label>Concordo com os <a>termos de uso</a></ion-label>
       <div *ngIf="form.controls.cordaComTermos.errors ">
         <p *ngIf="form.controls.cordaComTermos.errors.required"></p>
@@ -126,4 +151,3 @@
     </div>
   </div>
 </ion-content>
-
