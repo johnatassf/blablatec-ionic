@@ -34,7 +34,7 @@ export class AppComponent {
       },
       {
         rota: 'caronas-agendadas',
-        verificarMotorista: true,
+        verificarMotorista: false,
         mostrarMenu: true,
         nomeIcon: 'thumbs-up',
         slot: 'start',
