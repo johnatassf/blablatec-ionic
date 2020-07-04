@@ -78,7 +78,6 @@ export class MapaMotoristaPageComponent implements OnDestroy {
       }
 
 
-
     }).catch((error) => {
       console.log('Error getting location', error);
     });

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ViagemService } from '../services/viagem/viagem.service'
 import { NavController, AlertController, LoadingController } from '@ionic/angular';
 import { finalize } from 'rxjs/operators';
+import { LoadingService } from '../shared/loading/loading.service';
+import { NotificationService } from '../shared/notification/notification.service';
 
 @Component({
   selector: 'app-procurar-carona',
@@ -14,8 +16,9 @@ export class ProcurarCaronaPage implements OnInit {
 
   constructor(private viagemService: ViagemService,
     private alertController: AlertController,
-    private navCtrl: NavController,
-    private loadingCtrl: LoadingController) {
+    public loadingService: LoadingService,
+    public notificationService: NotificationService
+  ) {
     this.viagens = [];
   }
 
@@ -24,73 +27,32 @@ export class ProcurarCaronaPage implements OnInit {
 
   }
 
-  async exibirMensagemCadastroRealizado() {
-    const alert = await this.alertController.create({
-      header: 'Aviso',
-      message: 'Cadastro realizado com sucesso',
-      buttons: [
-        {
-          text: 'OK',
-          handler: () => {
-            this.navCtrl.navigateRoot('home');
-          },
-        },
-      ],
-    });
-
-    await alert.present();
-  }
 
 
   async solicitarCarona(viagem: any) {
 
-    let carregando = await this.loadingCtrl.create({
-      message: 'Solicitando carona...',
-    });
-    carregando.present();
+    this.loadingService.showLoading();
 
     this.viagemService.solicitarCarona(viagem.id)
       .pipe(
         finalize(() => {
-          carregando.dismiss();
+          this.loadingService.hideLoading();
         })).subscribe(() => {
           this.buscarViagens();
-        }, async (error: Error) => {
-          const alert = await this.alertController.create({
-            header: 'Aviso',
-            message: 'Um erro ocorreu ao efetuar a ação, tente novamente mais tarde',
-            buttons: [
-              {
-                text: 'OK'
-              },
-            ],
-          });
         });
   }
 
   async removerSolicitacaoCarona(viagem: any) {
 
-    let carregando = await this.loadingCtrl.create({
-      message: 'Removendo solicitação carona...',
-    });
-    carregando.present();
+    this.loadingService.showLoading();
 
     this.viagemService.removerSolicitacaoCarona(viagem.id)
       .pipe(
         finalize(() => {
-          carregando.dismiss();
+          this.loadingService.hideLoading();
         })).subscribe(() => {
           this.buscarViagens();
-        }, async (error: Error) => {
-          const alert = await this.alertController.create({
-            header: 'Aviso',
-            message: 'Um erro ocorreu ao efetuar a ação, tente novamente mais tarde',
-            buttons: [
-              {
-                text: 'OK'
-              },
-            ],
-          });
+          this.notificationService.notificarSucesso('');
         });
   }
 

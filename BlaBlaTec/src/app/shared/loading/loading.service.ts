@@ -1,11 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
-import * as jwt_decode from 'jwt-decode';
-import { TokenAutentication } from '../../model/TokenAutentication';
-import { ToastController, LoadingController } from '@ionic/angular';
-import { debounce, debounceTime } from 'rxjs/operators';
+import { LoadingController } from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
@@ -13,21 +7,24 @@ import { debounce, debounceTime } from 'rxjs/operators';
 export class LoadingService {
     loading: HTMLIonLoadingElement;
 
-
     constructor(
         private loadingCtrl: LoadingController,
-    ) {
-        this.createLoading();
-    }
+    ) { }
 
-    showLoading() {
-        if (this.loading)
-            this.loading.present();
+
+    async showLoading() {
+        if (!this.loading)
+            await this.createLoading();
+
+        this.loading.present();
     }
 
     hideLoading() {
         if (this.loading) {
-            setTimeout(() => { this.loading.dismiss(); }, 1500);
+            setTimeout(() => {
+                this.loading.dismiss();
+                this.loading = null;
+            }, 1500);
         }
     }
 
