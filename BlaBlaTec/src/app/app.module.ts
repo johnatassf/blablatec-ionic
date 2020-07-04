@@ -16,6 +16,7 @@ import { AuthService } from './services/auth/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, FormsModule } from '@angular/forms';
 import { ModalCorridaService } from './services/modal-corrida/modal-corrida.service';
 import { ModalMapaCorridaComponent } from './mapa-motorista/modal-mapa.component';
+import { NotificationService } from './shared/notification/notification.service';
 
 
 @NgModule({
@@ -39,9 +40,10 @@ import { ModalMapaCorridaComponent } from './mapa-motorista/modal-mapa.component
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Geolocation,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    Storage
+    Storage,
+    NotificationService
   ],
   bootstrap: [AppComponent],
 
 })
-export class AppModule { } 
+export class AppModule { }
