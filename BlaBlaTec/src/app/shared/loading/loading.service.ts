@@ -32,7 +32,7 @@ export class LoadingService {
         this.loading = await this.loadingCtrl.create({
             spinner: null,
             message: `  <div class="custom-spinner-container" style="background: white!important">
-           <a href="https://www.imagensanimadas.com/cat-fuscas-700.htm">
+           <a>
             <img src="https://www.imagensanimadas.com/data/media/700/fusca-imagem-animada-0005.gif" border="0" alt="fusca-imagem-animada-0005" /></a>
             <div class="texto" >Carregando...<div>
          </div>`,

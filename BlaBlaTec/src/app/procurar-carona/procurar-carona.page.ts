@@ -4,6 +4,7 @@ import { NavController, AlertController, LoadingController } from '@ionic/angula
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../shared/loading/loading.service';
 import { NotificationService } from '../shared/notification/notification.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-procurar-carona',
@@ -86,5 +87,9 @@ export class ProcurarCaronaPage implements OnInit {
         }
       );
 
+  }
+
+  formatarData(data){
+    return moment(data, 'YYYY-MM-DD[T]HH:mm:ss').format('DD-MM-YYYY HH:mm:ss')
   }
 }

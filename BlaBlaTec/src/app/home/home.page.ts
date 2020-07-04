@@ -48,7 +48,8 @@ export class HomePage {
   async realizarLogin() {
     if (this.form.invalid)
       return;
-      this.loadingService.showLoading();
+
+    this.loadingService.showLoading();
 
     this.userService
       .autenticarUsuario(this.form.value)
