@@ -39,7 +39,7 @@
           <ion-col>
             <!-- Adicionar propriedade de recusado && viagem.recusado == false" -->
             <ion-row *ngIf="viagem.jaSolicitado == false && viagem.motoristaDaCorrida== false"
-              class="solicitar-carona-mensagem ion-justify-content-start">
+              class="solicitar-carona-mensagem ion-justify-content-center">
               <span (click)="solicitarCarona(viagem)">Solicitar carona <ion-icon class="icon-car"
                   name="thumbs-up-outline"></ion-icon></span>
             </ion-row>
@@ -51,7 +51,7 @@
             </ion-row>
             <!-- Adionar no modal carona aceita viagens.caronaAceita -->
             <ion-row *ngIf="viagem?.caronaAceita == true && viagem?.motoristaDaCorrida == false"
-              class="solicitar-carona-mensagem ion-justify-content-start">
+              class="solicitar-carona-mensagem ion-justify-content-center">
               <span>
                 Carona aceita... <ion-icon class="icon-car" name="checkmark-done-outline"></ion-icon>
               </span>

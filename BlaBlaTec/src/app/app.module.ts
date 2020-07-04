@@ -17,6 +17,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, FormsModule }
 import { ModalCorridaService } from './services/modal-corrida/modal-corrida.service';
 import { ModalMapaCorridaComponent } from './mapa-motorista/modal-mapa.component';
 import { NotificationService } from './shared/notification/notification.service';
+import { LoadingService } from './shared/loading/loading.service';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { NotificationService } from './shared/notification/notification.service'
     Geolocation,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     Storage,
-    NotificationService
+    NotificationService,
+    LoadingService
   ],
   bootstrap: [AppComponent],
 

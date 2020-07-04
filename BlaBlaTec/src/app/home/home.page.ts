@@ -8,6 +8,7 @@ import { TokenAutentication } from '../model/TokenAutentication';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ModalCorridaService } from '../services/modal-corrida/modal-corrida.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { LoadingService } from '../shared/loading/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -29,9 +30,9 @@ export class HomePage {
     private userService: UserService,
     private authService: AuthService,
     private alertController: AlertController,
-    private loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
-    private modalService: ModalCorridaService
+    private modalService: ModalCorridaService,
+    public loadingService: LoadingService
   ) { }
 
   ngOnInit() {
@@ -47,18 +48,13 @@ export class HomePage {
   async realizarLogin() {
     if (this.form.invalid)
       return;
-
-    const carregando = await this.loadingCtrl.create({
-      message: 'Carregando...',
-    });
-
-    carregando.present();
+      this.loadingService.showLoading();
 
     this.userService
       .autenticarUsuario(this.form.value)
       .pipe(
         finalize(() => {
-          carregando.dismiss();
+          this.loadingService.hideLoading();
         })
       )
       .subscribe(

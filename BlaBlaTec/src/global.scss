@@ -10,20 +10,20 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import '~@ionic/angular/css/core.css';
+@import "~@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
-@import '~@ionic/angular/css/normalize.css';
-@import '~@ionic/angular/css/structure.css';
-@import '~@ionic/angular/css/typography.css';
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
-@import '~@ionic/angular/css/padding.css';
-@import '~@ionic/angular/css/float-elements.css';
-@import '~@ionic/angular/css/text-alignment.css';
-@import '~@ionic/angular/css/text-transformation.css';
-@import '~@ionic/angular/css/flex-utils.css';
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
 
 .icon-7em {
   font-size: 7em;
@@ -54,7 +54,6 @@ ion-label {
 ion-button {
   /*  --background: #1c808b;
   --color: #ffffff;*/
-  
 
   --background: rgba(65, 105, 225, 1);
   --background: -moz-linear-gradient(
@@ -109,4 +108,16 @@ ion-searchbar.autocompleteperson {
   .sc-ion-searchbar-md-h {
     padding: 0;
   }
+}
+.sc-ion-loading-md-h {
+  --background: #ffffff !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+
+  .texto{ margin-top: 20px !important;}
+}
+
+.loading-wrapper.sc-ion-loading-md {
+  height: 24%;
+  border-radius: 20px;
 }
