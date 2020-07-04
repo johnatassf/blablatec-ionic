@@ -49,7 +49,7 @@ export class HomePage {
     if (this.form.invalid)
       return;
 
-    this.loadingService.showLoading();
+    await this.loadingService.showLoading();
 
     this.userService
       .autenticarUsuario(this.form.value)
@@ -61,7 +61,7 @@ export class HomePage {
       .subscribe(
         (data: any) => {
 
-          const token = new TokenAutentication();
+          const token = new TokenAutentication(); 
           token.accessToken = data?.accessToken;
           token.authenticated = data?.authenticated;
           token.created = data?.created;

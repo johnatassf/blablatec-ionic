@@ -61,26 +61,26 @@ export class MapaMotoristaPageComponent implements OnDestroy {
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     this.directionsDisplay.setMap(this.map);
 
-    this.geolocation.getCurrentPosition().then(pos => {
-      const latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-      this.map.setCenter(latLng);
-      this.map.setZoom(16);
+    // this.geolocation.getCurrentPosition().then(pos => {
+    //   const latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+    //   this.map.setCenter(latLng);
+    //   this.map.setZoom(16);
 
 
-      this.destinationPositionDriver = this.rotaAtiva.pontoFinal;
+    //   this.destinationPositionDriver = this.rotaAtiva.pontoFinal;
 
-      // if motorista current position trackeia a rota
-      if (this.rotaAtiva.isMotorista) {
-        this.setMapDriverView(latLng);
-      } else {
-        this.startTrakingUser(latLng);
-        this.setMapDriverView(this.rotaAtiva.latLng);
-      }
+    //   // if motorista current position trackeia a rota
+    //   if (this.rotaAtiva.isMotorista) {
+    //     this.setMapDriverView(latLng);
+    //   } else {
+    //     this.startTrakingUser(latLng);
+    //     this.setMapDriverView(this.rotaAtiva.latLng);
+    //   }
 
 
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
+    // }).catch((error) => {
+    //   console.log('Error getting location', error);
+    // });
 
 
   }

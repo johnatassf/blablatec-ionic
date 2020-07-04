@@ -15,7 +15,8 @@ export class ProcurarCaronaPage implements OnInit {
 
   viagens;
 
-  constructor(private viagemService: ViagemService,
+  constructor(
+    private viagemService: ViagemService,
     private alertController: AlertController,
     public loadingService: LoadingService,
     public notificationService: NotificationService
@@ -32,7 +33,7 @@ export class ProcurarCaronaPage implements OnInit {
 
   async solicitarCarona(viagem: any) {
 
-    this.loadingService.showLoading();
+    await this.loadingService.showLoading();
 
     this.viagemService.solicitarCarona(viagem.id)
       .pipe(
@@ -45,7 +46,7 @@ export class ProcurarCaronaPage implements OnInit {
 
   async removerSolicitacaoCarona(viagem: any) {
 
-    this.loadingService.showLoading();
+   await this.loadingService.showLoading();
 
     this.viagemService.removerSolicitacaoCarona(viagem.id)
       .pipe(
@@ -89,7 +90,7 @@ export class ProcurarCaronaPage implements OnInit {
 
   }
 
-  formatarData(data){
+  formatarData(data) {
     return moment(data, 'YYYY-MM-DD[T]HH:mm:ss').format('DD-MM-YYYY HH:mm:ss')
   }
 }

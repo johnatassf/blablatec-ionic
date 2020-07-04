@@ -64,6 +64,10 @@ const routes: Routes = [
     path: 'solicitar-novasenha',
     loadChildren: () => import('./solicitar-novasenha/solicitar-novasenha.module').then( m => m.SolicitarNovasenhaPageModule)
   },
+  {
+    path: 'caronas-agendadas',
+    loadChildren: () => import('./caronas-agendadas/caronas-agendadas.module').then( m => m.CaronasAgendadasPageModule)
+  },
 
 ];
 

@@ -33,7 +33,7 @@ export class LoadingService {
             spinner: null,
             message: `  <div class="custom-spinner-container" style="background: white!important">
            <a>
-            <img src="https://www.imagensanimadas.com/data/media/700/fusca-imagem-animada-0005.gif" border="0" alt="fusca-imagem-animada-0005" /></a>
+            <img src="../assets/gif/animat-road-trip-color.gif" /></a>
             <div class="texto" >Carregando...<div>
          </div>`,
             translucent: true,

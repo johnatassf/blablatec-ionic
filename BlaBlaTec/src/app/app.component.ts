@@ -33,7 +33,7 @@ export class AppComponent {
         titulo: 'Caronas Oferecidas',
       },
       {
-        rota: '',
+        rota: 'caronas-agendadas',
         verificarMotorista: true,
         mostrarMenu: true,
         nomeIcon: 'thumbs-up',
