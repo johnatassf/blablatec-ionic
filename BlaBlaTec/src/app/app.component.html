@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-menu side="start" menuId="first" contentId="principal">
+  <ion-menu side="start" menuId="first" contentId="principal" *ngIf="this.router.url != '/'">
     <ion-header>
       <ion-toolbar>
         <ion-title>Menu</ion-title>
@@ -7,47 +7,19 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-menu-toggle>
-          <ion-item [routerLink]="['/oferecer-carona']" routerLinkActive="router-link-active">
-            <ion-icon name="thumbs-up" slot="start"></ion-icon>Minhas caronas
+        <ion-menu-toggle *ngFor="let item of listaMenu">
+          <ion-item *ngIf="item.mostrarMenu" [routerLink]="[item.rota]" routerLinkActive="router-link-active">
+            <ion-icon name="{{item.nomeIcon}}" slot="start"></ion-icon>{{item.titulo}}
           </ion-item>
         </ion-menu-toggle>
-
-        <ion-menu-toggle>
-          <ion-item [routerLink]="['/oferecer-carona']" routerLinkActive="router-link-active">
-            <ion-icon name="chatbubble" slot="start"></ion-icon>Oferecer carona
-          </ion-item>
-        </ion-menu-toggle>
-        
-        <ion-menu-toggle>
-          <ion-item [routerLink]="['/procurar-carona']" routerLinkActive="router-link-active">
-            <ion-icon name="search" slot="start"></ion-icon>Procurar
-          </ion-item>
-        </ion-menu-toggle>
-        
-        <ion-menu-toggle>
-          <ion-item [routerLink]="['/perfil']" routerLinkActive="router-link-active">
-            <ion-icon name="person" slot="start"></ion-icon>Meu Perfil
-          </ion-item>
-        </ion-menu-toggle>
-        
-        <ion-menu-toggle>
-          <ion-item [routerLink]="['/listar-caronas']" routerLinkActive="router-link-active">
-            <ion-icon name="list" slot="start"></ion-icon>Listar
-          </ion-item>
-        </ion-menu-toggle>
-        
         <ion-menu-toggle>
           <ion-item (click)="logOut()" routerLinkActive="router-link-active">
             <ion-icon name="exit-outline" slot="start"></ion-icon>Sair
           </ion-item>
         </ion-menu-toggle>
-        
-        
-       
-       
       </ion-list>
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="principal"></ion-router-outlet>
+  <app-mapa-motorista></app-mapa-motorista>
 </ion-app>

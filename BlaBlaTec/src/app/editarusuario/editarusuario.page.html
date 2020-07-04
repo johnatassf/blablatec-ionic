@@ -50,12 +50,12 @@
 
   <ion-item>
     <ion-icon name="phone-portrait" slot="start"></ion-icon>
-    <ion-input type="number" placeholder="Numero de Telefone:" inputmode="numero" [(ngModel)]="usuario.Telefone"></ion-input>
+    <ion-input type="number" placeholder="Numero de Telefone:" inputmode="numero" [(ngModel)]="usuario.NumeroTelefone"></ion-input>
   </ion-item>
 
   <ion-button expand="block" (click)="atualizarInformacoes()">Atualizar</ion-button>
 
-  <ion-button expand="block">Encerrar a conta</ion-button>
+  <ion-button expand="block" (click)="encerrarConta()">Encerrar a conta</ion-button>
 
   <ion-button expand="block" (click)="mapas()">Retornar</ion-button>
 </ion-content>

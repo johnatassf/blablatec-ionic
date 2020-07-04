@@ -10,36 +10,90 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import '~@ionic/angular/css/core.css';
+@import "~@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
-@import '~@ionic/angular/css/normalize.css';
-@import '~@ionic/angular/css/structure.css';
-@import '~@ionic/angular/css/typography.css';
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
-@import '~@ionic/angular/css/padding.css';
-@import '~@ionic/angular/css/float-elements.css';
-@import '~@ionic/angular/css/text-alignment.css';
-@import '~@ionic/angular/css/text-transformation.css';
-@import '~@ionic/angular/css/flex-utils.css';
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
 
 .icon-7em {
   font-size: 7em;
 }
 
 ion-toolbar {
-  --background: #31c29f;
+  --background: rgba(76, 185, 196, 1);
+  --background: -moz-linear-gradient(45deg, rgba(76, 185, 196, 1) 0%, rgba(61, 211, 174, 1) 100%);
+  --background: -webkit-gradient(
+    left bottom,
+    right top,
+    color-stop(0%, rgba(76, 185, 196, 1)),
+    color-stop(100%, rgba(61, 211, 174, 1))
+  );
+  --background: -webkit-linear-gradient(45deg, rgba(76, 185, 196, 1) 0%, rgba(61, 211, 174, 1) 100%);
+  --background: -o-linear-gradient(45deg, rgba(76, 185, 196, 1) 0%, rgba(61, 211, 174, 1) 100%);
+  --background: -ms-linear-gradient(45deg, rgba(76, 185, 196, 1) 0%, rgba(61, 211, 174, 1) 100%);
+  --background: linear-gradient(45deg, rgba(76, 185, 196, 1) 0%, rgba(61, 211, 174, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4cb9c4', endColorstr='#3dd3ae', GradientType=1 );
+
   --color: #ffffff;
+}
+
+ion-label {
+  margin: 10px;
 }
 
 ion-button {
-  --background: #1c808b;
+  /*  --background: #1c808b;
+  --color: #ffffff;*/
+
+  --background: rgba(65, 105, 225, 1);
+  --background: -moz-linear-gradient(
+    left,
+    rgba(65, 105, 225, 1) 0%,
+    rgba(30, 144, 255, 1) 44%,
+    rgba(0, 191, 255, 1) 100%
+  );
+  --background: -webkit-gradient(
+    left top,
+    right top,
+    color-stop(0%, rgba(65, 105, 225, 1)),
+    color-stop(44%, rgba(30, 144, 255, 1)),
+    color-stop(100%, rgba(0, 191, 255, 1))
+  );
+  --background: -webkit-linear-gradient(
+    left,
+    rgba(65, 105, 225, 1) 0%,
+    rgba(30, 144, 255, 1) 44%,
+    rgba(0, 191, 255, 1) 100%
+  );
+  --background: -o-linear-gradient(left, rgba(65, 105, 225, 1) 0%, rgba(25, 25, 112, 1) 44%, rgba(72, 61, 139, 1) 100%);
+  --background: -ms-linear-gradient(
+    left,
+    rgba(65, 105, 225, 1) 0%,
+    rgba(30, 144, 255, 1) 44%,
+    rgba(0, 191, 255, 1) 100%
+  );
+  --background: linear-gradient(
+    to right,
+    rgba(65, 105, 225, 1) 0%,
+    rgba(30, 144, 255, 1) 44%,
+    rgba(0, 191, 255, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019', GradientType=1 );
+
   --color: #ffffff;
 }
 
-ion-searchbar.autocompleteperson{
+ion-searchbar.autocompleteperson {
   padding: 0;
   box-shadow: none !important;
   .searchbar-search-icon.sc-ion-searchbar-md {
@@ -51,10 +105,34 @@ ion-searchbar.autocompleteperson{
     padding-left: 9px !important;
     box-shadow: none !important;
   }
-  .sc-ion-searchbar-md-h{
+  .sc-ion-searchbar-md-h {
     padding: 0;
   }
-  
+}
+.sc-ion-loading-md-h {
+  --background: #ffffff !important;
+  font-weight: 700 !important;
+  text-align: center !important;
 
-  
+  .texto {
+    position: relative;
+    bottom: 50px;
+    font-size: 20px;
+    color: white;
+  }
+}
+
+.loading-wrapper.sc-ion-loading-md {
+  height: 24%;
+  border-radius: 20px;
+  background-color: #faebd700;
+  padding: 0 0 0 0;
+  box-shadow: none;
+}
+
+.row-p0 ion-row {
+  padding: 0 0 0 0;
+}
+.col-p0 ion-col {
+  padding: 0 0 0 0;
 }

@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import * as moment from 'moment';
 import { OferecerCaronaService } from 'src/app/oferecer-carona/oferecer-carona.service';
 import { OferecerCaronaModel } from './oferecer-carona.model';
+import { finalize } from 'rxjs/operators';
 declare var google: any;
 
 @Component({
@@ -43,7 +44,8 @@ export class OferecerCaronaPage implements OnInit {
     private ngZone: NgZone,
     private cd: ChangeDetectorRef,
     private service: OferecerCaronaService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    
 
   ) { }
 
@@ -87,6 +89,7 @@ export class OferecerCaronaPage implements OnInit {
     this.destinationPosition = event.description;
     this.calculateRoute();
   }
+
   setDestino(event: any) {
     this.origens = [];
     this.destinos = [];
@@ -99,14 +102,12 @@ export class OferecerCaronaPage implements OnInit {
 
   searchOrigem(input: any, tela: boolean) {
     this.cd.detectChanges();
-    if ((input.detail.value == null || input.detail.value == undefined) || this.clickList) {
+    if ((input.detail.value == null || input.detail.value === undefined) || this.clickList) {
       this.showListOrigin = false;
       this.clickList = false;
       return;
     }
     this.ngZone.run(() => {
-      console.log('request origem');
-      console.log('request origem');
       new google.maps.places.AutocompleteService().getPlacePredictions({ input: input.detail.value }, prediction => {
         this.origens = prediction;
         this.showListOrigin = true;
@@ -116,7 +117,7 @@ export class OferecerCaronaPage implements OnInit {
   }
 
   searchDestino(input: any, tela: boolean) {
-    if ((input.detail.value == null || input.detail.value == undefined) || this.clickList) {
+    if ((input.detail.value == null || input.detail.value === undefined) || this.clickList) {
       this.showLisDesti = false;
       this.clickList = false;
       return;
@@ -132,36 +133,40 @@ export class OferecerCaronaPage implements OnInit {
 
   }
 
-
   oferecerCarona() {
-    console.log(this.form.controls.data.value)
+    console.log(this.form.controls.data.value);
     this.criarRota();
   }
 
-
-  renderDate(value: any, depoisDaFormatacao = 'DD/MM/YYYY', antesDaFormatacao = 'YYYY-MM-DD') {
-    if (value) { return; }
-    const date = moment(value, antesDaFormatacao);
-
-    if (moment('0001-01-01').format(depoisDaFormatacao) != moment.utc(date).format(depoisDaFormatacao)) {
-      return date.isValid() ? date.format(depoisDaFormatacao) : ' - ';
-    }
-  }
-
-  criarRota() {
+  async criarRota() {
     const oferecerCarona = new OferecerCaronaModel();
-    oferecerCarona.valor = 0,
-      oferecerCarona.viagem = this.form.controls.data.value,
-      oferecerCarona.pontoInicial = this.form.controls.origem.value,
-      oferecerCarona.pontoFinal = this.form.controls.destino.value,
-      oferecerCarona.qtdLugares = this.form.controls.qtdLugares.value,
+    oferecerCarona.valor = 0;
+    oferecerCarona.viagem = this.form.controls.data.value;
+    oferecerCarona.pontoInicial = this.form.controls.origem.value;
+    oferecerCarona.pontoFinal = this.form.controls.destino.value;
+    oferecerCarona.qtdLugares = this.form.controls.qtdLugares.value;
 
-      this.service.criarViagem(oferecerCarona).subscribe(() => {
-        //carrega loading
-        this.navCtrl.back();
-      }, error => {
-        console.log('Erro');
+    if (oferecerCarona.qtdLugares > 30) {
+      this.exibirMensagem('O número de lugares disponíveis não pode ser maior que 30');
+      return;
+    }
+    const carregando = await this.alertController.create({
+      message: 'Carregando...',
+    });
+
+    carregando.present();
+
+    this.service.criarViagem(oferecerCarona)
+    .pipe(
+      finalize(() => {
+        carregando.dismiss();
       })
+    )
+    .subscribe(() => {
+      this.navCtrl.back();
+    }, error => {
+      console.log('Erro');
+    })
   }
 
   initializeMap() {
@@ -203,6 +208,15 @@ export class OferecerCaronaPage implements OnInit {
     });
   }
 
+  async exibirMensagem(mensagem: string) {
+    const alert = await this.alertController.create({
+      header: 'Aviso',
+      message: mensagem,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
 
 
 }

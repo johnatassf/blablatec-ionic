@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 
 import { UserService } from '../services/user/user.service';
+import { LoadingService } from '../shared/loading/loading.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-editarusuario',
@@ -10,47 +12,72 @@ import { UserService } from '../services/user/user.service';
 })
 export class EditarusuarioPage implements OnInit {
 
-  constructor(private userService: UserService,
+  constructor(
+    private userService: UserService,
     private alertController: AlertController,
-    private navCtrl: NavController) { }
+    private navCtrl: NavController,
+    public loadingService: LoadingService
+  ) { }
 
-    usuario = {
-      Id: '',
-      Email: '',
-      Nome: '',
-      Sobrenome: '',
-      Ra: ''
-    }
-
-    usuarioAtualizado = {
-      Id: '',
-      Email: '',
-      Name: '',
-      LastName: '',
-      Ra: ''
-    }
-
-  ngOnInit() {
-    this.userService.buscarInformacoesUsuario().subscribe((data: any) => {
-      console.log(data);
-      this.usuario.Id = data[0].id;
-      this.usuario.Email = data[0].email;
-      this.usuario.Ra = data[0].ra;
-      this.usuario.Nome = data[0].nome;
-      this.usuario.Sobrenome = data[0].sobrenome;
-  });
+  usuario = {
+    Id: '',
+    Email: '',
+    Nome: '',
+    Sobrenome: '',
+    Ra: '',
+    NumeroTelefone: '',
   }
 
-  atualizarInformacoes(){
+  usuarioAtualizado = {
+    Id: '',
+    Email: '',
+    Name: '',
+    LastName: '',
+    Ra: '',
+    NumeroTelefone: '',
+    Encerrado: false,
+  }
+
+  ngOnInit() {
+    this.loadingService.showLoading();
+    this.userService.buscarInformacoesUsuario()
+      .pipe(finalize(() => this.loadingService.hideLoading()))
+      .subscribe((data: any) => {
+        console.log(data);
+        this.usuario.Id = data[0].id;
+        this.usuario.Email = data[0].email;
+        this.usuario.Ra = data[0].ra;
+        this.usuario.Nome = data[0].nome;
+        this.usuario.Sobrenome = data[0].sobrenome;
+        this.usuario.NumeroTelefone = data[0].numeroTelefone;
+      });
+  }
+
+  atualizarInformacoes() {
     this.usuarioAtualizado.Id = this.usuario.Id;
     this.usuarioAtualizado.Email = this.usuario.Email;
     this.usuarioAtualizado.Ra = this.usuario.Ra;
     this.usuarioAtualizado.Name = this.usuario.Nome;
     this.usuarioAtualizado.LastName = this.usuario.Sobrenome;
+    this.usuarioAtualizado.NumeroTelefone = this.usuario.NumeroTelefone;
 
     this.userService.AtualizarUsuario(this.usuarioAtualizado).subscribe((data: any) => {
       this.exibirMensagemAtualziacaoRealizada();
-  });
+    });
+  }
+
+  encerrarConta() {
+    this.usuarioAtualizado.Id = this.usuario.Id;
+    this.usuarioAtualizado.Email = this.usuario.Email;
+    this.usuarioAtualizado.Ra = this.usuario.Ra;
+    this.usuarioAtualizado.Name = this.usuario.Nome;
+    this.usuarioAtualizado.LastName = this.usuario.Sobrenome;
+    this.usuarioAtualizado.NumeroTelefone = this.usuario.NumeroTelefone;
+    this.usuarioAtualizado.Encerrado = true;
+
+    this.userService.AtualizarUsuario(this.usuarioAtualizado).subscribe((data: any) => {
+      this.exibirMensagemContaEncerrada();
+    });
   }
 
   mapas(): void {
@@ -65,6 +92,21 @@ export class EditarusuarioPage implements OnInit {
         text: 'OK',
         handler: () => {
           this.navCtrl.navigateRoot('perfil');
+        }
+      }]
+    });
+
+    await alert.present();
+  }
+
+  async exibirMensagemContaEncerrada() {
+    const alert = await this.alertController.create({
+      header: 'Aviso',
+      message: 'Conta encerrada',
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.navCtrl.navigateRoot('home');
         }
       }]
     });

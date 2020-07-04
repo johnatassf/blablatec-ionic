@@ -5,6 +5,10 @@ import { UserService } from '../services/user/user.service';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from '../services/auth/auth.service';
 import { TokenAutentication } from '../model/TokenAutentication';
+import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { ModalCorridaService } from '../services/modal-corrida/modal-corrida.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { LoadingService } from '../shared/loading/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -17,56 +21,63 @@ export class HomePage {
     Password: '',
   };
 
+  ra = new FormControl('', Validators.compose([Validators.required]));
+  password = new FormControl('', Validators.compose([Validators.required]));
+  form: FormGroup;
+
   constructor(
     public navCtrl: NavController,
     private userService: UserService,
     private authService: AuthService,
     private alertController: AlertController,
-    private loadingCtrl: LoadingController
+    private formBuilder: FormBuilder,
+    private modalService: ModalCorridaService,
+    public loadingService: LoadingService
   ) { }
 
+  ngOnInit() {
+    this.form = this.formBuilder.group({
+      ra: this.ra,
+      password: this.password
+    });
+  }
   acessarCadastrar(): void {
     this.navCtrl.navigateRoot('cadastrar');
   }
 
   async realizarLogin() {
-    // this.navCtrl.navigateRoot('mapas');
+    if (this.form.invalid)
+      return;
 
-    let carregando = await this.loadingCtrl.create({
-      message: 'Carregando...',
-    });
-
-    carregando.present();
+    await this.loadingService.showLoading();
 
     this.userService
-      .autenticarUsuario(this.usuario)
+      .autenticarUsuario(this.form.value)
       .pipe(
         finalize(() => {
-          carregando.dismiss();
+          this.loadingService.hideLoading();
         })
       )
       .subscribe(
         (data: any) => {
 
-          const token = new TokenAutentication();
+          const token = new TokenAutentication(); 
           token.accessToken = data?.accessToken;
           token.authenticated = data?.authenticated;
           token.created = data?.created;
           token.expiration = data?.expiration;
 
           window.localStorage.setItem('ContentLocaly', JSON.stringify(token));
+          this.authService.isMotoristaEvent.emit(this.authService.isMotorista());
+          this.modalService.mostrarCorridaAtivaMotorista.emit(true);
           this.navCtrl.navigateRoot('mapas');
-        },
-        (error: any) => {
-          console.log(error);
-          this.exibirMensagemErroLogin();
         }
       );
   }
-  async exibirMensagemErroLogin() {
+  async exibirMensagemErroLogin(msg: string) {
     const alert = await this.alertController.create({
       header: 'Aviso',
-      message: 'Usuario ou senha incorreto.',
+      message: msg,
       buttons: ['OK'],
     });
     await alert.present();

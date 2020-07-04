@@ -1,40 +1,43 @@
 .lista {
-    color: white;
+  color: white;
 }
 
 .card-viagem {
-    border-radius: 20px;
+  border-radius: 20px;
+ 
+  ion-label {
+    font-size: 12px;
+    margin: 4px 0 0 0
+  }
+  .img-motorista {
+    width: 100%;
+  }
+  img {
+    max-height: 78px;
+  }
 
-    .img-motorista {
-        width: 100%;
-    }
-    img {
-        max-height: 78px;
-    }
+  .notificacao-carona {
+    width: 90%;
+  }
+  .solicitar-carona-mensagem {
+    font-style: oblique;
+    color: darkslategrey;
+    text-decoration: underline;
+  }
 
-    .notificacao-carona {
-        width: 90%;
-    }
-    .solicitar-carona-mensagem {
-        font-family: cursive;
-        font-style: oblique;
-        color: darkslategrey;
-        text-decoration: underline;
-    }
+  .destino-origem {
+    font-style: oblique;
+    font-size: 16px;
+  }
 
-    .destino-origem {
-        font-family: cursive;
-        font-style: oblique;
-        font-size: 16px;
-    }
+  .icon-car {
+    position: relative;
+    top: 3px;
+  }
 
-    .icon-car {
-        position: relative;
-        left: 10px;
-        top: 3px;
-    }
+  background-color: #f5fffa; // o nome desta cor é  MintCream
 }
 
 .cem {
-    width: 100%;
+  width: 100%;
 }

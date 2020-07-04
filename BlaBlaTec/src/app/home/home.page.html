@@ -4,23 +4,23 @@
       <img src="https://uploaddeimagens.com.br/images/002/681/801/full/logo_blabla.png?1590890763" class="icon-7em" />
     </h1>
   </div>
+  <div [formGroup]="form">
+    <ion-item>
+      <ion-icon name="person" slot="start"></ion-icon>
+      <ion-input type="text" placeholder="RA" formControlName="ra" focus="true" maxlength="13"></ion-input>
+      <div *ngIf="form?.controls.ra.errors">
+        <p *ngIf="form?.controls.ra.errors.required"></p>
+      </div>
+    </ion-item>
 
-  <ion-item>
-    <ion-icon name="person" slot="start"></ion-icon>
-    <ion-input
-      type="text"
-      placeholder="RA"
-      inputmode="ra"
-      validators.required
-      autofocus="true"
-      [(ngModel)]="usuario.Ra"
-    ></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-icon name="lock-closed" slot="start"></ion-icon>
-    <ion-input type="password" placeholder="Senha" [(ngModel)]="usuario.Password"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-icon name="lock-closed" slot="start"></ion-icon>
+      <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
+      <div *ngIf="form?.controls.password.errors">
+        <p *ngIf="form?.controls.password.errors.required"></p>
+      </div>
+    </ion-item>
+  </div>
 
   <div id="login">
     <ion-button fill="clear" (click)="realizarLogin()">Acessar </ion-button>
@@ -30,8 +30,6 @@
     <ion-button fill="clear" (click)="acessarCadastrar()">Criar uma conta</ion-button>
   </div>
   <div id="esqueceuSenha">
-    <ion-button fill="clear" (click)="alterarSenha()" color="success">Esqueceu sua senha</ion-button>
+    <ion-button fill="clear" (click)="alterarSenha()" color="success">Esqueci minha senha</ion-button>
   </div>
-
-  
 </ion-content>

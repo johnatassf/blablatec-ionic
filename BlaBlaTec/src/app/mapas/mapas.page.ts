@@ -1,64 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController, AlertController, ActionSheetController } from '@ionic/angular';
+import { ModalCorridaService } from '../services/modal-corrida/modal-corrida.service';
+import { RotaAtiva } from '../mapa-motorista/rota-ativa-model';
 
 @Component({
   selector: 'app-mapas',
   templateUrl: './mapas.page.html',
   styleUrls: ['./mapas.page.scss'],
 })
-export class MapasPage implements OnInit {
-  constructor(public navCtrl: NavController, public actionSheetController: ActionSheetController) {}
+export class MapasPage implements OnDestroy {
+  showCorridaEmAndamento = false;
+  constructor(
+    public navCtrl: NavController,
+    public actionSheetController: ActionSheetController,
+    private modalCorridaService: ModalCorridaService
+  ) { }
 
-  ngOnInit() {}
-
-
-  async openActionSheet() {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Menu',
-      cssClass: 'my-custom-class',
-      buttons: [
-        
-        {
-          text: 'Oferecer Carona',
-          icon: 'thumbs-up',
-          handler: () => {
-            this.navCtrl.navigateRoot('oferecer-carona');
-          },
-        },
-        {
-          text: 'Procurar',
-          icon: 'search',
-          handler: () => {
-            this.navCtrl.navigateRoot('procurar-carona');
-          },
-        },
-        {
-          text: 'Meu Perfil',
-          icon: 'happy-outline',
-          handler: () => {
-            
-          },
-        },
-        {
-          text: 'Corridas',
-          icon: 'list-outline',
-          handler: () => {
-            this.navCtrl.navigateRoot('listarcaronas');
-          },
-        },
-        {
-          text: 'Voltar',
-          icon: 'arrow-back-circle',
-          role: 'cancel',
-          handler: () => {
-            console.log('Voltar clicked');
-          },
-        },
-      ],
-    });
-    await actionSheet.present();
+  ionViewDidEnter() {
+    this.verificarCorridaAndamento();
   }
-  procurarCaronas(){
+
+
+  procurarCaronas() {
     this.navCtrl.navigateRoot('listarCaronas');
+  }
+
+  verificarCorridaAndamento() {
+    this.modalCorridaService.buscarRotasEmAdamentoUsuario().subscribe(async (result: RotaAtiva) => {
+      this.showCorridaEmAndamento = true;
+    }, error => {
+      this.showCorridaEmAndamento = false;
+    });
+  }
+
+  showModal() {
+    this.modalCorridaService.mostrarCorridaAtivaMenu.emit(true);
+  }
+
+  ngOnDestroy(): void {
+    this.showCorridaEmAndamento = false;
   }
 }

@@ -25,4 +25,8 @@ export class ViagemService {
   removerSolicitacaoCarona(idViagem: number){
     return this.http.delete(environment.apiUrl + 'solicitacao-viagem/viagem/' + idViagem, {});
   }
+
+  buscarMinhasViagens(){
+    return this.http.get(environment.apiUrl + 'viagens/minhas-viagens', {});
+  }
 }
