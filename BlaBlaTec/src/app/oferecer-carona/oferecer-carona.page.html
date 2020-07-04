@@ -27,7 +27,7 @@
   <ion-item *ngIf="!showListOrigin">
     <ion-icon name="map-outline" slot="start"></ion-icon>
     <ion-searchbar debounce="500" class="autocompleteperson" (ionClear)="ionClear()" (ionChange)="searchDestino($event)"
-      formControlName="destino" placeholder="Origem da Corrida" style="box-shadow:nome!important"></ion-searchbar>
+      formControlName="destino" placeholder="Destino da Corrida" style="box-shadow:nome!important"></ion-searchbar>
     <div *ngIf="form.controls.destino.errors">
       <p *ngIf="form.controls.destino.errors.required"></p>
     </div>

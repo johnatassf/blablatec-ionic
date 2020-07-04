@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import * as moment from 'moment';
 import { OferecerCaronaService } from 'src/app/oferecer-carona/oferecer-carona.service';
 import { OferecerCaronaModel } from './oferecer-carona.model';
+import { finalize } from 'rxjs/operators';
 declare var google: any;
 
 @Component({
@@ -43,7 +44,8 @@ export class OferecerCaronaPage implements OnInit {
     private ngZone: NgZone,
     private cd: ChangeDetectorRef,
     private service: OferecerCaronaService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    
 
   ) { }
 
@@ -136,25 +138,35 @@ export class OferecerCaronaPage implements OnInit {
     this.criarRota();
   }
 
-  criarRota() {
+  async criarRota() {
     const oferecerCarona = new OferecerCaronaModel();
     oferecerCarona.valor = 0;
-      oferecerCarona.viagem = this.form.controls.data.value;
-      oferecerCarona.pontoInicial = this.form.controls.origem.value;
-      oferecerCarona.pontoFinal = this.form.controls.destino.value;
-      oferecerCarona.qtdLugares = this.form.controls.qtdLugares.value;
+    oferecerCarona.viagem = this.form.controls.data.value;
+    oferecerCarona.pontoInicial = this.form.controls.origem.value;
+    oferecerCarona.pontoFinal = this.form.controls.destino.value;
+    oferecerCarona.qtdLugares = this.form.controls.qtdLugares.value;
 
-      if(oferecerCarona.qtdLugares > 30){
-        this.exibirMensagemQtdLugaresInvalido();
-        return;
-      }
+    if (oferecerCarona.qtdLugares > 30) {
+      this.exibirMensagem('O número de lugares disponíveis não pode ser maior que 30');
+      return;
+    }
+    const carregando = await this.alertController.create({
+      message: 'Carregando...',
+    });
 
-      this.service.criarViagem(oferecerCarona).subscribe(() => {
-        //carrega loading
-        this.navCtrl.back();
-      }, error => {
-        console.log('Erro');
+    carregando.present();
+
+    this.service.criarViagem(oferecerCarona)
+    .pipe(
+      finalize(() => {
+        carregando.dismiss();
       })
+    )
+    .subscribe(() => {
+      this.navCtrl.back();
+    }, error => {
+      console.log('Erro');
+    })
   }
 
   initializeMap() {
@@ -196,10 +208,10 @@ export class OferecerCaronaPage implements OnInit {
     });
   }
 
-  async exibirMensagemQtdLugaresInvalido() {
+  async exibirMensagem(mensagem: string) {
     const alert = await this.alertController.create({
       header: 'Aviso',
-      message: 'O número de lugares disponíveis não pode ser maior que 30',
+      message: mensagem,
       buttons: ['OK'],
     });
 

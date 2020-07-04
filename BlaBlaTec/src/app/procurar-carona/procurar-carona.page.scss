@@ -4,7 +4,11 @@
 
 .card-viagem {
   border-radius: 20px;
-
+ 
+  ion-label {
+    font-size: 12px;
+    margin: 4px 0 0 0
+  }
   .img-motorista {
     width: 100%;
   }
@@ -28,7 +32,6 @@
 
   .icon-car {
     position: relative;
-    left: 10px;
     top: 3px;
   }
 
