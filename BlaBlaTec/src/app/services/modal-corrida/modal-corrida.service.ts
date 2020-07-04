@@ -30,14 +30,11 @@ export class ModalCorridaService {
   }
   atualizarRotaEmAndamento(id: number, rotaAtiva: RotaAtivaUpdate) {
 
-return this.http.put(`${environment.apiUrl}rotas/ativa/${id}` , rotaAtiva);
+    return this.http.put(`${environment.apiUrl}rotas/ativa/${id}`, rotaAtiva);
   }
 
-  removerAndamento(id: number) {
-    let params = new HttpParams();
-    params = params.set('id', id.toString());
-
-    return this.http.delete(environment.apiUrl + 'rotas/ativa');
+  removerViagemEmAndamento(id: number) {
+    return this.http.delete(`${environment.apiUrl}rotas/ativa/${id}`);
   }
 
 }
