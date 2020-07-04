@@ -30,7 +30,15 @@ export class AppComponent {
         mostrarMenu: true,
         nomeIcon: 'thumbs-up',
         slot: 'start',
-        titulo: 'Minhas Caronas',
+        titulo: 'Caronas Oferecidas',
+      },
+      {
+        rota: '',
+        verificarMotorista: true,
+        mostrarMenu: true,
+        nomeIcon: 'thumbs-up',
+        slot: 'start',
+        titulo: 'Caronas Agendadas',
       },
       {
         rota: 'oferecer-carona',
