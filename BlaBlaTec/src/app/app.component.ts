@@ -38,7 +38,7 @@ export class AppComponent {
         mostrarMenu: true,
         nomeIcon: 'chatbubble',
         slot: 'start',
-        titulo: 'Oferecer carona'
+        titulo: 'Oferecer Carona'
       },
       {
         rota: 'procurar-carona',
