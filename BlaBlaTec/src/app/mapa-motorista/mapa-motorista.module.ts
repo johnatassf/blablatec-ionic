@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { MapaMotoristaPageRoutingModule } from './mapa-motorista-routing.module';
 
-import { MapaMotoristaPage } from './mapa-motorista.page';
+import { MapaMotoristaPageComponent } from './mapa-motorista.page';
 
 @NgModule({
   imports: [
@@ -15,6 +15,6 @@ import { MapaMotoristaPage } from './mapa-motorista.page';
     IonicModule,
     MapaMotoristaPageRoutingModule
   ],
-  declarations: [MapaMotoristaPage],
+  declarations: [MapaMotoristaPageComponent],
 })
 export class MapaMotoristaPageModule { }

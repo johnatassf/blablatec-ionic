@@ -4,7 +4,7 @@ import { map, tap, retryWhen, delayWhen, filter } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NavController, Platform, ModalController } from '@ionic/angular';
 import { ModalCorridaService } from '../services/modal-corrida/modal-corrida.service';
-import { MapaMotoristaPage } from './mapa-motorista.page';
+import { MapaMotoristaPageComponent } from './mapa-motorista.page';
 import { RotaAtiva } from './rota-ativa-model';
 declare var google;
 
@@ -51,7 +51,7 @@ export class ModalMapaCorridaComponent {
 
     async presentModal() {
         const modal = await this.modalController.create({
-            component: MapaMotoristaPage,
+            component: MapaMotoristaPageComponent,
             cssClass: 'my-custom-class',
             componentProps: {
                 rotaAtiva: this.rotaAtiva,

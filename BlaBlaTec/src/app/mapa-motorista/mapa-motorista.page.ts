@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, OnDestroy } from '@angular/core';
 import { interval, timer, Subscription, Observable, Subject } from 'rxjs';
 import { map, tap, retryWhen, delayWhen, filter, finalize } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -6,13 +6,14 @@ import { NavController, Platform, ModalController } from '@ionic/angular';
 import { ModalCorridaService } from '../services/modal-corrida/modal-corrida.service';
 import { RotaAtiva, RotaAtivaUpdate } from './rota-ativa-model';
 import { IfStmt } from '@angular/compiler';
+import { NotificationService } from '../shared/notification/notification.service';
 declare var google;
 
 @Component({
   templateUrl: './mapa-motorista.page.html',
   styleUrls: ['./mapa-motorista.page.scss'],
 })
-export class MapaMotoristaPage {
+export class MapaMotoristaPageComponent implements OnDestroy {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   public timer: Subscription = new Subscription();
@@ -40,24 +41,13 @@ export class MapaMotoristaPage {
     public navCtrl: NavController,
     public modalController: ModalController,
     private modalCorridaService: ModalCorridaService,
+    public notificationService: NotificationService
   ) { }
-  //  To do:
-  // Toda vez q a posição atual atualizar setar no banco: metodo Set Map
-  // Criar método para finalizar corrida
-
 
   ionViewDidEnter() {
     this.setMap();
     this.atualizarPosicaoAtual();
   }
-
-  // Iniciei acompanhamento de rota atual por usuario
-  // Pegar a rota do motorista no banco
-  // Traca a rota até o ponto final
-  // Fazer requests no banco para verificação
-
-
-
 
   setMap() {
     const mapOptions = {
@@ -104,7 +94,9 @@ export class MapaMotoristaPage {
   }
 
   finalizarRotaEmAndamento() {
-    this.modalCorridaService.removerAndamento(this.rotaAtiva.id);
+    this.modalCorridaService.removerViagemEmAndamento(this.rotaAtiva.id).subscribe(result => {
+      this.notificationService.notificarSucesso('Corrida finalizada com sucesso');
+    });
   }
 
 
@@ -194,8 +186,11 @@ export class MapaMotoristaPage {
 
 
   stopTracking() {
-    if (this.tracking)
-      this.positionSubscription.unsubscribe();
+    if (!this.tracking)
+      return;
+
+    this.tracking = false;
+    this.positionSubscription.unsubscribe();
 
   }
 
@@ -216,6 +211,13 @@ export class MapaMotoristaPage {
         }
       }, 30000);
     }).subscribe();
+  }
+
+  finalizarCarona() {
+    this.modalCorridaService.removerViagemEmAndamento(this.rotaAtiva.idViagem)
+      .subscribe(() => {
+
+      })
   }
 
   ngOnDestroy(): void {
