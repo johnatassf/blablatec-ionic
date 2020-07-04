@@ -74,13 +74,6 @@ export class HomePage {
           this.authService.isMotoristaEvent.emit(this.authService.isMotorista());
           this.modalService.mostrarCorridaAtivaMotorista.emit(true);
           this.navCtrl.navigateRoot('mapas');
-        },
-        (error: HttpErrorResponse) => {
-          if (error.status === 400) {
-            this.exibirMensagemErroLogin('ERRO: ' + error.error.message);
-          } else {
-            this.exibirMensagemErroLogin('Um erro ocorreu tente novamente mais tarde');
-          }
         }
       );
   }
