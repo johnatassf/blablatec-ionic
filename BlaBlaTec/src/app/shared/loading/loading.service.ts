@@ -12,9 +12,9 @@ export class LoadingService {
     ) { }
 
 
-    async showLoading() {
+    async showLoading(mensagem = 'Carregando...') {
         if (!this.loading)
-            await this.createLoading();
+            await this.createLoading(mensagem);
 
         this.loading.present();
     }
@@ -28,13 +28,13 @@ export class LoadingService {
         }
     }
 
-    private async createLoading() {
+    private async createLoading(mensagem: string) {
         this.loading = await this.loadingCtrl.create({
             spinner: null,
             message: `  <div class="custom-spinner-container" style="background: white!important">
            <a>
             <img src="../assets/gif/animat-road-trip-color.gif" /></a>
-            <div class="texto" >Carregando...<div>
+            <div class="texto" >${mensagem}<div>
          </div>`,
             translucent: true,
             cssClass: ['--background:white']

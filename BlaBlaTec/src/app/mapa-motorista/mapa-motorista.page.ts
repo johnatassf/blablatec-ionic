@@ -51,7 +51,7 @@ export class MapaMotoristaPageComponent implements OnDestroy {
 
   setMap() {
     const mapOptions = {
-      zoom: 13,
+      zoom: 8,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       mapTypeControl: false,
       streetViewControl: false,

@@ -22,19 +22,15 @@ export class ModalCorridaService {
     return this.http.get<RotaAtiva>(environment.apiUrl + 'rotas/ativa');
   }
 
-  criarRotaEmAndamento(id: number) {
-    let params = new HttpParams();
-    params = params.set('id', id.toString());
-
-    return this.http.post(environment.apiUrl + 'rotas/ativa', {});
+  criarRotaEmAndamento(idViagem: number) {
+    return this.http.post(`${environment.apiUrl}rotas/ativa/${idViagem}`, {});
   }
-  atualizarRotaEmAndamento(id: number, rotaAtiva: RotaAtivaUpdate) {
-
-    return this.http.put(`${environment.apiUrl}rotas/ativa/${id}`, rotaAtiva);
+  atualizarRotaEmAndamento(idViagem: number, rotaAtiva: RotaAtivaUpdate) {
+    return this.http.put(`${environment.apiUrl}rotas/ativa/${idViagem}`, rotaAtiva);
   }
 
-  removerViagemEmAndamento(id: number) {
-    return this.http.delete(`${environment.apiUrl}rotas/ativa/${id}`);
+  removerViagemEmAndamento(idViagem: number) {
+    return this.http.delete(`${environment.apiUrl}rotas/ativa/${idViagem}`);
   }
 
 }
