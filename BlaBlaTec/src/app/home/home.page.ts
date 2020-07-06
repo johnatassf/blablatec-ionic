@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController } from '@ionic/angular';
+import { NavController, AlertController, LoadingController, MenuController } from '@ionic/angular';
 
 import { UserService } from '../services/user/user.service';
 import { finalize } from 'rxjs/operators';
@@ -32,7 +32,8 @@ export class HomePage {
     private alertController: AlertController,
     private formBuilder: FormBuilder,
     private modalService: ModalCorridaService,
-    public loadingService: LoadingService
+    public loadingService: LoadingService,
+    public menu: MenuController
   ) { }
 
   ngOnInit() {
@@ -40,6 +41,10 @@ export class HomePage {
       ra: this.ra,
       password: this.password
     });
+  }
+
+  ionViewDidEnter() {
+    this.menu.enable(false, 'first');
   }
   acessarCadastrar(): void {
     this.navCtrl.navigateRoot('cadastrar');
@@ -61,7 +66,7 @@ export class HomePage {
       .subscribe(
         (data: any) => {
 
-          const token = new TokenAutentication(); 
+          const token = new TokenAutentication();
           token.accessToken = data?.accessToken;
           token.authenticated = data?.authenticated;
           token.created = data?.created;
@@ -70,6 +75,7 @@ export class HomePage {
           window.localStorage.setItem('ContentLocaly', JSON.stringify(token));
           this.authService.isMotoristaEvent.emit(this.authService.isMotorista());
           this.modalService.mostrarCorridaAtivaMotorista.emit(true);
+          this.menu.enable(true, 'first');
           this.navCtrl.navigateRoot('mapas');
         }
       );

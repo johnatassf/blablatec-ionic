@@ -6,6 +6,7 @@ import { NavController, Platform, ModalController } from '@ionic/angular';
 import { ModalCorridaService } from '../services/modal-corrida/modal-corrida.service';
 import { MapaMotoristaPageComponent } from './mapa-motorista.page';
 import { RotaAtiva } from './rota-ativa-model';
+import { BaseResult } from '../shared/base-result/base-result';
 declare var google;
 
 @Component({
@@ -39,14 +40,13 @@ export class ModalMapaCorridaComponent {
 
     // Verificar se existe rota atmiva para este usuario
     buscarRotaAtivaUsuario(mostrarCorridaClickMeu: boolean) {
-        this.modalCorridaService.buscarRotasEmAdamentoUsuario().subscribe(async (result: RotaAtiva) => {
-            this.rotaAtiva = result;
-            if (this.rotaAtiva.isMotorista || mostrarCorridaClickMeu) {
-                await this.presentModal();
-            }
-        }, error => {
-            console.log('Erro ao buscar rota ativa');
-        });
+        this.modalCorridaService.buscarRotasEmAdamentoUsuario()
+            .subscribe(async (result) => {
+                this.rotaAtiva = result.data;
+
+                if (this.rotaAtiva?.isMotorista || mostrarCorridaClickMeu)
+                    await this.presentModal();
+            });
     }
 
     async presentModal() {

@@ -26,10 +26,10 @@ export class MapasPage implements OnDestroy {
   }
 
   verificarCorridaAndamento() {
-    this.modalCorridaService.buscarRotasEmAdamentoUsuario().subscribe(async (result: RotaAtiva) => {
-      this.showCorridaEmAndamento = true;
-    }, error => {
-      this.showCorridaEmAndamento = false;
+    this.modalCorridaService.buscarRotasEmAdamentoUsuario().subscribe(async (result: any) => {
+      result.success
+        ? this.showCorridaEmAndamento = true
+        : this.showCorridaEmAndamento = false;
     });
   }
 

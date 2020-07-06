@@ -140,7 +140,7 @@ export class MapaMotoristaPageComponent implements OnDestroy {
         this.calculateRoute();
       }))
       .subscribe(result => {
-        this.currentPositionDriver = result.latLng;
+        this.currentPositionDriver = result.data.latLng;
 
       });
 

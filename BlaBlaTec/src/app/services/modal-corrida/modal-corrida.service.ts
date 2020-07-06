@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { RotaAtiva, RotaAtivaUpdate } from 'src/app/mapa-motorista/rota-ativa-model';
+import { BaseResult } from 'src/app/shared/base-result/base-result';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class ModalCorridaService {
 
 
   buscarRotasEmAdamentoUsuario() {
-    return this.http.get<RotaAtiva>(environment.apiUrl + 'rotas/ativa');
+    return this.http.get<BaseResult<RotaAtiva>>(environment.apiUrl + 'rotas/ativa');
   }
 
   criarRotaEmAndamento(idViagem: number) {
