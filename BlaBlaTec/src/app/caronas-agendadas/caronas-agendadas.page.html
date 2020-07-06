@@ -9,8 +9,12 @@
 
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
-      refreshingSpinner="circles" refreshingText="Atualizando caronas...">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Atualizando caronas..."
+    >
     </ion-refresher-content>
   </ion-refresher>
 
@@ -19,7 +23,8 @@
       <ion-card-header style="padding: 3px 0 5px 5px;">
         <ion-row>
           <ion-col size="10">
-            <ion-card-subtitle><b>Motorista: </b>{{ viagem.motorista.nome }} {{ viagem.motorista.sobrenome }}
+            <ion-card-subtitle
+              ><b>Motorista: </b>{{ viagem.motorista.nome }} {{ viagem.motorista.sobrenome }}
             </ion-card-subtitle>
           </ion-col>
           <ion-col size="2">
@@ -30,7 +35,6 @@
         </ion-row>
       </ion-card-header>
       <ion-card-content>
-
         <ion-row style="margin-top: 5px; margin-left: -2px;" class="destino-origem row-p0 col-p0">
           <ion-row>
             <ion-col size="12">
@@ -49,11 +53,11 @@
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center acao-viagem">
-          <div class="col responsive-sm ">
-            <ion-button size="small" color="danger">Cancelar Viagem</ion-button>
+          <div class="col responsive-sm">
+            <ion-button size="small">Cancelar Viagem</ion-button>
           </div>
         </ion-row>
-
       </ion-card-content>
     </ion-card>
-  </ion-content>
+  </ion-content></ion-content
+>

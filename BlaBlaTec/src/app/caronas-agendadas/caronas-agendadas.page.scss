@@ -1,44 +1,73 @@
 .lista {
-    color: white;
+  color: white;
+}
+
+.card-viagem {
+  border-radius: 20px;
+
+  ion-label {
+    font-size: 12px;
+    margin: 4px 0 0 0;
   }
-  
-  .card-viagem {
-    border-radius: 20px;
-   
-    ion-label {
-      font-size: 12px;
-      margin: 4px 0 0 0
-    }
-    .img-motorista {
-      width: 100%;
-    }
-    img {
-      max-height: 78px;
-    }
-  
-    .notificacao-carona {
-      width: 90%;
-    }
-    .solicitar-carona-mensagem {
-      font-style: oblique;
-      color: darkslategrey;
-      text-decoration: underline;
-    }
-  
-    .destino-origem {
-      font-style: oblique;
-      font-size: 16px;
-    }
-  
-    .icon-car {
-      position: relative;
-      top: 3px;
-    }
-  
-    background-color: #f5fffa; // o nome desta cor é  MintCream
-  }
-  
-  .cem {
+  .img-motorista {
     width: 100%;
   }
-  
+  img {
+    max-height: 78px;
+  }
+
+  .notificacao-carona {
+    width: 90%;
+  }
+  .solicitar-carona-mensagem {
+    font-style: oblique;
+    color: darkslategrey;
+    text-decoration: underline;
+  }
+
+  .destino-origem {
+    font-style: oblique;
+    font-size: 16px;
+  }
+
+  .icon-car {
+    position: relative;
+    top: 3px;
+  }
+
+  background-color: #f5fffa; // o nome desta cor é  MintCream
+}
+
+.cem {
+  width: 100%;
+}
+
+ion-button {
+  --background: rgba(139, 0, 0, 1);
+  --background: -moz-linear-gradient(
+    left,
+    rgba(178, 34, 34, 1) 0%,
+    rgba(128, 0, 0, 1) 44%,
+    rgba(250, 128, 114, 1) 100%
+  );
+  --background: -webkit-gradient(
+    left top,
+    right top,
+    color-stop(0%, rgba(178, 34, 34, 1)),
+    color-stop(44%, rgba(128, 0, 0, 1)),
+    color-stop(100%, rgba(250, 128, 114, 1))
+  );
+  --background: -webkit-linear-gradient(
+    left,
+    rgba(178, 34, 34, 1) 0%,
+    rgba(128, 0, 0, 1) 44%,
+    rgba(255, 69, 0, 1) 100%
+  );
+  --background: -o-linear-gradient(left, rgba(178, 34, 34, 1) 0%, rgba(128, 0, 0, 1) 44%, rgba(255, 69, 0, 1) 100%);
+  --background: -ms-linear-gradient(left, rgba(178, 34, 34, 1) 0%, rgba(128, 0, 0, 1) 44%, rgba(255, 69, 0, 1) 100%);
+  --background: linear-gradient(to right, rgba(178, 34, 34, 1) 0%, rgba(128, 0, 0, 1) 44%, rgba(255, 69, 0, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019', GradientType=1 );
+
+  --color: #ffffff;
+}
+
