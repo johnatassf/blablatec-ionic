@@ -90,8 +90,7 @@ export class CadastrarPage implements OnInit {
         await this.loadingService.showLoading();
 
         this.form.controls.motorista.patchValue('perfilMotorista' ? true : false);
-
-        if (this.form.value.grupo = 'perfilCarona') {
+        if(this.form.value.grupo == 'perfilCarona'){
           this.form.value.motorista = false;
         }
         else {
