@@ -80,6 +80,10 @@ export class EditarusuarioPage implements OnInit {
     });
   }
 
+  solicitarnovasenha() : void {
+    this.navCtrl.navigateRoot('solicitar-novasenha');
+  }
+
   mapas(): void {
     this.navCtrl.navigateRoot('mapas');
   }
