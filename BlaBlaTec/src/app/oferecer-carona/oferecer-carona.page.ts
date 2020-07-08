@@ -68,7 +68,7 @@ export class OferecerCaronaPage implements OnInit {
     this.initializeMap();
 
   }
-  mapas(): void {
+  notificacoes(): void {
     this.navCtrl.navigateRoot('notificacoes');
   }
 

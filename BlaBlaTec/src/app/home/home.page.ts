@@ -76,7 +76,7 @@ export class HomePage {
           this.authService.isMotoristaEvent.emit(this.authService.isMotorista());
           this.modalService.mostrarCorridaAtivaMotorista.emit(true);
           this.menu.enable(true, 'first');
-          this.navCtrl.navigateRoot('mapas');
+          this.navCtrl.navigateRoot('notificacoes');
         }
       );
   }

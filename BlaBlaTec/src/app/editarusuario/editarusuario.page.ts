@@ -80,7 +80,7 @@ export class EditarusuarioPage implements OnInit {
     });
   }
 
-  mapas(): void {
+  notificacoes(): void {
     this.navCtrl.navigateRoot('notificacoes');
   }
 
