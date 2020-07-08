@@ -155,7 +155,7 @@ export class OferecerCaronaPage implements OnInit {
     oferecerCarona.qtdLugares = this.form.controls.qtdLugares.value;
 
     if (oferecerCarona.qtdLugares > 30) {
-      this.exibirMensagem('O número de lugares disponíveis não pode ser maior que 30');
+      this.notificartionService.notificarInfo('O número de lugares disponíveis não pode ser maior que 30');
       return;
     }
     this.loadingService.showLoading('Criando carona...', false);
@@ -210,16 +210,6 @@ export class OferecerCaronaPage implements OnInit {
         display.setDirections(result);
       }
     });
-  }
-
-  async exibirMensagem(mensagem: string) {
-    const alert = await this.alertController.create({
-      header: 'Aviso',
-      message: mensagem,
-      buttons: ['OK'],
-    });
-
-    await alert.present();
   }
 
 
