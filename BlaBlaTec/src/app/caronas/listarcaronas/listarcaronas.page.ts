@@ -35,6 +35,7 @@ export class ListarcaronasPage {
   }
 
   ionViewDidEnter() {
+  
     this.buscarCaronasOferecidas();
   }
 

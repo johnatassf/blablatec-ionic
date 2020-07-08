@@ -53,7 +53,10 @@ export class AuthService {
     getTokenAutetication(): TokenAutentication {
 
         const token: TokenAutentication = JSON.parse(localStorage.getItem('ContentLocaly'));
-        const tokenIsExp = new Date(token.expiration).valueOf() < new Date().valueOf();
+        if (!token)
+            return null;
+
+        const tokenIsExp = new Date(token?.expiration).valueOf() < new Date().valueOf();
 
         if (!(token || token.authenticated)) {
             return null;

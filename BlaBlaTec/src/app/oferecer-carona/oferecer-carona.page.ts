@@ -5,6 +5,8 @@ import * as moment from 'moment';
 import { OferecerCaronaService } from 'src/app/oferecer-carona/oferecer-carona.service';
 import { OferecerCaronaModel } from './oferecer-carona.model';
 import { finalize } from 'rxjs/operators';
+import { LoadingService } from '../shared/loading/loading.service';
+import { NotificationService } from '../shared/notification/notification.service';
 declare var google: any;
 
 @Component({
@@ -14,7 +16,7 @@ declare var google: any;
 })
 export class OferecerCaronaPage implements OnInit {
 
-  private form: FormGroup;
+  public form: FormGroup;
   private autoCompleteService = new google.maps.places.AutocompleteService();
   public resultasBuscaEndereco = new Array<any>();
   public origens = new Array<any>();
@@ -37,6 +39,7 @@ export class OferecerCaronaPage implements OnInit {
   longitudeAtual: string;
   idViagem: any;
   RotaAtiva: any;
+  dateString: string;
 
   constructor(
     private navCtrl: NavController,
@@ -44,8 +47,9 @@ export class OferecerCaronaPage implements OnInit {
     private ngZone: NgZone,
     private cd: ChangeDetectorRef,
     private service: OferecerCaronaService,
-    private alertController: AlertController,
-    
+    public loadingService: LoadingService,
+    public notificartionService: NotificationService,
+
 
   ) { }
 
@@ -67,6 +71,11 @@ export class OferecerCaronaPage implements OnInit {
 
     this.initializeMap();
 
+  }
+
+  ionViewWillEnter() {
+    const datenow = new Date();
+    this.dateString = `${datenow.getFullYear().toString()}-${datenow.getMonth().toString()}`
   }
   notificacoes(): void {
     this.navCtrl.navigateRoot('notificacoes');
@@ -134,7 +143,6 @@ export class OferecerCaronaPage implements OnInit {
   }
 
   oferecerCarona() {
-    console.log(this.form.controls.data.value);
     this.criarRota();
   }
 
@@ -150,24 +158,20 @@ export class OferecerCaronaPage implements OnInit {
       this.exibirMensagem('O número de lugares disponíveis não pode ser maior que 30');
       return;
     }
-    const carregando = await this.alertController.create({
-      message: 'Carregando...',
-    });
-
-    carregando.present();
+    this.loadingService.showLoading('Criando carona...', false);
 
     this.service.criarViagem(oferecerCarona)
-    .pipe(
-      finalize(() => {
-        carregando.dismiss();
-      })
-    )
-    .subscribe(() => {
-      this.navCtrl.back();
-    }, error => {
-      console.log('Erro');
-    })
+      .pipe(
+        finalize(() => {
+          this.loadingService.hideLoading();
+        })
+      )
+      .subscribe(() => {
+        this.notificartionService.notificarSucesso('Carona criada com sucesso');
+        this.navCtrl.back();
+      });
   }
+
 
   initializeMap() {
     this.startPosition = new google.maps.LatLng(-21.763409, -43.349034);

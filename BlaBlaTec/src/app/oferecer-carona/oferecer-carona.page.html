@@ -41,7 +41,7 @@
 
     <ion-label>Data/Hora da Corrida</ion-label>
     <ion-datetime value="1995-04-15" min="1990-02" max="2050" formControlName="data" mask="00/00/0000"
-      [dayShortNames]="customDayShortNames" displayFormat="MMM DD, YYYY HH:mm"
+      displayFormat="MMM DD, YYYY HH:mm"
       monthShortNames="jan, feb, mar, apr, mai, jun, jul, aug, sep, okt, nov, des"></ion-datetime>
   </ion-item>
 
@@ -57,7 +57,7 @@
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!showListOrigin || !showLisDesti">
     <ion-fab-button [disabled]="!form.valid" (click)="oferecerCarona()">
-      <ion-icon name="add"></ion-icon>
+      <ion-icon name="save"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="!showListOrigin || !showLisDesti">
