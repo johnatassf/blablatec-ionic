@@ -9,6 +9,10 @@ export class UserService {
 
   constructor(public http: HttpClient) { }
 
+  redefinirSenha(senha: any, confirmacaosenha: any){
+    return this.http.put<any>(environment.apiUrl + 'user/redefinirsenha', senha, confirmacaosenha);
+
+  }
   cadastrarUsuario(usuario) {
     return this.http.post<any>(environment.apiUrl + 'user/signup', usuario);
   }

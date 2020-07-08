@@ -51,12 +51,16 @@ export class AuthService {
         return false;
     }
     getTokenAutetication(): TokenAutentication {
-        const tokenSession = localStorage.getItem('ContentLocaly');
 
-        if (!tokenSession)
+        const token: TokenAutentication = JSON.parse(localStorage.getItem('ContentLocaly'));
+        const tokenIsExp = new Date(token.expiration).valueOf() < new Date().valueOf();
+
+        if (!(token || token.authenticated)) {
             return null;
+        } else if (tokenIsExp) {
+            return null;
+        }
 
-        const token: TokenAutentication = JSON.parse(tokenSession);
         return token;
     }
 

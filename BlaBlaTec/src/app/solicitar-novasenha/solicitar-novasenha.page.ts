@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-solicitar-novasenha',
@@ -8,9 +9,14 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./solicitar-novasenha.page.scss'],
 })
 export class SolicitarNovasenhaPage implements OnInit {
+  [x: string]: any;
 
   usuario = {
 
+    Senha: '',
+    ConfirmacaoSenha: '',
+  };
+  usuarioAtualizado = {
     Senha: '',
     ConfirmacaoSenha: '',
   };
@@ -20,7 +26,12 @@ export class SolicitarNovasenhaPage implements OnInit {
 
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, public navCtrl: NavController) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    public navCtrl: NavController, 
+    private alertController: AlertController,
+    private userService: UserService,
+) { }
 
   ngOnInit() {
 
@@ -30,13 +41,32 @@ export class SolicitarNovasenhaPage implements OnInit {
     });
 
   }
+  mapas(): void {
+    this.navCtrl.navigateRoot('mapas');
+  }
 
   home(): void {
     this.navCtrl.navigateRoot('home');
   };
 
   atualizarSenha(): void {
+    this.usuarioAtualizado.Senha = this.usuario.Senha;
+    this.usuarioAtualizado.ConfirmacaoSenha = this.usuario.ConfirmacaoSenha;
+
 
   };
+  async exibirMensagemAtualziacaoRealizada() {
+    const alert = await this.alertController.create({
+      header: 'Aviso',
+      message: 'Perfil atualizado com sucesso',
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.navCtrl.navigateRoot('notificacoes');
+        }
+      }]
+    });
 
+    await alert.present();
+  }
 }

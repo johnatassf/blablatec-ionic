@@ -34,7 +34,7 @@ export class ModalComponent implements OnInit {
 
 
   aceitarSolicitacao(solicitacao) {
-    solicitacao.Recusada = false;
+    solicitacao.recusada = false;
     console.log(solicitacao);
     this.solicitacoesService.AtualizarSolicitacaoViagem(solicitacao).subscribe((data: any) => {
       this.exibirSolicitacaoAceita();
