@@ -13,9 +13,6 @@ export class UserService {
     return this.http.post<any>(environment.apiUrl + 'user/signup', usuario);
   }
 
-  redefinerSenha(senhas: any){
-    return this.http.post<any>(environment.apiUrl + 'user/refinirser', usuario);
-  }
   autenticarUsuario(usuario) {
     return this.http.post(environment.apiUrl + 'user/login', usuario);
   }
