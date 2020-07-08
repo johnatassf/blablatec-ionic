@@ -158,7 +158,7 @@ export class OferecerCaronaPage implements OnInit {
       this.notificartionService.notificarInfo('O número de lugares disponíveis não pode ser maior que 30');
       return;
     }
-    this.loadingService.showLoading('Criando carona...', false);
+    this.loadingService.showLoading('Criando carona...', true);
 
     this.service.criarViagem(oferecerCarona)
       .pipe(
