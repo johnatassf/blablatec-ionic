@@ -30,8 +30,8 @@ export class ModalCorridaService {
     return this.http.put(`${environment.apiUrl}rotas/ativa/${idViagem}`, rotaAtiva);
   }
 
-  removerViagemEmAndamento(idViagem: number) {
-    return this.http.delete(`${environment.apiUrl}rotas/ativa/${idViagem}`);
+  finalizarViagemEmAndamento(idViagem: number, rotaAtiva: RotaAtivaUpdate) {
+    return this.http.post(`${environment.apiUrl}rotas/ativa/${idViagem}/finalizar`, rotaAtiva );
   }
 
 }

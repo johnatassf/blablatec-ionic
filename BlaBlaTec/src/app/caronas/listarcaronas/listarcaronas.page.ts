@@ -13,7 +13,7 @@ import { LoadingService } from 'src/app/shared/loading/loading.service';
   templateUrl: './listarcaronas.page.html',
   styleUrls: ['./listarcaronas.page.scss'],
 })
-export class ListarcaronasPage implements OnInit {
+export class ListarcaronasPage {
 
   lista = [];
 
@@ -22,7 +22,7 @@ export class ListarcaronasPage implements OnInit {
     private serviceViagem: ViagemService,
     private modalCorridaService: ModalCorridaService,
     private noticationService: NotificationService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
   ) { }
   async openModal(idViagem) {
     const modal = await this.modalController.create({
@@ -34,11 +34,8 @@ export class ListarcaronasPage implements OnInit {
     await modal.present();
   }
 
-  ngOnInit() {
-    this.serviceViagem.buscarMinhasViagens().subscribe((data: any) => {
-      console.log(data);
-      this.lista = data;
-    });
+  ionViewDidEnter() {
+    this.buscarCaronasOferecidas();
   }
 
   formatarData(data) {
@@ -49,12 +46,31 @@ export class ListarcaronasPage implements OnInit {
     this.loadingService.showLoading('Iniciando Corrida...');
 
     this.modalCorridaService.criarRotaEmAndamento(idViagem)
-      .pipe(finalize(() => { this.loadingService.hideLoading  (); }))
+      .pipe(finalize(() => { this.loadingService.hideLoading(); }))
       .subscribe(() => {
         this.noticationService.notificarSucesso('Corrida iniciada com sucesso');
         this.modalCorridaService.mostrarCorridaAtivaMotorista.emit(true);
       });
   }
 
+
+  buscarCaronasOferecidas() {
+    this.loadingService.showLoading('Buscando caronas oferecidas...');
+    this.serviceViagem.buscarMinhasViagensOferecidas()
+      .pipe(finalize(() => { this.loadingService.hideLoading(); }))
+      .subscribe((data: any) => {
+        console.log(data);
+        this.lista = data;
+      });
+  }
+
+  doRefresh(event) {
+    this.serviceViagem.buscarMinhasViagensOferecidas()
+      .pipe(finalize(() => { event.target.complete(); }))
+      .subscribe((data: any) => {
+        console.log(data);
+        this.lista = data;
+      });
+  }
 
 }

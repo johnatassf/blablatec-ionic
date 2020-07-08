@@ -10,7 +10,7 @@
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
-      refreshingSpinner="circles" refreshingText="Atualizando caronas...">
+      refreshingSpinner="null" refreshingText="Atualizando caronas...">
     </ion-refresher-content>
   </ion-refresher>
 
@@ -49,10 +49,10 @@
           </ion-col>
         </ion-row>
         <ion-row class="ion-align-items-center acao-viagem">
-          <div class="col responsive-sm ">
+          <div class="col responsive-sm " *ngIf="!viagem.emAndamento">
             <ion-col size="4">
               <ion-button size="small" color="light" (click)="openModal(viagem.id)">Solicitações <ion-badge
-                slot="end" color="secundary">22</ion-badge>
+                slot="end" color="secundary">{{viagem.quantidadeDeSolicitacaoAtiva}}</ion-badge>
               </ion-button>
             </ion-col>
             <ion-col size="4">
@@ -62,6 +62,9 @@
               <ion-button size="small" color="danger">Cancelar Viagem</ion-button>
             </ion-col>
           </div>
+          <ion-row>
+            <ion-col size="12" *ngIf="viagem.emAndamento">Corrida em andamento...</ion-col>
+          </ion-row>
         </ion-row>
 
       </ion-card-content>

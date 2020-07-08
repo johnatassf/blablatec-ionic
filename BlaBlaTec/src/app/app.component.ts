@@ -25,6 +25,14 @@ export class AppComponent {
     nomeIcon: string, slot: string, titulo: string
   }[] = [
       {
+        rota: 'notificacoes',
+        verificarMotorista: false,
+        mostrarMenu: true,
+        nomeIcon: 'home',
+        slot: 'start',
+        titulo: 'Notificações',
+      },
+      {
         rota: 'caronas',
         verificarMotorista: true,
         mostrarMenu: true,
