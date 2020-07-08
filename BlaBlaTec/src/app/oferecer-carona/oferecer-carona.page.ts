@@ -69,7 +69,7 @@ export class OferecerCaronaPage implements OnInit {
 
   }
   mapas(): void {
-    this.navCtrl.navigateRoot('mapas');
+    this.navCtrl.navigateRoot('notificacoes');
   }
 
   ionClear() {

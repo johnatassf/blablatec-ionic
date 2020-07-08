@@ -12,9 +12,9 @@ export class LoadingService {
     ) { }
 
 
-    async showLoading() {
+    async showLoading(mensagem = 'Carregando...', showIcon = true) {
         if (!this.loading)
-            await this.createLoading();
+            await this.createLoading(mensagem, showIcon);
 
         this.loading.present();
     }
@@ -28,14 +28,22 @@ export class LoadingService {
         }
     }
 
-    private async createLoading() {
-        this.loading = await this.loadingCtrl.create({
-            spinner: null,
-            message: `  <div class="custom-spinner-container" style="background: white!important">
-           <a>
+    private async createLoading(mensagem: string, showIcon = true) {
+        let template = '';
+        if (showIcon) {
+            template = `  <div class="custom-spinner-container" style="background: white!important">
+            <a>
             <img src="../assets/gif/animat-road-trip-color.gif" /></a>
-            <div class="texto" >Carregando...<div>
-         </div>`,
+                                   <div class="texto" >${mensagem}</div>
+                                </div>`;
+        }
+        else {
+            template = mensagem;
+        }
+
+        this.loading = await this.loadingCtrl.create({
+            spinner: showIcon ? null : 'circular',
+            message: template,
             translucent: true,
             cssClass: ['--background:white']
         });

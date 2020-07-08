@@ -85,7 +85,7 @@ export class EditarusuarioPage implements OnInit {
   }
 
   mapas(): void {
-    this.navCtrl.navigateRoot('mapas');
+    this.navCtrl.navigateRoot('notificacoes');
   }
 
   async exibirMensagemAtualziacaoRealizada() {

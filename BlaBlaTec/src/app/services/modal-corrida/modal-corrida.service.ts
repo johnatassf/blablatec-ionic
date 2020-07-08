@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { RotaAtiva, RotaAtivaUpdate } from 'src/app/mapa-motorista/rota-ativa-model';
+import { BaseResult } from 'src/app/shared/base-result/base-result';
 
 @Injectable({
   providedIn: 'root'
@@ -19,22 +20,18 @@ export class ModalCorridaService {
 
 
   buscarRotasEmAdamentoUsuario() {
-    return this.http.get<RotaAtiva>(environment.apiUrl + 'rotas/ativa');
+    return this.http.get<BaseResult<RotaAtiva>>(environment.apiUrl + 'rotas/ativa');
   }
 
-  criarRotaEmAndamento(id: number) {
-    let params = new HttpParams();
-    params = params.set('id', id.toString());
-
-    return this.http.post(environment.apiUrl + 'rotas/ativa', {});
+  criarRotaEmAndamento(idViagem: number) {
+    return this.http.post(`${environment.apiUrl}rotas/ativa/${idViagem}`, {});
   }
-  atualizarRotaEmAndamento(id: number, rotaAtiva: RotaAtivaUpdate) {
-
-    return this.http.put(`${environment.apiUrl}rotas/ativa/${id}`, rotaAtiva);
+  atualizarRotaEmAndamento(idViagem: number, rotaAtiva: RotaAtivaUpdate) {
+    return this.http.put(`${environment.apiUrl}rotas/ativa/${idViagem}`, rotaAtiva);
   }
 
-  removerViagemEmAndamento(id: number) {
-    return this.http.delete(`${environment.apiUrl}rotas/ativa/${id}`);
+  finalizarViagemEmAndamento(idViagem: number, rotaAtiva: RotaAtivaUpdate) {
+    return this.http.post(`${environment.apiUrl}rotas/ativa/${idViagem}/finalizar`, rotaAtiva );
   }
 
 }

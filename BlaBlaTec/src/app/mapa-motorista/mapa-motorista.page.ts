@@ -2,11 +2,12 @@ import { Component, OnInit, ViewChild, ElementRef, Input, OnDestroy } from '@ang
 import { interval, timer, Subscription, Observable, Subject } from 'rxjs';
 import { map, tap, retryWhen, delayWhen, filter, finalize } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NavController, Platform, ModalController } from '@ionic/angular';
+import { NavController, Platform, ModalController, AlertController } from '@ionic/angular';
 import { ModalCorridaService } from '../services/modal-corrida/modal-corrida.service';
 import { RotaAtiva, RotaAtivaUpdate } from './rota-ativa-model';
 import { IfStmt } from '@angular/compiler';
 import { NotificationService } from '../shared/notification/notification.service';
+import { LoadingService } from '../shared/loading/loading.service';
 declare var google;
 
 @Component({
@@ -41,7 +42,9 @@ export class MapaMotoristaPageComponent implements OnDestroy {
     public navCtrl: NavController,
     public modalController: ModalController,
     private modalCorridaService: ModalCorridaService,
-    public notificationService: NotificationService
+    public notificationService: NotificationService,
+    public loadingService: LoadingService,
+    public alertController: AlertController
   ) { }
 
   ionViewDidEnter() {
@@ -51,7 +54,7 @@ export class MapaMotoristaPageComponent implements OnDestroy {
 
   setMap() {
     const mapOptions = {
-      zoom: 13,
+      zoom: 8,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       mapTypeControl: false,
       streetViewControl: false,
@@ -93,10 +96,20 @@ export class MapaMotoristaPageComponent implements OnDestroy {
   }
 
   finalizarRotaEmAndamento() {
-    this.modalCorridaService.removerViagemEmAndamento(this.rotaAtiva.id).subscribe(result => {
-      this.notificationService.notificarSucesso('Corrida finalizada com sucesso');
-    });
+
+    this.loadingService.showLoading('Finalizando corrida...', false);
+    this.modalCorridaService.finalizarViagemEmAndamento(this.rotaAtiva.idViagem,
+      new RotaAtivaUpdate(this.rotaAtiva.id, this.rotaAtiva.latLng))
+      .pipe(finalize(() => {
+        this.loadingService.hideLoading();
+      }))
+      .subscribe(result => {
+        this.notificationService.notificarSucesso('Corrida finalizada com sucesso');
+        this.stopTracking();
+        this.dismiss();
+      });
   }
+
 
 
   startTracking() {
@@ -128,7 +141,7 @@ export class MapaMotoristaPageComponent implements OnDestroy {
   setMapDriverView(latLng: string) {
     this.currentPositionDriver = latLng;
     this.modalCorridaService.atualizarRotaEmAndamento(
-      this.rotaAtiva.id,
+      this.rotaAtiva.idViagem,
       new RotaAtivaUpdate(this.rotaAtiva.id, latLng));
     this.calculateRoute();
   }
@@ -140,7 +153,7 @@ export class MapaMotoristaPageComponent implements OnDestroy {
         this.calculateRoute();
       }))
       .subscribe(result => {
-        this.currentPositionDriver = result.latLng;
+        this.currentPositionDriver = result.data.latLng;
 
       });
 
@@ -212,12 +225,31 @@ export class MapaMotoristaPageComponent implements OnDestroy {
     }).subscribe();
   }
 
-  finalizarCarona() {
-    this.modalCorridaService.removerViagemEmAndamento(this.rotaAtiva.idViagem)
-      .subscribe(() => {
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message: '<strong>Deseja finalizar esta corrida?</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Finalizar',
+          handler: () => {
+            this.finalizarRotaEmAndamento();
+          }
+        }
+      ]
+    });
 
-      })
+    await alert.present();
   }
+
 
   ngOnDestroy(): void {
     this.atualizarPosicaoObservable.unsubscribe();

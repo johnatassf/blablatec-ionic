@@ -13,7 +13,7 @@
   </ion-header>
   
   <div #map id="map"></div>
-  <ion-button (click)="stopTracking()" color="danger" expand="block" fill="clear" shape="round" *ngIf="!isTracking">
+  <ion-button (click)="presentAlertConfirm()" color="danger" expand="block" fill="clear" shape="round" *ngIf="!isTracking">
     Finalizar Corrida
   </ion-button>
 

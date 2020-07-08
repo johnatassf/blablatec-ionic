@@ -27,13 +27,13 @@
         </ion-list>
         
           <ion-card class="info-carona">
-            <h4><ion-icon name="location-outline"></ion-icon> {{valorEndereco.endereco}}</h4>
-            <h4><ion-icon name="person-circle-outline"></ion-icon> {{valorEndereco.nome}}</h4>
-            <h4><ion-icon name="alarm-outline"></ion-icon> {{valorEndereco.horario}}</h4>
+            <h4><ion-icon name="location-outline"></ion-icon> {{valorEndereco.viagem.pontoFinal}}</h4>
+            <h4><ion-icon name="person-circle-outline"></ion-icon> {{valorEndereco.carona.nome}}</h4>
+            <h4><ion-icon name="alarm-outline"></ion-icon> {{valorEndereco.viagem.dataViagem}}</h4>
           </ion-card>
         
-      <ion-button class="btn1" size="small" color="success"><ion-icon name="thumbs-up-sharp"></ion-icon></ion-button>
-      <ion-button size="small" color="danger"><ion-icon name="thumbs-down-sharp"></ion-icon></ion-button>
+      <ion-button class="btn1" size="small" color="success" (click)="aceitarSolicitacao(valorEndereco)"><ion-icon name="thumbs-up-sharp"></ion-icon></ion-button>
+      <ion-button size="small" color="danger"><ion-icon name="thumbs-down-sharp" (click)="recusarSolicitacao(valorEndereco)"></ion-icon></ion-button>
 
     </ion-card>
   

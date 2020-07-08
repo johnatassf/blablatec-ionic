@@ -19,7 +19,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'mapas',
+    path: 'notificacoes',
     loadChildren: () => import('./mapas/mapas.module').then((m) => m.MapasPageModule),
     canActivate: [HomeGuard]
   },
@@ -56,7 +56,8 @@ const routes: Routes = [
   {
     path: 'caronas',
     loadChildren: () => import('./caronas/listarcaronas/listarcaronas.module').then(m => m.ListarcaronasPageModule)
-  },  {
+  },
+  {
     path: 'alterar-infocar',
     loadChildren: () => import('./alterar-infocar/alterar-infocar.module').then( m => m.AlterarInfocarPageModule)
   },

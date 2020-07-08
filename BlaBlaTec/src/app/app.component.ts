@@ -25,6 +25,14 @@ export class AppComponent {
     nomeIcon: string, slot: string, titulo: string
   }[] = [
       {
+        rota: 'notificacoes',
+        verificarMotorista: false,
+        mostrarMenu: true,
+        nomeIcon: 'home',
+        slot: 'start',
+        titulo: 'Notificações',
+      },
+      {
         rota: 'caronas',
         verificarMotorista: true,
         mostrarMenu: true,
@@ -34,7 +42,7 @@ export class AppComponent {
       },
       {
         rota: 'caronas-agendadas',
-        verificarMotorista: true,
+        verificarMotorista: false,
         mostrarMenu: true,
         nomeIcon: 'thumbs-up',
         slot: 'start',
@@ -73,7 +81,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private authService: AuthService,
-    private router: Router
+    public router: Router
   ) {
     this.initializeApp();
     this.varificarMenu();
