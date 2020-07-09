@@ -29,4 +29,8 @@ export class ViagemService {
   buscarMinhasViagensOferecidas(){
     return this.http.get(environment.apiUrl + 'viagens/minhas-viagens-oferecidas', {});
   }
+
+  buscarViagensAgendadas(){
+    return this.http.get(environment.apiUrl + 'viagens/minhas-viagens-agendadas');
+  }
 }
