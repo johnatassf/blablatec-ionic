@@ -9,8 +9,12 @@
 
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
-      refreshingSpinner="null" refreshingText="Atualizando caronas...">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="null"
+      refreshingText="Atualizando caronas..."
+    >
     </ion-refresher-content>
   </ion-refresher>
 
@@ -19,7 +23,8 @@
       <ion-card-header style="padding: 3px 0 5px 5px;">
         <ion-row>
           <ion-col size="10">
-            <ion-card-subtitle><b>Motorista: </b>{{ viagem.motorista.nome }} {{ viagem.motorista.sobrenome }}
+            <ion-card-subtitle
+              ><b>Motorista: </b>{{ viagem.motorista.nome }} {{ viagem.motorista.sobrenome }}
             </ion-card-subtitle>
           </ion-col>
           <ion-col size="2">
@@ -30,7 +35,6 @@
         </ion-row>
       </ion-card-header>
       <ion-card-content>
-
         <ion-row style="margin-top: 5px; margin-left: -2px;" class="destino-origem row-p0 col-p0">
           <ion-row>
             <ion-col size="12">
@@ -48,25 +52,32 @@
             </ion-row>
           </ion-col>
         </ion-row>
-        <ion-row class="ion-align-items-center acao-viagem">
-          <div class="col responsive-sm " *ngIf="!viagem.emAndamento">
-            <ion-col size="4">
-              <ion-button size="small" color="light" (click)="openModal(viagem.id)">Solicitações <ion-badge
-                slot="end" color="secundary">{{viagem.quantidadeDeSolicitacaoAtiva}}</ion-badge>
-              </ion-button>
-            </ion-col>
-            <ion-col size="4">
-              <ion-button size="small" color="success" (click)="iniciarCorrida(viagem.id)">Iniciar Corrida</ion-button>
-            </ion-col>
-            <ion-col size="4">
-              <ion-button size="small" color="danger">Cancelar Viagem</ion-button>
-            </ion-col>
-          </div>
-          <ion-row>
-            <ion-col size="12" *ngIf="viagem.emAndamento">Corrida em andamento...</ion-col>
-          </ion-row>
-        </ion-row>
 
+        <ion-row class="ion-align-items-center acao-viagem">
+          <div id="centro">
+            <div class="col responsive-sm" *ngIf="!viagem.emAndamento">
+              <ion-col size="4">
+                <ion-button id="solicitacao" size="small" (click)="openModal(viagem.id)"
+                  >Solicitações
+                  <ion-badge color="#DCDCDC" slot="end">{{viagem.quantidadeDeSolicitacaoAtiva}}</ion-badge>
+                </ion-button>
+              </ion-col>
+
+              <ion-col size="4">
+                <ion-button id="iniciaC" size="small" (click)="iniciarCorrida(viagem.id)">Iniciar Corrida</ion-button>
+              </ion-col>
+
+              <ion-col size="4">
+                <ion-button id="cancelaViagem" size="small">Cancelar Viagem</ion-button>
+              </ion-col>
+            </div>
+
+            <ion-row>
+              <ion-col size="12" *ngIf="viagem.emAndamento">Corrida em andamento...</ion-col>
+            </ion-row>
+          </div>
+        </ion-row>
       </ion-card-content>
     </ion-card>
-  </ion-content>
+  </ion-content></ion-content
+>

@@ -50,14 +50,23 @@
 
   <ion-item>
     <ion-icon name="phone-portrait" slot="start"></ion-icon>
-    <ion-input type="number" placeholder="Numero de Telefone:" inputmode="numero" [(ngModel)]="usuario.NumeroTelefone"></ion-input>
+    <ion-input
+      type="number"
+      placeholder="Numero de Telefone:"
+      inputmode="numero"
+      [(ngModel)]="usuario.NumeroTelefone"
+    ></ion-input>
   </ion-item>
-
-  <ion-button expand="block" (click)="atualizarInformacoes()">Atualizar</ion-button>
-
-  <ion-button expand="block" (click)="solicitarnovasenha()">Solicitar nova senha</ion-button>
-  
-  <ion-button expand="block" (click)="atualizarInformacoes()">Encerrar a conta</ion-button>
-
-  <ion-button expand="block" (click)="notificacoes()">Retornar</ion-button>
+  <div id="atualiza">
+    <ion-button fill="clear" (click)="atualizarInformacoes()">Atualizar</ion-button>
+  </div>
+<div id="nsenha">
+  <ion-button fill="clear" (click)="solicitarnovasenha()">Solicitar nova senha</ion-button>
+  </div>
+<div id="encerrac">
+  <ion-button fill="clear" (click)="atualizarInformacoes()">Encerrar a conta</ion-button>
+  </div>
+<div id="voltar">
+  <ion-button fill="clear" (click)="notificacoes()">Retornar</ion-button>
+  </div>
 </ion-content>
