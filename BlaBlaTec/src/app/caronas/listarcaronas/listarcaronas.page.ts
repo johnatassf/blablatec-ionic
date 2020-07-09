@@ -35,12 +35,11 @@ export class ListarcaronasPage {
   }
 
   ionViewDidEnter() {
-  
     this.buscarCaronasOferecidas();
   }
 
   formatarData(data) {
-    return moment(data, 'YYYY-MM-DD[T]HH:mm:ss').format('DD-MM-YYYY HH:mm:ss')
+    return moment(data, 'YYYY-MM-DD[T]HH:mm:ss').format('DD-MM-YYYY HH:mm:ss');
   }
 
   iniciarCorrida(idViagem: number) {
