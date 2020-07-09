@@ -33,6 +33,14 @@ export class AppComponent {
         titulo: 'Notificações',
       },
       {
+        rota: 'oferecer-carona',
+        verificarMotorista: true,
+        mostrarMenu: true,
+        nomeIcon: 'chatbubble',
+        slot: 'start',
+        titulo: 'Oferecer Carona'
+      },
+      {
         rota: 'caronas',
         verificarMotorista: true,
         mostrarMenu: true,
@@ -47,14 +55,6 @@ export class AppComponent {
         nomeIcon: 'thumbs-up',
         slot: 'start',
         titulo: 'Caronas Agendadas',
-      },
-      {
-        rota: 'oferecer-carona',
-        verificarMotorista: true,
-        mostrarMenu: true,
-        nomeIcon: 'chatbubble',
-        slot: 'start',
-        titulo: 'Oferecer Carona'
       },
       {
         rota: 'procurar-carona',

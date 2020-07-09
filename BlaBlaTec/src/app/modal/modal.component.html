@@ -1,42 +1,51 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Status da Carona</ion-title>
-    <ion-buttons slot="end">
-        <ion-button class="btn" (click)="dismissModal()">Fechar</ion-button>
-    </ion-buttons>
+    <ion-row>
+      <ion-col size="8" class="ion-align-items-start " style="margin-top: 2px">
+        <ion-title>Solicitações</ion-title>
+      </ion-col>
+      <ion-col size="4">
+        <ion-row class="ion-align-items-end ">
+          <a style="font-size: 27px; position: relative; left: 60px;top: 3px;" (click)="dismissModal()">
+            <ion-icon name="chevron-down-outline"></ion-icon>
+          </a>
+        </ion-row>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
+<ion-content class="ion-padding">
+  <ion-card class="card-viagem" *ngFor="let viagem of listaEndereco">
 
+    <ion-card-content>
+      <ion-row class="destino-origem row-p0 col-p0">
+        <ion-col size="12">
+          <ion-row>Este carona está solicitando participar de sua viagem, deseja aceitar ?</ion-row>
+          <ion-row>
+            <ion-col size="12" style="margin-top: 5px">
+              <h4>
+                <ion-icon name="person-circle-outline"></ion-icon> {{viagem.carona.nome}}
+              </h4>
+            </ion-col>
+          </ion-row>
 
-<ion-content>
-  <div>
-  <ion-list>
-   
-    <ion-card *ngFor="let valorEndereco of listaEndereco">
+          <ion-row class="ion-align-items-center acao-viagem">
+            <ion-col size="12">
+              <ion-col size="6">
+                <ion-button class="btn1" size="small" color="success" (click)="aceitarSolicitacao(viagem)">
+                  <ion-icon name="thumbs-up-sharp"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button size="small" color="danger">
+                  <ion-icon name="thumbs-down-sharp" (click)="recusarSolicitacao(viagem)"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-col>
 
-        <ion-list>
-          <ion-item class="img" *ngFor="let item of items">
-            <ion-thumbnail slot="start">
-              <ion-img [src]="item.src"></ion-img>
-            </ion-thumbnail>
-            <ion-label>
-              <h2>{{item.texto}}</h2>
-              <h2>{{item.status}}</h2>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-        
-          <ion-card class="info-carona">
-            <h4><ion-icon name="location-outline"></ion-icon> {{valorEndereco.viagem.pontoFinal}}</h4>
-            <h4><ion-icon name="person-circle-outline"></ion-icon> {{valorEndereco.carona.nome}}</h4>
-            <h4><ion-icon name="alarm-outline"></ion-icon> {{valorEndereco.viagem.dataViagem}}</h4>
-          </ion-card>
-        
-      <ion-button class="btn1" size="small" color="success" (click)="aceitarSolicitacao(valorEndereco)"><ion-icon name="thumbs-up-sharp"></ion-icon></ion-button>
-      <ion-button size="small" color="danger"><ion-icon name="thumbs-down-sharp" (click)="recusarSolicitacao(valorEndereco)"></ion-icon></ion-button>
-
-    </ion-card>
-  
-  </ion-list>
-</div>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

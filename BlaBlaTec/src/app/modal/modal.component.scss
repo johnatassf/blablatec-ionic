@@ -1,27 +1,27 @@
-ion-item{
+ion-item {
     --padding-start: 0;
 }
-.btn{
+.btn {
     --background: #31c29f;
 }
-.img{
+.img {
     margin-top: 10px;
     max-height: 78px;
     --padding-start: 13px;
 }
-ion-button{
+ion-button {
     width: 45%;
     height: 100%;
     text-align: center;
     float: right;
 }
-.btn1{
+.btn1 {
     width: 45%;
     height: 100%;
     text-align: center;
     float: left;
 }
-.info-carona{
+.info-carona {
     --padding-start: 5px;
     font-size: xx-small;
     font-style: italic;
@@ -29,3 +29,80 @@ ion-button{
     color: black;
     font-weight: lighter;
 }
+ion-item {
+    --padding-start: 0;
+}
+
+.lista {
+    color: white;
+}
+
+.card-viagem {
+    border-radius: 20px;
+
+    ion-label {
+        font-size: 12px;
+        margin: 4px 0 0 0;
+    }
+    .img-motorista {
+        width: 100%;
+    }
+    img {
+        max-height: 78px;
+    }
+
+    .notificacao-carona {
+        width: 90%;
+    }
+    .solicitar-carona-mensagem {
+        font-style: oblique;
+        color: darkslategrey;
+        text-decoration: underline;
+    }
+
+    .destino-origem {
+        font-style: oblique;
+        font-size: 16px;
+        ion-row.row-p0 {
+            padding: 0 0 0 0;
+        }
+    }
+
+    .icon-car {
+        position: relative;
+        top: 3px;
+    }
+
+    background-color: #f5fffa; // o nome desta cor é  MintCream
+}
+
+.cem {
+    width: 100%;
+}
+
+.acao-viagem {
+    ion-button {
+        font-size: 10px !important;
+        ion-badge {
+            --background: #ffffff;
+            --color: #3880ff;
+            --padding-bottom: 4px;
+            --padding-end: 4px;
+            --padding-start: 4px;
+            --padding-top: 4px;
+            font-size: 10px;
+        }
+    }
+}
+
+#centro {
+    width: 100%;
+    display: float;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+}
+
+
+
+
