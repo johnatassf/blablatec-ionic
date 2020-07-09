@@ -11,7 +11,7 @@ import * as moment from 'moment';
   templateUrl: './procurar-carona.page.html',
   styleUrls: ['./procurar-carona.page.scss'],
 })
-export class ProcurarCaronaPage implements OnInit {
+export class ProcurarCaronaPage {
 
   viagens;
 
@@ -24,11 +24,9 @@ export class ProcurarCaronaPage implements OnInit {
     this.viagens = [];
   }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.buscarViagens();
-
   }
-
 
 
   async solicitarCarona(viagem: any) {
@@ -46,7 +44,7 @@ export class ProcurarCaronaPage implements OnInit {
 
   async removerSolicitacaoCarona(viagem: any) {
 
-   await this.loadingService.showLoading();
+    await this.loadingService.showLoading();
 
     this.viagemService.removerSolicitacaoCarona(viagem.id)
       .pipe(
@@ -60,16 +58,14 @@ export class ProcurarCaronaPage implements OnInit {
 
 
   async buscarViagens() {
-    await this.viagemService.buscarViagens().subscribe(
-      data => {
-        console.log(data);
+    await this.loadingService.showLoading();
+
+    this.viagemService.buscarViagens().pipe(
+      finalize(() => {
+        this.loadingService.hideLoading();
+      })).subscribe(data => {
         this.viagens = data;
-        console.log(this.viagens);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+      });
   }
 
 
