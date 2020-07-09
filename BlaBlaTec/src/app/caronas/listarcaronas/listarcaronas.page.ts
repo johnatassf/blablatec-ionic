@@ -73,4 +73,14 @@ export class ListarcaronasPage {
       });
   }
 
+  finalizarCorrida(idViagem: number){
+    this.loadingService.showLoading('Cancelando Corrida...');
+
+    this.modalCorridaService.cancelarViagem(idViagem)
+      .pipe(finalize(() => { this.loadingService.hideLoading(); }))
+      .subscribe(() => {
+        this.noticationService.notificarSucesso('Corrida cancelada com sucesso');
+        this.modalCorridaService.mostrarCorridaAtivaMotorista.emit(true);
+      });
+  }
 }

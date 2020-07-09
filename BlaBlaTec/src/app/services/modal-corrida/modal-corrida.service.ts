@@ -32,6 +32,9 @@ export class ModalCorridaService {
 
   finalizarViagemEmAndamento(idViagem: number, rotaAtiva: RotaAtivaUpdate) {
     return this.http.post(`${environment.apiUrl}rotas/ativa/${idViagem}/finalizar`, rotaAtiva );
+  } 
+  cancelarViagem(idViagem: number) {
+    return this.http.delete(`${environment.apiUrl}viagens/${idViagem}` );
   }
 
 }
