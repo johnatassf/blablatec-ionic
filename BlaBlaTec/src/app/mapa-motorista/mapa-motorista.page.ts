@@ -49,7 +49,6 @@ export class MapaMotoristaPageComponent implements OnDestroy {
 
   ionViewDidEnter() {
     this.setMap();
-    this.atualizarPosicaoAtual();
   }
 
   setMap() {
@@ -75,6 +74,7 @@ export class MapaMotoristaPageComponent implements OnDestroy {
       // if motorista current position trackeia a rota
       if (this.rotaAtiva.isMotorista) {
         this.setMapDriverView(latLng);
+        this.atualizarPosicaoAtual();
       } else {
         this.startTrakingUser(latLng);
         this.setMapDriverView(this.rotaAtiva.latLng);
@@ -132,6 +132,7 @@ export class MapaMotoristaPageComponent implements OnDestroy {
             this.setMapDriverView(latLng);
           } else {
             this.startTrakingUser(latLng);
+            this.setMapDriverView(this.rotaAtiva.latLng);
           }
 
         }, 0);
@@ -204,7 +205,7 @@ export class MapaMotoristaPageComponent implements OnDestroy {
       return;
 
     this.tracking = false;
-    this.positionSubscription.unsubscribe();
+    this.positionSubscription?.unsubscribe();
 
   }
 
@@ -254,7 +255,7 @@ export class MapaMotoristaPageComponent implements OnDestroy {
 
 
   ngOnDestroy(): void {
-    this.atualizarPosicaoObservable.unsubscribe();
+    this.atualizarPosicaoObservable?.unsubscribe();
   }
 }
 
