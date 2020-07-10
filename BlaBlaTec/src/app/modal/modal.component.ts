@@ -49,6 +49,7 @@ export class ModalComponent {
 
   recusarSolicitacao(solicitacao) {
     this.loadingService.showLoading('Recusando solicitação');
+    solicitacao.recusada = true;
     this.solicitacoesService.AtualizarSolicitacaoViagem(solicitacao)
       .pipe(
         finalize(() => {

@@ -28,8 +28,7 @@
               </h4>
             </ion-col>
           </ion-row>
-
-          <ion-row class="ion-align-items-center acao-viagem">
+          <ion-row class="ion-align-items-center acao-viagem" *ngIf="viagem.recusada == null">
             <ion-col size="12">
               <ion-col size="6">
                 <ion-button class="btn1" size="small" color="success" (click)="aceitarSolicitacao(viagem)">
@@ -37,12 +36,17 @@
                 </ion-button>
               </ion-col>
               <ion-col size="6">
-                <ion-button size="small" color="danger">
-                  <ion-icon name="thumbs-down-sharp" (click)="recusarSolicitacao(viagem)"></ion-icon>
+                <ion-button size="small" color="danger" (click)="recusarSolicitacao(viagem)">
+                  <ion-icon name="thumbs-down-sharp" ></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-col>
-
+          </ion-row>
+          <ion-row *ngIf="viagem.recusada == true">
+            <ion-label style="color:red">Status: Solicitação recusada </ion-label>
+          </ion-row>
+          <ion-row *ngIf="viagem.recusada == false">
+            <ion-label style="color:green">Status: Solicitação aceita </ion-label>
           </ion-row>
         </ion-col>
       </ion-row>

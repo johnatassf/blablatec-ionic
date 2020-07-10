@@ -4,6 +4,7 @@ import { NavController, AlertController } from '@ionic/angular';
 import { UserService } from '../services/user/user.service';
 import { LoadingService } from '../shared/loading/loading.service';
 import { finalize } from 'rxjs/operators';
+import { NotificationService } from '../shared/notification/notification.service';
 
 @Component({
   selector: 'app-editarusuario',
@@ -16,7 +17,8 @@ export class EditarusuarioPage implements OnInit {
     private userService: UserService,
     private alertController: AlertController,
     private navCtrl: NavController,
-    public loadingService: LoadingService
+    public loadingService: LoadingService,
+    public notificationService: NotificationService
   ) { }
 
   usuario = {
@@ -54,6 +56,7 @@ export class EditarusuarioPage implements OnInit {
   }
 
   atualizarInformacoes() {
+    this.loadingService.showLoading();
     this.usuarioAtualizado.Id = this.usuario.Id;
     this.usuarioAtualizado.Email = this.usuario.Email;
     this.usuarioAtualizado.Ra = this.usuario.Ra;
@@ -61,8 +64,10 @@ export class EditarusuarioPage implements OnInit {
     this.usuarioAtualizado.LastName = this.usuario.Sobrenome;
     this.usuarioAtualizado.NumeroTelefone = this.usuario.NumeroTelefone;
 
-    this.userService.AtualizarUsuario(this.usuarioAtualizado).subscribe((data: any) => {
-      this.exibirMensagemAtualziacaoRealizada();
+    this.userService.AtualizarUsuario(this.usuarioAtualizado)
+    .pipe(finalize(() => this.loadingService.hideLoading()))
+    .subscribe(() => {
+      this.notificationService.notificarSucesso('Perfil atualizado com sucesso');
     });
   }
 
@@ -75,8 +80,11 @@ export class EditarusuarioPage implements OnInit {
     this.usuarioAtualizado.NumeroTelefone = this.usuario.NumeroTelefone;
     this.usuarioAtualizado.Encerrado = true;
 
-    this.userService.AtualizarUsuario(this.usuarioAtualizado).subscribe((data: any) => {
-      this.exibirMensagemContaEncerrada();
+    this.userService.AtualizarUsuario(this.usuarioAtualizado)
+    .pipe(finalize(() => this.loadingService.hideLoading()))
+    .subscribe((data: any) => {
+      this.notificationService.notificarSucesso('Conta encerrada com sucesso');
+      this.navCtrl.navigateRoot('home');
     });
   }
 
@@ -89,20 +97,6 @@ export class EditarusuarioPage implements OnInit {
     this.navCtrl.navigateRoot('notificacoes');
   }
 
-  async exibirMensagemAtualziacaoRealizada() {
-    const alert = await this.alertController.create({
-      header: 'Aviso',
-      message: 'Perfil atualizado com sucesso',
-      buttons: [{
-        text: 'OK',
-        handler: () => {
-          this.navCtrl.navigateRoot('perfil');
-        }
-      }]
-    });
-
-    await alert.present();
-  }
 
   async exibirMensagemContaEncerrada() {
     const alert = await this.alertController.create({
